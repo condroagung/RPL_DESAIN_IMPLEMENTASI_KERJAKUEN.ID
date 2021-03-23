@@ -14,7 +14,7 @@
     <title>Dashboard Admin</title>
 </head>
 
-<body>
+<body style="background-color:#fafafa">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="font-family: 'Nunito', sans-serif; color:#2F80ED; font-size:32px">K.ID</a>
@@ -49,7 +49,7 @@
         </div>
     </nav>
 
-    <div class="container-fluid" style="background-color:#fafafa">
+    <div class="container-fluid">
         <h3 style="margin-top:2vh">Selamat Datang <span style="font-weight:bold">ADMIN!</span></h3>
 
         <h5 style="margin-top:4vh;font-weight:bold">DAFTAR PAKET SOAL</h5>
