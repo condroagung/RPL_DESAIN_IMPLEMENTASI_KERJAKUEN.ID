@@ -54,7 +54,7 @@
 
         <h5 style="margin-top:4vh;font-weight:bold">DAFTAR PAKET SOAL</h5>
 
-        <div class="row row-cols-1 row-cols-md-6 g-4" style="margin-top:2vh">
+        <div class="row row-cols-1 row-cols-md-6 g-4" style="margin-top:2vh; border-radius: 0">
             <div class="col">
                 <div class="card">
                     <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
