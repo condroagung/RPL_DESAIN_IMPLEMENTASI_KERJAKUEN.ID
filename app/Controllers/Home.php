@@ -6,12 +6,9 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
-	}
-
-	public function dashboard_admin()
-	{
-		return view('dashboard_admin');
+		echo view('header_admin');
+		echo view('dashboard_admin');
+		echo view('footer_admin');
 	}
 
 	//--------------------------------------------------------------------
