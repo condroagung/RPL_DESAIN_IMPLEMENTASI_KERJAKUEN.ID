@@ -1,38 +1,41 @@
-<div class="container-fluid">
-    <h3 style="margin-top:2vh">Selamat Datang <span style="font-weight:bold">ADMIN!</span></h3>
+<div class="container-fluid" style="font-family: 'Nunito', sans-serif;">
+    <p style="font-size: 24px;">Selamat Datang <span style="font-weight:700">ADMIN!</span> </p>
 
-    <h5 style="margin-top:4vh;font-weight:bold">DAFTAR PAKET SOAL</h5>
+    <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR PAKET SOAL</p>
 
-    <div class="row row-cols-1 row-cols-md-6 g-4" style="margin-top:2vh; border-radius: 0">
+    <div class="row row-cols-1 row-cols-md-6 g-4" style="margin-top:2vh;">
         <div class="col">
-            <div class="card">
+            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
+                <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
                 <div class="card-body">
-                    <h5 class="card-title">BAHASA INDONESIA - 5A</h5>
+                    <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
+                <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
                 <div class="card-body">
-                    <h5 class="card-title">MATEMATIKA - 5A</h5>
+                    <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
+                <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
                 <div class="card-body">
-                    <h5 class="card-title">IPA - 5A</h5>
+                    <h5 class="card-title text-center">IPA - 5A</h5>
                 </div>
             </div>
         </div>
     </div>
 
-    <h5 style="margin-top:4vh;font-weight:bold;">DAFTAR GURU</h5>
+    <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR GURU</p>
 
-    <table class="table" style="margin-top:2vh; font-family: 'Nunito', sans-serif;">
+    <table class="table" id="table1" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); " data-page-length='10'>
         <thead class="text-center">
             <tr>
                 <th scope="col">No</th>
@@ -43,42 +46,29 @@
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
-        <tbody class="text-center">
-            <tr>
-                <th scope="row">1</th>
-                <td>341231413</td>
-                <td>ahfajkafa</td>
-                <td>afajfafka</td>
-                <td>gobikegogreen</td>
-                <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href=""><i class="fas fa-trash"></i></a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>341231413</td>
-                <td>afakfajfaf</td>
-                <td>afkafjkakf</td>
-                <td>gobikegogreen</td>
-                <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href=""><i class="fas fa-trash"></i></a>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>341231413</td>
-                <td>afkafafafaf</td>
-                <td>afafakafaff</td>
-                <td>gobikegogreen</td>
-                <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href=""><i class="fas fa-trash"></i></a>
-                </td>
-            </tr>
+        <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
+            <?php
+            $no = 1;
+            foreach ($guru as $row) {
+            ?>
+                <tr>
+                    <th scope="row"><?= $no++ ?></th>
+                    <td><?= $row['nip']; ?></td>
+                    <td><?= $row['nama_guru']; ?></td>
+                    <td><?= $row['username']; ?></td>
+                    <td><?= $row['password']; ?></td>
+                    <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
+                        <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_guru/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus guru ini?')"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
         </tbody>
     </table>
 
-    <div class="d-grid gap-2" style="margin-top:2vh">
-        <button type=" button" class="btn btn-outline-primary btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 8px"><i class="fas fa-plus"> </i> Tambah Guru</button>
+    <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH GURU BARU</button>
     </div>
 
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -89,52 +79,54 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3">
+                    <form class="row g-3" action="<?php echo base_url('KelolaAdmin/add_guru'); ?>" method="post">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nama Guru</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_guru">
                             <div id="emailHelp" class="form-text">Gurunya minimal S3</div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">NIP</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="nip">
                         </div>
                         <div class="col-md-6">
                             <label for="validationDefault01" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="validationDefault01" value="user" required>
+                            <input type="text" class="form-control" id="validationDefault01" value="user" name="username" required>
                         </div>
                         <div class="col-md-6">
                             <label for="validationDefault02" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="validationDefault02" value="ajg" required>
+                            <input type="password" class="form-control" id="validationDefault02" value="ajg" name="password" required>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <h5 style="margin-top:4vh;font-weight:bold;">DAFTAR SISWA</h5>
+    <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR SISWA</p>
 
-    <table class="table" style="margin-top:2vh; font-family: 'Nunito', sans-serif;"">
-            <thead class=" text-center">
-        <tr>
-            <th scope="col">No</th>
-            <th scope="col">NIS</th>
-            <th scope="col">Nama Siswa</th>
-            <th scope="col">Username</th>
-            <th scope="col">Password</th>
-            <th scope="col">Aksi</th>
-        </tr>
+    <table class="table" id="table2" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+        <thead class=" text-center">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">NIS</th>
+                <th scope="col">Nama Siswa</th>
+                <th scope="col">Kelas</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Aksi</th>
+            </tr>
         </thead>
-        <tbody class=" text-center">
+        <tbody class=" text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
             <tr>
                 <th scope="row">1</th>
                 <td>1301180386</td>
                 <td>Hafizh Indriyanto</td>
+                <td>5 A</td>
                 <td>hafizhidy</td>
                 <td>hafizh</td>
                 <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
@@ -145,6 +137,7 @@
                 <th scope="row">2</th>
                 <td>1301180386</td>
                 <td>Hafizh Indriyanto</td>
+                <td>5 A</td>
                 <td>hafizhidy</td>
                 <td>hafizh</td>
                 <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
@@ -155,6 +148,7 @@
                 <th scope="row">3</th>
                 <td>1301180386</td>
                 <td>Hafizh Indriyanto</td>
+                <td>5 A</td>
                 <td>hafizhidy</td>
                 <td>hafizh</td>
                 <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
@@ -164,8 +158,8 @@
         </tbody>
     </table>
 
-    <div class="d-grid gap-2" style="margin-top:2vh">
-        <button type=" button" class="btn btn-outline-primary btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 8px"><i class="fas fa-plus"> </i> Tambah Siswa</button>
+    <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+        <button type=" button" class="btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH SISWA BARU</button>
     </div>
 
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -212,6 +206,11 @@
             </div>
         </div>
     </div>
-
-
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#table1').DataTable();
+        $('#table2').DataTable();
+    });
+</script>
