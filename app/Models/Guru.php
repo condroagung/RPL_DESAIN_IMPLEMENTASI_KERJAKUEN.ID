@@ -29,4 +29,9 @@ class Guru extends Model
     {
         return $this->db->table($this->table)->delete(['id_user' => $primaryKey]);
     }
+
+    public function updateguru($data, $primaryKey)
+    {
+        return $this->db->table($this->table)->update($data, ['id_user' => $primaryKey]);
+    }
 }

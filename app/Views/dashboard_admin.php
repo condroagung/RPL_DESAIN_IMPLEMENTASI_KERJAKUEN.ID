@@ -35,7 +35,7 @@
 
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR GURU</p>
 
-    <table class="table" id="table1" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); " data-page-length='10'>
+    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); " data-page-length='10'>
         <thead class="text-center">
             <tr>
                 <th scope="col">No</th>
@@ -57,7 +57,7 @@
                     <td><?= $row['nama_guru']; ?></td>
                     <td><?= $row['username']; ?></td>
                     <td><?= $row['password']; ?></td>
-                    <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
+                    <td class="text-center"><a class="btn btn-info" data-toggle="modal" data-target="#edit_guru<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
                         <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_guru/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus guru ini?')"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
@@ -83,7 +83,6 @@
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nama Guru</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_guru">
-                            <div id="emailHelp" class="form-text">Gurunya minimal S3</div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">NIP</label>
@@ -109,8 +108,8 @@
 
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR SISWA</p>
 
-    <table class="table" id="table2" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-        <thead class=" text-center">
+    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+        <thead class="text-center">
             <tr>
                 <th scope="col">No</th>
                 <th scope="col">NIS</th>
@@ -123,38 +122,25 @@
         </thead>
         <tbody class=" text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
             <tr>
-                <th scope="row">1</th>
-                <td>1301180386</td>
-                <td>Hafizh Indriyanto</td>
-                <td>5 A</td>
-                <td>hafizhidy</td>
-                <td>hafizh</td>
-                <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href=""><i class="fas fa-trash"></i></a>
-                </td>
-            </tr>
+                <?php
+                $no = 1;
+                foreach ($siswa as $row) {
+                ?>
             <tr>
-                <th scope="row">2</th>
-                <td>1301180386</td>
-                <td>Hafizh Indriyanto</td>
-                <td>5 A</td>
-                <td>hafizhidy</td>
-                <td>hafizh</td>
+                <th scope="row"><?= $no++ ?></th>
+                <td><?= $row['nis']; ?></td>
+                <td><?= $row['nama_siswa']; ?></td>
+                <td><?= $row['kelas']; ?></td>
+                <td><?= $row['username']; ?></td>
+                <td><?= $row['password']; ?></td>
                 <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href=""><i class="fas fa-trash"></i></a>
+                    <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_siswa/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>1301180386</td>
-                <td>Hafizh Indriyanto</td>
-                <td>5 A</td>
-                <td>hafizhidy</td>
-                <td>hafizh</td>
-                <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href=""><i class="fas fa-trash"></i></a>
-                </td>
-            </tr>
+        <?php
+                }
+        ?>
+        </tr>
         </tbody>
     </table>
 
@@ -170,39 +156,44 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3">
+                    <form class="row g-3" action="<?php echo base_url('KelolaAdmin/add_siswa'); ?>" method="post">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nama Siswa</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text">Siswa Cerdas</div>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="nama_siswa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
+                            <select class="form-select" aria-label="Default select example" name="jenis_kelamin" required>
+                                <option value="Laki Laki">Laki Laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="validationDefault01" class="form-label">Pilih Kelas</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select" aria-label="Default select example" name="kelas" required>
+                                <option value="6A">6 A</option>
+                                <option value="6B">6 B</option>
+                                <option value="6C">6 C</option>
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="validationDefault02" class="form-label">NIS</label>
-                            <input type="text" class="form-control" id="validationDefault02" value="" required>
+                            <input type="text" class="form-control" id="validationDefault02" name="nis" value="" required>
                         </div>
                         <div class="col-md-6">
                             <label for="validationDefault01" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="validationDefault01" value="user" required>
+                            <input type="text" class="form-control" id="validationDefault01" name="username_siswa" value="user" required>
                         </div>
                         <div class="col-md-6">
                             <label for="validationDefault02" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="validationDefault02" value="ajg" required>
+                            <input type="password" class="form-control" id="validationDefault02" name="password_siswa" value="ajg" required>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -210,7 +201,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#table1').DataTable();
-        $('#table2').DataTable();
+        $('table.display').DataTable();
     });
 </script>
