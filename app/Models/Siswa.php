@@ -16,6 +16,11 @@ class Siswa extends Model
 
     protected $allowedFields = ['username', 'password', 'nama_siswa', 'kelas', 'nis', 'jenis_kelamin', 'status'];
 
+    public function getSiswa($username)
+    {
+        return $this->db->table($this->table)->where('username', $username);
+    }
+
     public function showsiswa()
     {
         return $this->db->table($this->table)->get()->getResultArray();

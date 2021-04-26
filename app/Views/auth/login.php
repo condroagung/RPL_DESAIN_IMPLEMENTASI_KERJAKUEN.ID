@@ -71,14 +71,17 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-4">
-                        <form action="" style="background-color:white ;border-radius:15px; font-family: 'Nunito', sans-serif; font-size:18px; font-weight:500; font-style:normal; padding:5px 20px ">
+                        <?php if (session()->getFlashdata('msg')) : ?>
+                            <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+                        <?php endif; ?>
+                        <form action="<?php echo base_url('Home/auth'); ?>" method="post" style="background-color:white ;border-radius:15px; font-family: 'Nunito', sans-serif; font-size:18px; font-weight:500; font-style:normal; padding:5px 20px ">
                             <label for="exampleInputEmail1" class="form-label" style="margin-top:1vh">Username</label>
                             <div class="input-group mb-3" style="margin-bottom:3vh;">
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             </div>
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group mb-3" style="margin-bottom:3vh;">
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                             </div>
                             <div class="input-group mb-3">

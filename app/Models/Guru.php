@@ -15,6 +15,11 @@ class Guru extends Model
 
     protected $allowedFields = ['username', 'password', 'nama_guru', 'status', 'nip'];
 
+    public function getGuru($username)
+    {
+        return $this->db->table($this->table)->where('username', $username);
+    }
+
     public function showguru()
     {
         return $this->db->table($this->table)->get()->getResultArray();
