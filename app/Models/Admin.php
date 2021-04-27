@@ -10,10 +10,12 @@ class Admin extends Model
     protected $primaryKey = 'id_user';
     protected $useAutoIncrement = true;
 
+    protected $returnType     = 'array';
+
     protected $allowedFields = ['id_user', 'username', 'password', 'nama_admin',  'status'];
 
     public function getAdmin($username)
     {
-        return $this->table($this->table)->Where(['username', $username])->first();
+        return $this->table($this->table)->Where(['username', $username]);
     }
 }

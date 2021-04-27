@@ -31,6 +31,8 @@ class Home extends BaseController
 		$username = $this->request->getPost('username');
 		$password = $this->request->getPost('password');
 		$log_admin = $this->admin->where('username', $username)->first();
+		$log_siswa = $this->siswa->where('username', $username)->first();
+		$log_guru = $this->guru->where('username', $username)->first();
 		if ($log_admin) {
 			$pass_admin = $log_admin['password'];
 			if ($pass_admin == $password) {
@@ -46,6 +48,36 @@ class Home extends BaseController
 				$session->setFlashdata('msg', 'Wrong Password');
 				return redirect()->to(base_url('Home'));
 			}
+		} else if ($log_siswa) {
+			$pass_siswa = $log_siswa['password'];
+			if ($pass_siswa == $password) {
+				$session_data = [
+					'id_user' => $log_siswa['id_user'],
+					'username' => $log_siswa['username'],
+					'logged_in' => TRUE
+				];
+				$session->set($session_data);
+				$session->setFlashdata('msg', 'Hello');
+				return redirect()->to(base_url('PageSiswa'));
+			} else {
+				$session->setFlashdata('msg', 'Wrong Password');
+				return redirect()->to(base_url('Home'));
+			}
+		} else if ($log_guru) {
+			$pass_guru = $log_guru['password'];
+			if ($pass_guru == $password) {
+				$session_data = [
+					'id_user' => $log_guru['id_user'],
+					'username' => $log_guru['username'],
+					'logged_in' => TRUE
+				];
+				$session->set($session_data);
+				$session->setFlashdata('msg', 'Hello');
+				return redirect()->to(base_url('PageGuru'));
+			} else {
+				$session->setFlashdata('msg', 'Wrong Password');
+				return redirect()->to(base_url('Home'));
+			}
 		} else {
 			$session->setFlashdata('msg', 'Username not Found');
 			return redirect()->to(base_url('Home'));
@@ -56,7 +88,7 @@ class Home extends BaseController
 	{
 		$session = session();
 		$session->destroy();
-		return redirect()->to('Home');
+		return redirect()->to(base_url('Home'));
 	}
 
 

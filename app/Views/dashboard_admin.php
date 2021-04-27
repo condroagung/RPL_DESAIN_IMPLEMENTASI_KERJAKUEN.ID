@@ -1,7 +1,4 @@
 <div class="container-fluid" style="font-family: 'Nunito', sans-serif;">
-    <?php if (session()->getFlashdata('msg')) : ?>
-        <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-    <?php endif; ?>
     <p style="font-size: 24px;">Selamat Datang <span style="font-weight:700">ADMIN!</span> </p>
 
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR PAKET SOAL</p>

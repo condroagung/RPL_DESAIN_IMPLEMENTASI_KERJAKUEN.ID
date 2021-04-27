@@ -18,6 +18,9 @@ class KelolaAdmin extends BaseController
 
     public function index()
     {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
         $data['guru'] = $this->guru->showguru();
         $data['siswa'] = $this->siswa->showsiswa();
         echo view('header_admin');
