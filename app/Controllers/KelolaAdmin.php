@@ -23,6 +23,7 @@ class KelolaAdmin extends BaseController
         }
         $data['guru'] = $this->guru->showguru();
         $data['siswa'] = $this->siswa->showsiswa();
+        $data['validation'] = \Config\Services::validation();
         echo view('header_admin');
         echo view('dashboard_admin', $data);
         echo view('footer_admin');
@@ -35,6 +36,42 @@ class KelolaAdmin extends BaseController
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
+        $validation = $this->validate(
+            [
+                'nama_guru' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'nip' => [
+                    'rules'  => 'required|is_unique[guru.nip]|numeric',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain',
+                        'numeric' => '{field} hanya boleh angka, jangan masukin selain angka'
+                    ]
+                ],
+                'username' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'password' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
         $data = [
             'nama_guru' => $nama,
             'nip' => $nip,
@@ -42,9 +79,7 @@ class KelolaAdmin extends BaseController
             'password' => $password,
             'status' => 1
         ];
-
         $this->guru->createguru($data);
-
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
@@ -78,15 +113,51 @@ class KelolaAdmin extends BaseController
     public function add_siswa()
     {
         $nama = $this->request->getPost('nama_siswa');
-        $nip = $this->request->getPost('nis');
+        $nis = $this->request->getPost('nis');
         $username = $this->request->getPost('username_siswa');
         $password = $this->request->getPost('password_siswa');
         $jeniskelamin = $this->request->getPost('jenis_kelamin');
         $kelas = $this->request->getPost('kelas');
 
+        $validation = $this->validate(
+            [
+                'nama_siswa' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'nis' => [
+                    'rules'  => 'required|is_unique[siswa.nis]|numeric',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain',
+                        'numeric' => '{field} hanya boleh angka, jangan masukin selain angka'
+                    ]
+                ],
+                'username_siswa' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'password_siswa' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
         $data = [
             'nama_siswa' => $nama,
-            'nis' => $nip,
+            'nis' => $nis,
             'username' => $username,
             'password' => $password,
             'status' => 2,

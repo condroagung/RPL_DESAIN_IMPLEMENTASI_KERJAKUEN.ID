@@ -81,20 +81,40 @@
                 <div class="modal-body">
                     <form class="row g-3" action="<?php echo base_url('KelolaAdmin/add_guru'); ?>" method="post">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nama Guru</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_guru">
+                            <label for="nama" class="form-label">Nama Guru</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= old('nama_guru'); ?>" name="nama_guru">
+                            <?php if ($validation->getError('nama')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('nama'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">NIP</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="nip">
+                            <label for="nip" class="form-label">NIP</label>
+                            <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= old('nip'); ?>" name="nip">
+                            <?php if ($validation->getError('nip')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('nip'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault01" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="validationDefault01" value="user" name="username" required>
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="validationDefault01" value="<?= old('username'); ?>" name="username">
+                            <?php if ($validation->getError('username')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('username'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault02" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="validationDefault02" value="ajg" name="password" required>
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="validationDefault02" value="<?= old('password'); ?>" name="password">
+                            <?php if ($validation->getError('password')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('password'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -114,7 +134,6 @@
                 <th scope="col">No</th>
                 <th scope="col">NIS</th>
                 <th scope="col">Nama Siswa</th>
-                <th scope="col">Kelas</th>
                 <th scope="col">Username</th>
                 <th scope="col">Password</th>
                 <th scope="col">Aksi</th>
@@ -130,7 +149,6 @@
                 <th scope="row"><?= $no++ ?></th>
                 <td><?= $row['nis']; ?></td>
                 <td><?= $row['nama_siswa']; ?></td>
-                <td><?= $row['kelas']; ?></td>
                 <td><?= $row['username']; ?></td>
                 <td><?= $row['password']; ?></td>
                 <td class="text-center"><a class="btn btn-info" href=""><i class="fas fa-pen"></i></a>
@@ -158,35 +176,55 @@
                 <div class="modal-body">
                     <form class="row g-3" action="<?php echo base_url('KelolaAdmin/add_siswa'); ?>" method="post">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nama Siswa</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" name="nama_siswa" required>
+                            <label for="nama_siswa" class="form-label">Nama Siswa</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="nama_siswa">
+                            <?php if ($validation->getError('nama_siswa')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('nama_siswa'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Jenis Kelamin</label>
-                            <select class="form-select" aria-label="Default select example" name="jenis_kelamin" required>
+                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                            <select class="form-select" aria-label="Default select example" name="jenis_kelamin">
                                 <option value="Laki Laki">Laki Laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault01" class="form-label">Pilih Kelas</label>
-                            <select class="form-select" aria-label="Default select example" name="kelas" required>
+                            <label for="kelas" class="form-label">Pilih Kelas</label>
+                            <select class="form-select" aria-label="Default select example" name="kelas">
                                 <option value="6A">6 A</option>
                                 <option value="6B">6 B</option>
                                 <option value="6C">6 C</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault02" class="form-label">NIS</label>
-                            <input type="text" class="form-control" id="validationDefault02" name="nis" value="" required>
+                            <label for="nis" class="form-label">NIS</label>
+                            <input type="text" class="form-control" id="validationDefault02" name="nis">
+                            <?php if ($validation->getError('nis')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('nis'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault01" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="validationDefault01" name="username_siswa" value="user" required>
+                            <label for="username_siswa" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="validationDefault01" name="username_siswa">
+                            <?php if ($validation->getError('username_siswa')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('username_siswa'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault02" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="validationDefault02" name="password_siswa" value="ajg" required>
+                            <label for="password_siswa" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="validationDefault02" name="password_siswa">
+                            <?php if ($validation->getError('password_siswa')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('password_siswa'); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                 </div>
                 <div class="modal-footer">
