@@ -39,6 +39,7 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_admin['id_user'],
 					'username' => $log_admin['username'],
+					'status' => '0',
 					'logged_in' => TRUE
 				];
 				$session->set($session_data);
@@ -54,6 +55,7 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_siswa['id_user'],
 					'username' => $log_siswa['username'],
+					'status' => '1',
 					'logged_in' => TRUE
 				];
 				$session->set($session_data);
@@ -69,6 +71,7 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_guru['id_user'],
 					'username' => $log_guru['username'],
+					'status' => '2',
 					'logged_in' => TRUE
 				];
 				$session->set($session_data);

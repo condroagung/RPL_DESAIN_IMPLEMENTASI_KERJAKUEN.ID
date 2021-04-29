@@ -59,9 +59,11 @@ class KelolaAdmin extends BaseController
                     ]
                 ],
                 'password' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|min_length[8]|max_length[16]',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong'
+                        'required' => '{field} tidak boleh kosong',
+                        'min_length' => '{field} minimal 8 karakter',
+                        'max_length' => '{field} maksimal 16 karakter'
                     ]
                 ]
             ]
@@ -89,13 +91,50 @@ class KelolaAdmin extends BaseController
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
-    public function update_guru($id)
+    public function update_guru()
     {
-
+        $id = $this->request->getPost('id_user');
         $nama = $this->request->getPost('nama_guru');
         $nip = $this->request->getPost('nip');
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
+
+        $validation = $this->validate(
+            [
+                'nama_guru' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'nip' => [
+                    'rules'  => 'required|numeric',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'numeric' => '{field} hanya boleh angka, jangan masukin selain angka'
+                    ]
+                ],
+                'username' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'password' => [
+                    'rules'  => 'required|min_length[8]|max_length[16]',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'min_length' => '{field} minimal 8 karakter',
+                        'max_length' => '{field} maksimal 16 karakter'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
 
         $data = [
             'nama_guru' => $nama,
@@ -142,9 +181,11 @@ class KelolaAdmin extends BaseController
                     ]
                 ],
                 'password_siswa' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|min_length[8]|max_length[16]',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong'
+                        'required' => '{field} tidak boleh kosong',
+                        'min_length' => '{field} minimal 8 karakter',
+                        'max_length' => '{field} maksimal 16 karakter'
                     ]
                 ]
             ]
@@ -176,15 +217,53 @@ class KelolaAdmin extends BaseController
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
-    public function update_siswa($id)
+    public function update_siswa()
     {
-
+        $id = $this->request->getPost('id_user');
         $nama = $this->request->getPost('nama_siswa');
         $nip = $this->request->getPost('nis');
         $username = $this->request->getPost('username_siswa');
         $password = $this->request->getPost('password_siswa');
         $jeniskelamin = $this->request->getPost('jenis_kelamin');
         $kelas = $this->request->getPost('kelas');
+
+        $validation = $this->validate(
+            [
+                'nama_siswa' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'nis' => [
+                    'rules'  => 'required|numeric',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain',
+                        'numeric' => '{field} hanya boleh angka, jangan masukin selain angka'
+                    ]
+                ],
+                'username_siswa' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'password_siswa' => [
+                    'rules'  => 'required|min_length[8]|max_length[16]',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'min_length' => '{field} minimal 8 karakter',
+                        'max_length' => '{field} maksimal 16 karakter'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
 
         $data = [
             'nama_siswa' => $nama,
