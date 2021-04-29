@@ -16,7 +16,9 @@ class PageSiswa extends BaseController
 
     public function index()
     {
+        echo view('header');
         echo view('siswa/dashboard_siswa');
+        echo view('footer');
     }
 
 

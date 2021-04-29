@@ -16,7 +16,9 @@ class PageGuru extends BaseController
 
     public function index()
     {
+        echo view('header');
         echo view('guru/dashboard_guru');
+        echo view('footer');
     }
 
 

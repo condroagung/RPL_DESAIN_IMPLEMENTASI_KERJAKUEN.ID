@@ -48,7 +48,7 @@
                         <img src="<?php echo base_url('images/admin.png'); ?>" style="height:5vh; widht:5vw;" alt=" ...">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#4F4F4F; font-family: 'Nunito', sans-serif; font-size:24px">
-                                ADMIN
+                                <?php echo session()->get('username') ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>

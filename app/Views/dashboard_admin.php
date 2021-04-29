@@ -198,25 +198,21 @@
             </tr>
         </thead>
         <tbody class=" text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
-            <tr>
-                <?php
-                $no = 1;
-                foreach ($siswa as $row) {
-                ?>
-            <tr>
-                <th scope="row"><?= $no++ ?></th>
-                <td><?= $row['nis']; ?></td>
-                <td><?= $row['nama_siswa']; ?></td>
-                <td><?= $row['username']; ?></td>
-                <td><?= $row['password']; ?></td>
-                <td class="text-center"><a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_siswa<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
-                    <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_siswa/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')"><i class="fas fa-trash"></i></a>
-                </td>
-            </tr>
-        <?php
-                }
-        ?>
-        </tr>
+            <?php
+            $no = 1;
+            foreach ($siswa as $row) {
+            ?>
+                <tr>
+                    <th scope="row"><?= $no++ ?></th>
+                    <td><?= $row['nis']; ?></td>
+                    <td><?= $row['nama_siswa']; ?></td>
+                    <td><?= $row['username']; ?></td>
+                    <td><?= $row['password']; ?></td>
+                    <td class="text-center"><a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_siswa<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
+                        <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_siswa/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            <?php } ?>
         </tbody>
     </table>
 
