@@ -166,7 +166,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="validationDefault02" value="<?= $row['password']; ?>" name="password">
+                                <input type="password" class="form-control" id="validationDefault02" value="<?= $row['password']; ?>" name="password" readonly>
                                 <?php if ($validation->getError('password')) { ?>
                                     <div class='alert alert-danger mt-2'>
                                         <?= $error = $validation->getError('password'); ?>
@@ -352,7 +352,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="password_siswa" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="validationDefault02" value="<?= $row['password']; ?>" name="password_siswa">
+                                <input type="password" class="form-control" id="validationDefault02" value="<?= $row['password']; ?>" name="password_siswa" readonly>
                                 <?php if ($validation->getError('password_siswa')) { ?>
                                     <div class='alert alert-danger mt-2'>
                                         <?= $error = $validation->getError('password_siswa'); ?>
