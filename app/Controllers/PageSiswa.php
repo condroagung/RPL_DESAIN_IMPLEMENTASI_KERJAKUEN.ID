@@ -26,6 +26,18 @@ class PageSiswa extends BaseController
         echo view('footer');
     }
 
+    public function lihat_modul()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+        $data['validation'] = \Config\Services::validation();
+        $set['title'] = 'Detail Paket';
+        echo view('header', $set);
+        echo view('siswa/modul_siswa', $data);
+        echo view('footer');
+    }
+
 
 
 

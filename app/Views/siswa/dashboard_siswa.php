@@ -7,7 +7,7 @@
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
+                    <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
                         <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
                     </a>
                 </div>
@@ -17,7 +17,7 @@
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
+                    <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
                         <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
                     </a>
                 </div>
@@ -27,7 +27,7 @@
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
+                    <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
                         <h5 class="card-title text-center">IPA - 5A</h5>
                     </a>
                 </div>
