@@ -3,15 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\Siswa;
+use App\Models\Guru;
+use App\Models\Admin;
 
-class PageSiswa extends BaseController
+class MulaiUjian extends BaseController
 {
-
     protected $siswa;
+    protected $guru;
+    protected $admin;
 
     function __construct()
     {
         $this->siswa = new Siswa();
+        $this->guru = new Guru();
+        $this->admin = new Admin();
     }
 
     public function index()
@@ -20,15 +25,9 @@ class PageSiswa extends BaseController
             return redirect()->to(base_url('Home'));
         }
         $data['validation'] = \Config\Services::validation();
-        $set['title'] = 'Dashboard Siswa';
-        echo view('header', $set);
-        echo view('siswa/dashboard_siswa', $data);
+        $data['title'] = 'Dashboard Siswa';
+        echo view('header');
+        echo view('ujian/start_ujian', $data);
         echo view('footer');
     }
-
-
-
-
-    //--------------------------------------------------------------------
-
 }

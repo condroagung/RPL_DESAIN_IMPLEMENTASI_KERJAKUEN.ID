@@ -24,8 +24,9 @@ class KelolaAdmin extends BaseController
         $data['guru'] = $this->guru->showguru();
         $data['siswa'] = $this->siswa->showsiswa();
         $data['validation'] = \Config\Services::validation();
-        echo view('header');
-        echo view('dashboard_admin', $data);
+        $set['title'] = 'Dashboard Admin';
+        echo view('header', $set);
+        echo view('admin/dashboard_admin', $data);
         echo view('footer');
     }
 

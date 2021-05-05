@@ -7,9 +7,7 @@
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
-                    </a>
+                    <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
                 </div>
             </div>
         </div>
@@ -17,9 +15,7 @@
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
-                    </a>
+                    <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
                 </div>
             </div>
         </div>
@@ -27,9 +23,7 @@
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">IPA - 5A</h5>
-                    </a>
+                    <h5 class="card-title text-center">IPA - 5A</h5>
                 </div>
             </div>
         </div>
@@ -37,7 +31,7 @@
 
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">REKAP NILAI SEMESTER INI</p>
 
-    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white " data-page-length='10'>
+    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); " data-page-length='10'>
         <thead class="text-center">
             <tr>
                 <th scope="col">No</th>
@@ -56,14 +50,6 @@
                 <td>7</td>
                 <td>490</td>
                 <td>70</td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>MTK0234</td>
-                <td>Matematika</td>
-                <td>10</td>
-                <td>950</td>
-                <td>95</td>
             </tr>
         </tbody>
     </table>

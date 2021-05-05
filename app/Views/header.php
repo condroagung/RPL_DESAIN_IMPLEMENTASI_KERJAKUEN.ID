@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-    <title>Dashboard Admin</title>
+    <title><?= $title ?></title>
 </head>
 
 <style>
@@ -30,8 +30,8 @@
     }
 </style>
 
-<body style="background-color: #fafafa;">
-    <nav class="navbar navbar-expand-lg navbar-custom">
+<body style="background-color: rgba(250, 250, 250, 1);">
+    <nav class="navbar navbar-expand-lg navbar-custom" style="box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.05);">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="font-family: 'Nunito', sans-serif; color:#2F80ED; font-size:32px">K.ID</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

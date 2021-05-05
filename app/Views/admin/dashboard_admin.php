@@ -1,14 +1,16 @@
 <div class="container-fluid" style="font-family: 'Nunito', sans-serif;">
-    <p style="font-size: 24px;">Selamat Datang <span style="font-weight:700">ADMIN!</span></p>
+    <p style="font-size: 24px; margin-top:2vh">Selamat Datang <span style="font-weight:700">ADMIN!</span></p>
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR PAKET SOAL</p>
 
-    <div class="row row-cols-1 row-cols-md-6 g-4" style="margin-top:2vh;">
+    <div class="row row-cols-1 row-cols-md-6 g-4">
         <div class="col">
             <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
                 <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
                 <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
+                    <a href="" style="text-decoration:none; color:black">
+                        <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
+                    </a>
                 </div>
             </div>
         </div>
@@ -17,7 +19,9 @@
                 <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
                 <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
+                    <a href="" style="text-decoration:none; color:black">
+                        <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
+                    </a>
                 </div>
             </div>
         </div>
@@ -26,7 +30,9 @@
                 <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
                 <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
                 <div class="card-body">
-                    <h5 class="card-title text-center">IPA - 5A</h5>
+                    <a href="" style="text-decoration:none; color:black">
+                        <h5 class="card-title text-center">IPA - 5A</h5>
+                    </a>
                 </div>
             </div>
         </div>
@@ -34,7 +40,7 @@
 
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR GURU</p>
 
-    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); " data-page-length='10'>
+    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white" data-page-length='10'>
         <thead class="text-center">
             <tr>
                 <th scope="col">No</th>
@@ -186,7 +192,7 @@
 
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR SISWA</p>
 
-    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);" data-page-length='10'>
+    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white" data-page-length='10'>
         <thead class="text-center">
             <tr>
                 <th scope="col">No</th>
@@ -315,7 +321,9 @@
                                 <select class="form-select" aria-label="Default select example" name="jenis_kelamin">
                                     <?php if ($row['jenis_kelamin'] == "Laki Laki") { ?>
                                         <option value="Laki Laki" selected>Laki Laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     <?php } else { ?>
+                                        <option value="Laki Laki">Laki Laki</option>
                                         <option value="Perempuan" selected>Perempuan</option>
                                     <?php } ?>
                                 </select>
@@ -325,9 +333,15 @@
                                 <select class="form-select" aria-label="Default select example" name="kelas">
                                     <?php if ($row['kelas'] == "6A") { ?>
                                         <option value="6A" selected>6 A</option>
+                                        <option value="6B">6 B</option>
+                                        <option value="6C">6 C</option>
                                     <?php } else if ($row['kelas'] == "6B") { ?>
+                                        <option value="6A">6 A</option>
                                         <option value="6B" selected>6 B</option>
+                                        <option value="6C">6 C</option>
                                     <?php } else { ?>
+                                        <option value="6A">6 A</option>
+                                        <option value="6B">6 B</option>
                                         <option value="6C" selected>6 C</option>
                                     <?php } ?>
                                 </select>
