@@ -38,43 +38,55 @@
         </div>
     </div>
 
-    <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR GURU</p>
+    <div class="row">
+        <div class="col-md-12">
+            <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR GURU</p>
+        </div>
+    </div>
 
-    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white" data-page-length='10'>
-        <thead class="text-center">
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">NIP</th>
-                <th scope="col">Nama Guru</th>
-                <th scope="col">Username</th>
-                <th scope="col">Password</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-        <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
-            <?php
-            $no = 1;
-            foreach ($guru as $row) {
-            ?>
-                <tr>
-                    <th scope="row"><?= $no++ ?></th>
-                    <td><?= $row['nip']; ?></td>
-                    <td><?= $row['nama_guru']; ?></td>
-                    <td><?= $row['username']; ?></td>
-                    <td><?= $row['password']; ?></td>
-                    <td class="text-center">
-                        <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_guru<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
-                        <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_guru/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus guru ini?')"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-            <?php
-            }
-            ?>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white" data-page-length='10'>
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">NIP</th>
+                        <th scope="col">Nama Guru</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
+                    <?php
+                    $no = 1;
+                    foreach ($guru as $row) {
+                    ?>
+                        <tr>
+                            <th scope="row"><?= $no++ ?></th>
+                            <td><?= $row['nip']; ?></td>
+                            <td><?= $row['nama_guru']; ?></td>
+                            <td><?= $row['username']; ?></td>
+                            <td><?= $row['password']; ?></td>
+                            <td class="text-center">
+                                <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_guru<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_guru/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus guru ini?')"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH GURU BARU</button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH GURU BARU</button>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -190,40 +202,52 @@
         </div>
     <?php } ?>
 
-    <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR SISWA</p>
+    <div class="row">
+        <div class="col-md-12">
+            <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR SISWA</p>
+        </div>
+    </div>
 
-    <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white" data-page-length='10'>
-        <thead class="text-center">
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">NIS</th>
-                <th scope="col">Nama Siswa</th>
-                <th scope="col">Username</th>
-                <th scope="col">Password</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>
-        <tbody class=" text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
-            <?php
-            $no = 1;
-            foreach ($siswa as $row) {
-            ?>
-                <tr>
-                    <th scope="row"><?= $no++ ?></th>
-                    <td><?= $row['nis']; ?></td>
-                    <td><?= $row['nama_siswa']; ?></td>
-                    <td><?= $row['username']; ?></td>
-                    <td><?= $row['password']; ?></td>
-                    <td class="text-center"><a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_siswa<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
-                        <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_siswa/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white" data-page-length='10'>
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">NIS</th>
+                        <th scope="col">Nama Siswa</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class=" text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
+                    <?php
+                    $no = 1;
+                    foreach ($siswa as $row) {
+                    ?>
+                        <tr>
+                            <th scope="row"><?= $no++ ?></th>
+                            <td><?= $row['nis']; ?></td>
+                            <td><?= $row['nama_siswa']; ?></td>
+                            <td><?= $row['username']; ?></td>
+                            <td><?= $row['password']; ?></td>
+                            <td class="text-center"><a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_siswa<?php echo $row['id_user'] ?>"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-danger" href="<?php echo base_url('KelolaAdmin/delete_siswa/' . $row['id_user']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-        <button type=" button" class="btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH SISWA BARU</button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+                <button type=" button" class="btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH SISWA BARU</button>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
