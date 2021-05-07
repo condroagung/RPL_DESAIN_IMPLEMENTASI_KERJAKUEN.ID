@@ -13,5 +13,18 @@ class Paket extends Model
 
     protected $returnType     = 'array';
 
-    protected $allowedFields = ['id_paket', 'id_mapel', 'nama_paket', 'durasi', 'banyak_soal', 'skor_paket', 'waktu_pengerjaan'];
+    protected $allowedFields = ['id_paket', 'id_user', 'id_mapel', 'kelas', 'nama_paket', 'cover'];
+
+    public function showpaket()
+    {
+        return $this->db->table($this->table)
+            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('guru', 'guru.id_user = paket.id_user')
+            ->get()->getResultArray();
+    }
+
+    public function createpaket($data)
+    {
+        return $this->db->table($this->table)->insert($data);
+    }
 }

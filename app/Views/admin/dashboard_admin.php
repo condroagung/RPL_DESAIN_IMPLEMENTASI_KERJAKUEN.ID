@@ -1,39 +1,90 @@
 <div class="container-fluid" style="font-family: 'Nunito', sans-serif;">
-    <p style="font-size: 24px; margin-top:2vh">Selamat Datang <span style="font-weight:700">ADMIN!</span></p>
+    <?php if (!empty(session()->getFlashdata('success'))) { ?>
+        <?php echo session()->getFlashdata('success'); ?>
+    <?php } ?>
     <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">DAFTAR PAKET SOAL</p>
 
     <div class="row row-cols-1 row-cols-md-6 g-4">
-        <div class="col">
-            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
-                <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
-                <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
-                    </a>
+        <?php foreach ($paket as $p) { ?>
+            <div class="col">
+                <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+                    <img src="<?= base_url() . '/uploads/' . $p['cover']; ?>" class="card-img-top" alt="...">
+                    <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
+                    <div class="card-body">
+                        <a href="" style="text-decoration:none; color:black">
+                            <h5 class="card-title text-center"><?= $p['nama_mapel'] ?> - <?= $p['kelas'] ?></h5>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
         <div class="col">
-            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
-                <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
-                <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
-                    </a>
-                </div>
-            </div>
+            <a href="" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                <img src="<?php echo base_url('images/add_modul.png'); ?>" class="card-img-top" alt="...">
+            </a>
         </div>
-        <div class="col">
-            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
-                <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
-                <div class="card-body">
-                    <a href="" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">IPA - 5A</h5>
-                    </a>
+    </div>
+
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Paket Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <form class="row g-3" action="<?php echo base_url('KelolaAdmin/add_paket'); ?>" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Paket Soal</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= old('nama'); ?>" name="nama">
+                            <?php if ($validation->getError('nama')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('nama'); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mapel" class="form-label">Mata Pelajaran</label>
+                            <select class="form-select" aria-label="Default select example" name="mapel">
+                                <?php foreach ($mapel as $m) { ?>
+                                    <option value="<?= $m['id_mapel']; ?>"><?= $m['nama_mapel'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="kelas" class="form-label">Pilih Kelas</label>
+                            <select class="form-select" aria-label="Default select example" name="kelas">
+                                <option value="1A">1A</option>
+                                <option value="2A">2A</option>
+                                <option value="3A">3A</option>
+                                <option value="4A">4A</option>
+                                <option value="5A">5A</option>
+                                <option value="6A">6A</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="guru" class="form-label">Pilih Guru Pengampu</label>
+                            <select class="form-select" aria-label="Default select example" name="guru">
+                                <?php foreach ($guru as $g) { ?>
+                                    <option value="<?= $g['id_user']; ?>"><?= $g['nama_guru'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cover" class="form-label">Upload Cover</label>
+                            <input type="file" class="form-control" name="cover">
+                            <?php if ($validation->getError('cover')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('cover'); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -99,11 +150,11 @@
                 <div class="modal-body">
                     <form class="row g-3" action="<?php echo base_url('KelolaAdmin/add_guru'); ?>" method="post">
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama Guru</label>
+                            <label for="nama_guru" class="form-label">Nama Guru</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= old('nama_guru'); ?>" name="nama_guru">
-                            <?php if ($validation->getError('nama')) { ?>
+                            <?php if ($validation->getError('nama_guru')) { ?>
                                 <div class='alert alert-danger mt-2'>
-                                    <?= $error = $validation->getError('nama'); ?>
+                                    <?= $error = $validation->getError('nama_guru'); ?>
                                 </div>
                             <?php } ?>
                         </div>
@@ -156,11 +207,11 @@
                         <form class="row g-3" action="<?php echo base_url('KelolaAdmin/update_guru'); ?>" method="post">
                             <div class="mb-3">
                                 <input type="hidden" name="id_user" id="id_user" value="<?= $row['id_user']; ?>">
-                                <label for="nama" class="form-label">Nama Guru</label>
+                                <label for="nama_guru" class="form-label">Nama Guru</label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $row['nama_guru']; ?>" name="nama_guru">
-                                <?php if ($validation->getError('nama')) { ?>
+                                <?php if ($validation->getError('nama_guru')) { ?>
                                     <div class='alert alert-danger mt-2'>
-                                        <?= $error = $validation->getError('nama'); ?>
+                                        <?= $error = $validation->getError('nama_guru'); ?>
                                     </div>
                                 <?php } ?>
                             </div>

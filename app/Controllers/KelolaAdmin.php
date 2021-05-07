@@ -4,16 +4,25 @@ namespace App\Controllers;
 
 use App\Models\Siswa;
 use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Paket;
+use App\Models\Mapel;
 
 class KelolaAdmin extends BaseController
 {
     protected $siswa;
     protected $guru;
+    protected $kelas;
+    protected $paket;
+    protected $mapel;
 
     function __construct()
     {
         $this->siswa = new Siswa();
         $this->guru = new Guru();
+        $this->kelas = new Kelas();
+        $this->paket = new Paket();
+        $this->mapel = new Mapel();
     }
 
     public function index()
@@ -23,6 +32,9 @@ class KelolaAdmin extends BaseController
         }
         $data['guru'] = $this->guru->showguru();
         $data['siswa'] = $this->siswa->showsiswa();
+        $data['kelas'] = $this->kelas->showkelas();
+        $data['mapel'] = $this->mapel->showmapel();
+        $data['paket'] = $this->paket->showpaket();
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Dashboard Admin';
         echo view('header', $set);
@@ -83,13 +95,22 @@ class KelolaAdmin extends BaseController
             'status' => 1
         ];
         $this->guru->createguru($data);
+        session()->setFlashdata('success', '<div class="alert alert-success" role="alert">Data Guru Berhasil Ditambahkan</div>');
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
+    /**
+     * @param  $id
+     * 
+     * @delete guru
+     * Digunakan untuk menghapus data guru tertentu,
+     * jika berhasil akan menampilkan halaman admin
+     */
     public function delete_guru($id)
     {
-        $this->guru->deleteguru($id);
-        return redirect()->to(base_url('KelolaAdmin'));
+        $this->guru->deleteguru($id); // memanggil function delete guru dari model guru
+        session()->setFlashdata('success', '<div class="alert alert-warning" role="alert">Data Guru berhasil dihapus</div>');
+        return redirect()->to(base_url('KelolaAdmin')); // jika proses berhasil, maka kembali ke page admin
     }
 
     public function update_guru()
@@ -146,7 +167,7 @@ class KelolaAdmin extends BaseController
         ];
 
         $this->guru->updateguru($data, $id);
-
+        session()->setFlashdata('success', '<div class="alert alert-primary" role="alert">Data Guru Berhasil Di Update</div>');
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
@@ -208,13 +229,14 @@ class KelolaAdmin extends BaseController
         ];
 
         $this->siswa->createsiswa($data);
-
+        session()->setFlashdata('success', '<div class="alert alert-success" role="alert">Data Siswa Berhasil Ditambahkan</div>');
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
     public function delete_siswa($id)
     {
         $this->siswa->deletesiswa($id);
+        session()->setFlashdata('success', '<div class="alert alert-warning" role="alert">Data Siswa berhasil dihapus</div>');
         return redirect()->to(base_url('KelolaAdmin'));
     }
 
@@ -277,7 +299,56 @@ class KelolaAdmin extends BaseController
         ];
 
         $this->siswa->updatesiswa($data, $id);
+        session()->setFlashdata('success', '<div class="alert alert-primary" role="alert">Data Siswa Berhasil Di Update</div>');
+        return redirect()->to(base_url('KelolaAdmin'));
+    }
 
+    public function add_paket()
+    {
+        $nama = $this->request->getPost('nama');
+        $mapel = $this->request->getPost('mapel');
+        $kelas = $this->request->getPost('kelas');
+        $guru = $this->request->getPost('guru');
+        $cover = $this->request->getFile('cover');
+
+        $validation = $this->validate(
+            [
+                'nama' => [
+                    'rules'  => 'required|is_unique[paket.nama_paket]',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain'
+                    ]
+                ],
+                'cover' => [
+                    'rules'  => 'uploaded[cover]|mime_in[cover,image/jpg,image/jpeg,image/gif,image/png]|max_size[cover,8192]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png',
+                        'max_size' => 'Ukuran File Maksimal 8 MB'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $fileName = $cover->getRandomName();
+
+        $data = [
+            'id_user' => $guru,
+            'id_mapel' => $mapel,
+            'kelas' => $kelas,
+            'nama_paket' => $nama,
+            'cover' => $fileName
+        ];
+
+        $this->paket->createpaket($data);
+        $cover->move('uploads/', $fileName);
+        session()->setFlashdata('success', '<div class="alert alert-success" role="alert">Data Paket Berhasil Ditambahkan</div>');
         return redirect()->to(base_url('KelolaAdmin'));
     }
 }

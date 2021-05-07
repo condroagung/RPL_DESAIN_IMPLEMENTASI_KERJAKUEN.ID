@@ -4,6 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+/**
+ * Mendefinisikan model Admin
+ */
 class Admin extends Model
 {
     protected $table = 'Admin';

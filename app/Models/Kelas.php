@@ -4,18 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Mapel extends Model
+class Kelas extends Model
 {
-    protected $table = 'Mata_pelajaran';
+    protected $table = 'kelas';
 
-    protected $primaryKey = 'id_mapel';
+    protected $primaryKey = 'id_kelas';
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
 
-    protected $allowedFields = ['id_mapel', 'id_user', 'nama_mapel', 'materi'];
+    protected $allowedFields = ['id_kelas', 'nama_kelas'];
 
-    public function showmapel()
+    public function showkelas()
     {
         return $this->db->table($this->table)->get()->getResultArray();
     }
