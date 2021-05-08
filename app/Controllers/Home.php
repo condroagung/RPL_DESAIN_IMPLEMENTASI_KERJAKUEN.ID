@@ -63,13 +63,13 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_admin['id_user'],
 					'username' => $log_admin['username'],
-					'status' => '0',
+					'status' => 0,
 					'logged_in' => TRUE
 				];
 				// men set session yang dibuat diatas
 				$session->set($session_data);
 				// membuat flash data message berhasil
-				$session->setFlashdata('msg', 'Hello');
+				$session->setFlashdata('success', '<p style="font-size:24px; font-weight:400; margin-top:2vh">Selamat Datang <span style="font-weight:700">ADMIN!</span></p>');
 				// menampilkan halaman index admin
 				return redirect()->to(base_url('KelolaAdmin'));
 			} else {
@@ -87,13 +87,15 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_siswa['id_user'],
 					'username' => $log_siswa['username'],
-					'status' => '1',
+					'status' => 2,
+					'kelas' => $log_siswa['kelas'],
+					'jenis_kelamin' => $log_siswa['jenis_kelamin'],
 					'logged_in' => TRUE
 				];
 				// men set session yang dibuat diatas
 				$session->set($session_data);
 				// membuat flash data message berhasil
-				$session->setFlashdata('msg', 'Hello');
+				$session->setFlashdata('success', '<p style="font-size:24px; font-weight:400; margin-top:2vh">Selamat Datang <span style="font-weight:700">' . $log_siswa['username'] . '</span></p>');
 				// menampilkan halaman index siswa
 				return redirect()->to(base_url('PageSiswa'));
 			} else {
@@ -111,13 +113,13 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_guru['id_user'],
 					'username' => $log_guru['username'],
-					'status' => '2',
+					'status' => 1,
 					'logged_in' => TRUE
 				];
 				// men set session yang dibuat diatas
 				$session->set($session_data);
 				// membuat flash data message berhasil
-				$session->setFlashdata('msg', 'Hello');
+				$session->setFlashdata('success', '<p style="font-size:24px; font-weight:400; margin-top:2vh">Selamat Datang <span style="font-weight:700">' . $log_guru['username'] . '</span></p>');
 				// menampilkan halaman index siswa
 				return redirect()->to(base_url('PageGuru'));
 			} else {

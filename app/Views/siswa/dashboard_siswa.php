@@ -1,9 +1,10 @@
-<div class="container-fluid" style="font-family: 'Nunito', sans-serif;">
-
-    <p style="font-size: 24px; margin-top:2vh">Selamat Datang <span style="font-weight:700"><?php echo session()->get('username') ?>!</span></p>
+<div class="container-fluid" style="font-family: 'Nunito', sans-serif; margin-left:2vh; color:rgba(79, 79, 79, 1)">
+    <?php if (!empty(session()->getFlashdata('success'))) { ?>
+        <?php echo session()->getFlashdata('success'); ?>
+    <?php } ?>
     <div class="row">
         <div class="col-md-12">
-            <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">PAKET SOAL YANG TERSEDIA</p>
+            <p style="margin-top:2vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700">PAKET SOAL YANG TERSEDIA</p>
         </div>
     </div>
 
@@ -13,7 +14,7 @@
                 <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">BAHASA INDONESIA - 5A</h5>
+                        <p class="card-title text-center" style="font-size:20px; font-weight:700; color:rgba(79, 79, 79, 1)">BAHASA INDONESIA - 5A</p>
                     </a>
                 </div>
             </div>
@@ -23,7 +24,7 @@
                 <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">MATEMATIKA - 5A</h5>
+                        <p class="card-title text-center" style="font-size:20px; font-weight:700; color:rgba(79, 79, 79, 1)">MATEMATIKA - 5A</p>
                     </a>
                 </div>
             </div>
@@ -33,7 +34,7 @@
                 <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
-                        <h5 class="card-title text-center">IPA - 5A</h5>
+                        <p class="card-title text-center" style="font-size:20px; font-weight:700; color:rgba(79, 79, 79, 1)">IPA - 5A</p>
                     </a>
                 </div>
             </div>
@@ -41,7 +42,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px">REKAP NILAI SEMESTER INI</p>
+            <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700">REKAP NILAI SEMESTER INI</p>
         </div>
     </div>
 
