@@ -25,8 +25,8 @@ class MulaiUjian extends BaseController
             return redirect()->to(base_url('Home'));
         }
         $data['validation'] = \Config\Services::validation();
-        $data['title'] = 'Dashboard Siswa';
-        echo view('header');
+        $data['title'] = 'Halaman Ujian';
+        echo view('header', $data);
         echo view('ujian/start_ujian', $data);
         echo view('footer');
     }

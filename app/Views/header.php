@@ -16,8 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="shortcut icon" href="<?php echo base_url('images/logo.png') ?>" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <title><?= $title ?></title>
 </head>
@@ -31,14 +31,30 @@
 <body style="background-color: rgba(250, 250, 250, 1);">
     <nav class="navbar navbar-expand-lg navbar-custom" style="box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.05);">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="font-family: 'Nunito', sans-serif; color:#2F80ED; font-size:32px">K.ID</a>
+            <a class="navbar-brand" href="<?php
+                                            if ((session()->get('status') == 0)) {
+                                                echo base_url('KelolaAdmin');
+                                            } else if ((session()->get('status') == 1)) {
+                                                echo base_url('PageGuru');
+                                            } else {
+                                                echo base_url('PageSiswa');
+                                            }
+                                            ?>" style="font-family: 'Nunito', sans-serif; color:#2F80ED; font-size:32px; font-weight:700">K.ID</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="font-family: 'Nunito', sans-serif; color:#4F4F4F; font-size:24px; font-weight:700">Kerjakeun.id</a>
+                        <a class="nav-link" href="<?php
+                                                    if ((session()->get('status') == 0)) {
+                                                        echo base_url('KelolaAdmin');
+                                                    } else if ((session()->get('status') == 1)) {
+                                                        echo base_url('PageGuru');
+                                                    } else {
+                                                        echo base_url('PageSiswa');
+                                                    }
+                                                    ?>" style="font-family: 'Nunito', sans-serif; color:#4F4F4F; font-size:24px; font-weight:700">Kerjakeun.id</a>
                     </li>
                 </ul>
                 <form class="d-flex">

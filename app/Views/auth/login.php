@@ -20,6 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="shortcut icon" href="<?php echo base_url('images/logo.png') ?>" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
@@ -65,7 +66,7 @@
 
     <div id="login_1" style="visibility:hidden">
         <section class="d-flex justify-content-center" style="position: absolute; top: 35%; width: 100%;">
-            <h1 style="color:white">LOGIN</h1>
+            <p style="color:white; font-family: 'Nunito', sans-serif; font-size:48px; font-weight:700">LOGIN</p>
         </section>
         <section class="d-flex justify-content-center" style="position: absolute; top: 43%; width: 100%;">
             <div class="container">
@@ -82,17 +83,22 @@
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group mb-3" style="margin-bottom:3vh;">
                                 <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                                <span class="input-group-text" id="basic-addon1">@</span>
+                                <button type="button" id="button_show" onclick=" showpass()"><i class=" fas fa-eye "></i></button>
                             </div>
                             <div class="input-group mb-3">
-                                <button type="submit" class="btn btn-primary" style="margin-left:15vw; padding:5px 20px; margin-top:1vh">LOGIN</button>
+                                <button type="submit" class="btn btn-primary" style="margin-left:15vw; padding:5px 20px; margin-top:1vh;  font-family: 'Poppins', sans-serif;">LOGIN</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
+        <section class="d-flex justify-content-center" style="position: absolute; top: 80%; width: 100%;">
+            <p style="color:rgba(235, 87, 87, 1); font-family: 'Nunito', sans-serif; font-size:18px; font-weight:700">*Lupa Password? Hubungi admin untuk mereset password</p>
+        </section>
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
@@ -102,14 +108,31 @@
         function showlogin() {
             var a = document.getElementById('login_1');
             var b = document.getElementById('welcome');
-            if (a.style.visibility = 'hidden') {
+            var button = document.getElementsByTagName('button')[0];
+            if (button.textContent === 'LOGIN') {
                 a.style.visibility = 'visible';
                 b.style.visibility = 'hidden';
+                button.textContent = 'BERANDA';
             } else {
                 a.style.visibility = 'hidden';
                 b.style.visibility = 'visible';
+                button.textContent = 'LOGIN';
             }
         }
         setTimeout("showlogin", 3000);
+
+        function showpass() {
+            var x = document.getElementById("exampleInputPassword1")
+            if (x.type === "password") {
+                x.type = "text";
+                x.classList.toggle("fa-thumbs-down");
+            } else {
+                x.type = "password";
+            }
+        }
+
+        $("#button_show").click(function() {
+            $(this).find("i").toggleClass("fa-eye-slash");
+        });
     </script>
 </body>

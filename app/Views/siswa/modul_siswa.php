@@ -4,8 +4,8 @@
         <div>
             <img src="<?php echo base_url('images/indo_detail.png') ?>" href="#" class="p-2" style="height:flex; width:flex" alt="">
         </div>
-        <div class="col p-2">
-            <p class="" style="font-weight:700; font-size:18px;">Detail Paket Soal</p>
+        <div class="col p-2" style="margin-left:2vh;">
+            <p style="font-weight:700; font-size:18px; font-family: 'Poppins', sans-serif;">DETAIL PAKET SOAL</p>
             <table class="table table-borderless" style="font-weight:700; color:rgba(79, 79, 79, 1)">
                 <tbody>
                     <tr>
@@ -56,43 +56,75 @@
             </div>
         </div>
 
-        <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+        <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); border-radius:8px">
             <div class="col-1" style=" margin-top:2vh; margin-left:2vh">1</div>
             <div class="col-2" style=" margin-left: -2vh; margin-top:2vh">
                 <p style="font-weight:700">KODE MODUL : <span style="font-weight:400">BIM1</span></p>
             </div>
-            <div class="col-3" style=" margin-top:2vh">Pengantar Bahasa Indonesia</div>
+            <div class="col-4" style=" margin-top:2vh">Pengantar Bahasa Indonesia</div>
             <div class="col-2" style=" margin-top:2vh">
                 <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400">20</span></p>
             </div>
-            <div class="col-2" style=" margin-top:2vh;">
-                <p style="font-size:16px; font-weight:700"> WAKTU PENGERJAAN : <span style="font-weight:400">45 MENIT</span> </p>
-            </div>
             <div class="col-2">
-                <a href=""><i class="fas fa-recycle" style="background-color:#BDBDBD; color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px"></i></a>
-                <a href=""><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
-                <a href=""><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
-                <a href=""><i class="fas fa-ellipsis-v" style="color:black; margin-left:2vh; font-size:24px; border-radius:4px"></i></a>
+                <p style="font-size:16px; font-weight:700;  margin-top:2vh"> WAKTU PENGERJAAN : <span style="font-weight:400">45 MENIT</span> </p>
+            </div>
+            <div class="col-1" style="background-color:rgba(39, 174, 96, 1); border-radius: 0px 8px 8px 0px;">
+                <a href="" style=" text-decoration:none">
+                    <p style=" color:white; font-size:24px; margin-bottom:10px; padding:15px;  text-align: center;">90</p>
+                </a>
             </div>
         </div>
 
-        <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh">
+        <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); border-radius:8px; margin-top:2vh">
             <div class="col-1" style=" margin-top:2vh; margin-left:2vh">2</div>
             <div class="col-2" style=" margin-left: -2vh; margin-top:2vh">
-                <p style="font-weight:700">KODE MODUL : <span style="font-family: 'Nunito', sans-serif; font-weight:500">BIM2</span></p>
+                <p style="font-weight:700">KODE MODUL : <span style="font-weight:400">BIM2</span></p>
             </div>
-            <div class="col-3" style=" margin-top:2vh">Sajak Bahasa</div>
+            <div class="col-4" style=" margin-top:2vh">Sajak Bahasa</div>
             <div class="col-2" style=" margin-top:2vh">
-                <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400"> 20</span></p>
-            </div>
-            <div class="col-2" style=" margin-top:2vh">
-                <p style="font-size:16px; font-weight:700"> WAKTU PENGERJAAN : <span style="font-weight:400"> 45 MENIT </span></p>
+                <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400">20</span></p>
             </div>
             <div class="col-2">
-                <a href=""><i class="fas fa-recycle" style="background-color:#BDBDBD; color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px"></i></a>
-                <a href=""><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
-                <a href=""><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
-                <a href=""><i class="fas fa-ellipsis-v" style="color:black; margin-left:2vh; font-size:24px; border-radius:4px"></i></a>
+                <p style="font-size:16px; font-weight:700;  margin-top:2vh"> WAKTU PENGERJAAN : <span style="font-weight:400">45 MENIT</span> </p>
+            </div>
+            <div class="col-1" style="background-color:rgba(39, 174, 96, 1); border-radius: 0px 8px 8px 0px;">
+                <a href="" style=" text-decoration:none">
+                    <p style=" color:white; font-size:24px; margin-bottom:10px; padding:15px;  text-align: center;">90</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); border-radius:8px; margin-top:2vh">
+            <div class="col-1" style=" margin-top:2vh; margin-left:2vh">3</div>
+            <div class="col-2" style=" margin-left: -2vh; margin-top:2vh">
+                <p style="font-weight:700">KODE MODUL : <span style="font-weight:400">BIM3</span></p>
+            </div>
+            <div class="col-4" style=" margin-top:2vh">Cerita Pendek</div>
+            <div class="col-2" style=" margin-top:2vh">
+                <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400">20</span></p>
+            </div>
+            <div class="col-2">
+                <p style="font-size:16px; font-weight:700;  margin-top:2vh"> WAKTU PENGERJAAN : <span style="font-weight:400">45 MENIT</span> </p>
+            </div>
+            <div class="col-1">
+                <a href="<?= base_url('MulaiUjian') ?>"><i class="fas fa-play" style="color:rgba(39, 174, 96, 1); margin-left:3vh; font-size:30px; padding:25px;"></i></a>
+            </div>
+        </div>
+
+        <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); border-radius:8px; margin-top:2vh">
+            <div class="col-1" style=" margin-top:2vh; margin-left:2vh">3</div>
+            <div class="col-2" style=" margin-left: -2vh; margin-top:2vh">
+                <p style="font-weight:700">KODE MODUL : <span style="font-weight:400">BIM4</span></p>
+            </div>
+            <div class="col-4" style=" margin-top:2vh">Karya Ilmiah</div>
+            <div class="col-2" style=" margin-top:2vh">
+                <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400">20</span></p>
+            </div>
+            <div class="col-2">
+                <p style="font-size:16px; font-weight:700;  margin-top:2vh"> WAKTU PENGERJAAN : <span style="font-weight:400">45 MENIT</span> </p>
+            </div>
+            <div class="col-1">
+                <a href="" onclick="alert('Soal belum bisa dikerjakan');"><i class="fas fa-lock" style="color:rgba(242, 153, 74, 1); margin-left:3vh; font-size:30px; padding:25px;"></i></a>
             </div>
         </div>
     </div>
