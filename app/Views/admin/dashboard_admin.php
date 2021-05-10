@@ -1,4 +1,4 @@
-<div class="container-fluid" style="font-family: 'Nunito', sans-serif; margin-left:2vh; color:rgba(79, 79, 79, 1)">
+<div class="container-fluid" style="font-family: 'Nunito', sans-serif; margin-left:2vh; color:rgba(79, 79, 79, 1);  font-weight:700">
     <?php if (!empty(session()->getFlashdata('success'))) { ?>
         <?php echo session()->getFlashdata('success'); ?>
     <?php } ?>
@@ -108,13 +108,13 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-left:-2vh">
             <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700; color:rgba(79, 79, 79, 1)">DAFTAR GURU</p>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-left:-2vh">
             <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
                 <thead class="text-center">
                     <tr>
@@ -151,9 +151,9 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); font-weight:700">
-                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH GURU BARU</button>
+        <div class="col-md-12" style="margin-left:-2vh">
+            <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1)">
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="border-radius: 8px; font-weight:700"><i class="fas fa-plus" style="margin-right:1vw;"> </i>TAMBAH GURU BARU</button>
             </div>
         </div>
     </div>
@@ -272,13 +272,13 @@
     <?php } ?>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-left:-2vh">
             <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700">DAFTAR SISWA</p>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-left:-2vh">
             <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
                 <thead class="text-center">
                     <tr>
@@ -314,7 +314,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <button type=" button" class="btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 8px"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH SISWA BARU</button>
+                <button type="button" class="btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="border-radius: 8px; font-weight:700; margin-right:2vh"><i class="fas fa-plus" style="margin-right:1vw"> </i>TAMBAH SISWA BARU</button>
             </div>
         </div>
     </div>

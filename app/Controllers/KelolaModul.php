@@ -7,8 +7,9 @@ use App\Models\Siswa;
 use App\Models\Kelas;
 use App\Models\Paket;
 use App\Models\Mapel;
+use App\Models\Modul;
 
-class PageGuru extends BaseController
+class KelolaModul extends BaseController
 {
 
     protected $siswa;
@@ -16,6 +17,7 @@ class PageGuru extends BaseController
     protected $kelas;
     protected $paket;
     protected $mapel;
+    protected $modul;
 
     function __construct()
     {
@@ -24,6 +26,7 @@ class PageGuru extends BaseController
         $this->kelas = new Kelas();
         $this->paket = new Paket();
         $this->mapel = new Mapel();
+        $this->modul = new Modul();
     }
 
     public function index()
@@ -31,7 +34,7 @@ class PageGuru extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
-        $data['paket'] = $this->paket->showpaketbyguru(session()->get('id_user'));
+        $data['modul'] = $this->paket->showpaketbyguru(session()->get('id_user'));
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Dashboard Guru';
         echo view('header', $set);
@@ -39,19 +42,28 @@ class PageGuru extends BaseController
         echo view('footer');
     }
 
-    public function lihat_modul($id)
+    public function buat_modul()
     {
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
-        $session = session();
-        $session->set('id_paket', $id);
-        $data['paket'] = $this->paket->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
-            ->join('guru', 'guru.id_user = paket.id_user')->where('id_paket', $id)->first();
+        $data['count_modul'] = $this->modul->countModul(session()->get('id_paket'));
         $data['validation'] = \Config\Services::validation();
-        $set['title'] = 'Detail Paket';
+        $set['title'] = 'Buat Modul';
         echo view('header', $set);
-        echo view('guru/modul_guru', $data);
+        echo view('guru/buat_modul', $data);
+        echo view('footer');
+    }
+
+    public function buat_soal()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+        $data['validation'] = \Config\Services::validation();
+        $set['title'] = 'Buat Soal';
+        echo view('header', $set);
+        echo view('guru/buat_soal', $data);
         echo view('footer');
     }
 }

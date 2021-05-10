@@ -25,7 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Welcome</title>
+    <title>Selamat Datang di Kerjakeun</title>
 </head>
 
 
@@ -83,7 +83,7 @@
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group mb-3" style="margin-bottom:3vh;">
                                 <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                                <button type="button" id="button_show" onclick=" showpass()"><i class=" fas fa-eye "></i></button>
+                                <button type="button" id="button_show" onclick=" showpass()"><i class="fas fa-eye"></i></button>
                             </div>
                             <div class="input-group mb-3">
                                 <button type="submit" class="btn btn-primary" style="margin-left:15vw; padding:5px 20px; margin-top:1vh;  font-family: 'Poppins', sans-serif;">LOGIN</button>
@@ -125,7 +125,6 @@
             var x = document.getElementById("exampleInputPassword1")
             if (x.type === "password") {
                 x.type = "text";
-                x.classList.toggle("fa-thumbs-down");
             } else {
                 x.type = "password";
             }

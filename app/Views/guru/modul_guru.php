@@ -2,7 +2,7 @@
     <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:5px">BAHASA INDONESIA</p>
     <div class="m-2 mb-4 rounded-3 shadow p-3 bg-white d-flex flex-row">
         <div>
-            <img src="<?php echo base_url('images/indo_detail.png') ?>" href="#" class="p-2" style="height:flex; width:flex" alt="">
+            <img src="<?= base_url() . '/uploads/' . $paket['cover']; ?>" href="#" class="p-2" style="height:300px; width:300px" alt="">
         </div>
         <div class="col p-2">
             <p class="" style="font-weight:700; font-size:18px;">Detail Paket Soal</p>
@@ -10,28 +10,28 @@
                 <tbody>
                     <tr>
                         <td class="col-3 px-0 py-2">Kode Mapel</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: BI7688</span></td>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['nama_paket'] ?></span></td>
                         <td class="col-3 px-0 py-2">Rata-rata nilai</td>
                         <td class="col-3 px-0 py-2"><span style="font-weight:400">: 90</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Nama Mapel</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: Bahasa Indonesia</td>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['nama_mapel'] ?></td>
                         <td class="col-3 px-0 py-2">Jumlah modul selesai</td>
                         <td class="col-3 px-0 py-2"><span style="font-weight:400">: 3</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Guru Pengampu</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: Susi Sudarwati S.Pd.</td>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['nama_guru'] ?>.</td>
                         <td class="col-3 px-0 py-2">Jumlah soal selesai</td>
                         <td class="col-3 px-0 py-2"><span style="font-weight:400">: 60</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Kelas</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: 5 A</span>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['kelas'] ?></span>
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +52,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <p style="margin-top:2vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700">DAFTAR SISWA</p>
+                <p style="margin-top:2vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700">DAFTAR MODUL</p>
             </div>
         </div>
 
@@ -93,6 +93,14 @@
                 <a href=""><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
                 <a href=""><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
                 <a href=""><i class="fas fa-ellipsis-v" style="color:black; margin-left:2vh; font-size:24px; border-radius:4px"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-12">
+                <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1)">
+                    <a href="<?= base_url('KelolaModul/buat_modul') ?>" type="button" class="btn btn-light" style="border-radius: 8px; font-weight:700"><i class="fas fa-plus" style="margin-right:1vw;"> </i>BUAT MODUL BARU</a>
+                </div>
             </div>
         </div>
     </div>
