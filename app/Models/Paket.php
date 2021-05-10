@@ -23,6 +23,11 @@ class Paket extends Model
             ->get()->getResultArray();
     }
 
+    public function createpaket($data)
+    {
+        return $this->db->table($this->table)->insert($data);
+    }
+
     public function showpaketbyguru($id_user)
     {
         return $this->db->table($this->table)
@@ -39,10 +44,5 @@ class Paket extends Model
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('id_paket', $primaryKey)
             ->get()->getResultArray();
-    }
-
-    public function createpaket($data)
-    {
-        return $this->db->table($this->table)->insert($data);
     }
 }

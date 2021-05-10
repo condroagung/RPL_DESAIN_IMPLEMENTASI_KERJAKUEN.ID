@@ -55,6 +55,50 @@ class KelolaModul extends BaseController
         echo view('footer');
     }
 
+    public function create_modul()
+    {
+        $judul_modul = $this->request->getPost('judul_modul');
+        $modul_ke = $this->request->getPost('modul_ke');
+        $rata_waktu = $this->request->getPost('rata_waktu');
+
+        $validation = $this->validate(
+            [
+                'judul_modul' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong'
+                    ]
+                ],
+                'rata_waktu' => [
+                    'rules'  => 'required|numeric',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain',
+                        'numeric' => 'Waktu Pengerjaan hanya boleh angka, jangan masukin selain angka'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $data = [
+            'id_paket' => session()->get('id_paket'),
+            'judul_modul' => $judul_modul,
+            'modul_ke' => $modul_ke,
+            'rata_waktu' => $rata_waktu,
+            'status_modul' => 0
+        ];
+
+        $this->modul->createmodul($data);
+        session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Modul Berhasil Ditambahkan</div>');
+        session()->remove('id_paket');
+        return redirect()->to(base_url('PageGuru'));
+    }
+
     public function buat_soal()
     {
         if (!session()->get('logged_in')) {

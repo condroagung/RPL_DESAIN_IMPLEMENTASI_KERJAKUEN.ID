@@ -7,6 +7,7 @@ use App\Models\Siswa;
 use App\Models\Kelas;
 use App\Models\Paket;
 use App\Models\Mapel;
+use App\Models\Modul;
 
 class PageGuru extends BaseController
 {
@@ -16,6 +17,7 @@ class PageGuru extends BaseController
     protected $kelas;
     protected $paket;
     protected $mapel;
+    protected $modul;
 
     function __construct()
     {
@@ -24,6 +26,7 @@ class PageGuru extends BaseController
         $this->kelas = new Kelas();
         $this->paket = new Paket();
         $this->mapel = new Mapel();
+        $this->modul = new Modul();
     }
 
     public function index()
@@ -48,6 +51,7 @@ class PageGuru extends BaseController
         $session->set('id_paket', $id);
         $data['paket'] = $this->paket->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')->where('id_paket', $id)->first();
+        $data['modul'] = $this->modul->showmodul($id);
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Detail Paket';
         echo view('header', $set);
