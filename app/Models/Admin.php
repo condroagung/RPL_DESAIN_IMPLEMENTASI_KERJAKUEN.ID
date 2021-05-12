@@ -21,4 +21,9 @@ class Admin extends Model
     {
         return $this->table($this->table)->Where(['username', $username]);
     }
+
+    public function updateadmin($data, $primaryKey)
+    {
+        return $this->db->table($this->table)->update($data, ['id_user' => $primaryKey]);
+    }
 }

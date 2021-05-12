@@ -30,4 +30,29 @@ class Soal extends Model
             ->where('soal.id_modul', $id)
             ->get()->getResultArray();
     }
+
+    public function deletesoal($primaryKey)
+    {
+        return $this->db->table($this->table)->delete(['id_soal' => $primaryKey]);
+    }
+
+    public function updatesoal($data, $primaryKey)
+    {
+        return $this->db->table($this->table)->update($data, ['id_soal' => $primaryKey]);
+    }
+
+    public function countsoal($id)
+    {
+        return $this->db->table($this->table)
+            ->join('Modul', 'soal.id_modul = modul.id_modul')
+            ->where('soal.id_modul', $id)
+            ->countAllResults();
+    }
+
+    public function countsoalmodul()
+    {
+        return $this->db->table($this->table)
+            ->join('Modul', 'soal.id_modul = modul.id_modul')
+            ->countAllResults();
+    }
 }

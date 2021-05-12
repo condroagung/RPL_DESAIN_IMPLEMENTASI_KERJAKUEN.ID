@@ -37,6 +37,15 @@ class Paket extends Model
             ->get()->getResultArray();
     }
 
+    public function showpaketbykelas($kelas)
+    {
+        return $this->db->table($this->table)
+            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('guru', 'guru.id_user = paket.id_user')
+            ->where('paket.kelas', $kelas)
+            ->get()->getResultArray();
+    }
+
     public function showpaketbyid($primaryKey)
     {
         return $this->db->table($this->table)

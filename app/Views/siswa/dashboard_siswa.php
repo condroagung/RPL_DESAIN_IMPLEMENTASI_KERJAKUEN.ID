@@ -1,5 +1,6 @@
 <div class="container-fluid" style="font-family: 'Nunito', sans-serif; margin-left:2vh; color:rgba(79, 79, 79, 1)">
-    <?php if (!empty(session()->getFlashdata('success'))) { ?>
+    <?php
+    if (!empty(session()->getFlashdata('success'))) { ?>
         <?php echo session()->getFlashdata('success'); ?>
     <?php } ?>
     <div class="row">
@@ -9,36 +10,19 @@
     </div>
 
     <div class="row row-cols-1 row-cols-md-6 g-4">
-        <div class="col">
-            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <img src="<?php echo base_url('images/indo.png'); ?>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
-                        <p class="card-title text-center" style="font-size:20px; font-weight:700; color:rgba(79, 79, 79, 1)">BAHASA INDONESIA - 5A</p>
-                    </a>
+        <?php foreach ($paket as $p) { ?>
+            <div class="col">
+                <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
+                    <img src="<?= base_url() . '/uploads/' . $p['cover']; ?>" class="card-img-top" alt="...">
+                    <i class="fas fa-ellipsis-v" style="position:absolute; top:1vh; right:1vw; color:white"></i>
+                    <div class="card-body">
+                        <a href="<?= base_url('PageSiswa/lihat_modul_siswa/' . $p['id_paket']); ?>" style="text-decoration:none; color:black">
+                            <p class="card-title text-center" style="font-weight:700; font-size:20px; color:rgba(79, 79, 79, 1)"><?= $p['nama_mapel'] ?> - <?= $p['kelas'] ?></p>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <img src="<?php echo base_url('images/mat.png'); ?>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
-                        <p class="card-title text-center" style="font-size:20px; font-weight:700; color:rgba(79, 79, 79, 1)">MATEMATIKA - 5A</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card border-0" style="box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);">
-                <img src="<?php echo base_url('images/ipa.png'); ?>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="<?php echo base_url('PageSiswa/lihat_modul'); ?>" style="text-decoration:none; color:black">
-                        <p class="card-title text-center" style="font-size:20px; font-weight:700; color:rgba(79, 79, 79, 1)">IPA - 5A</p>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -61,22 +45,20 @@
                         </tr>
                     </thead>
                     <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>BI769</td>
-                            <td>Bahasa Indonesia</td>
-                            <td>7</td>
-                            <td>490</td>
-                            <td>70</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>MTK0234</td>
-                            <td>Matematika</td>
-                            <td>10</td>
-                            <td>950</td>
-                            <td>95</td>
-                        </tr>
+                        <?php $no = 1;
+                        $no_modul = 0;
+                        foreach ($hasil as $h) { ?>
+                            <tr>
+                                <th scope="row"><?= $no++ ?></th>
+                                <td><?= $h['nama_paket'] ?></td>
+                                <td><?= $h['nama_mapel'] ?></td>
+                                <td><?= $count_modul[$no_modul]['id_modul'] ?></td>
+                                <td><?= number_format($sum_hasil[$no_modul]['skor_akhir']) ?></td>
+                                <td><?= number_format($avg_hasil[$no_modul]['skor_akhir'], 1) ?></td>
+                            </tr>
+                        <?php
+                            $no_modul++;
+                        } ?>
                     </tbody>
                 </table>
             </div>

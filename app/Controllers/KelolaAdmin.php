@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Siswa;
+use App\Models\Admin;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Paket;
@@ -11,6 +12,7 @@ use App\Models\Mapel;
 class KelolaAdmin extends BaseController
 {
     protected $siswa;
+    protected $admin;
     protected $guru;
     protected $kelas;
     protected $paket;
@@ -23,6 +25,7 @@ class KelolaAdmin extends BaseController
         $this->kelas = new Kelas();
         $this->paket = new Paket();
         $this->mapel = new Mapel();
+        $this->admin = new Admin();
     }
 
     public function index()
@@ -36,6 +39,7 @@ class KelolaAdmin extends BaseController
         $data['mapel'] = $this->mapel->showmapel();
         $data['paket'] = $this->paket->showpaket();
         $data['validation'] = \Config\Services::validation();
+        $set['validation'] = \Config\Services::validation();
         $set['title'] = 'Dashboard Admin';
         echo view('header', $set);
         echo view('admin/dashboard_admin', $data);
@@ -380,5 +384,138 @@ class KelolaAdmin extends BaseController
         $cover->move('uploads/', $fileName);
         session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Data Paket Berhasil Ditambahkan</div>');
         return redirect()->to(base_url('KelolaAdmin'));
+    }
+
+    public function change_pass()
+    {
+        $id = session()->get('id_user');
+        $pass_lama = $this->request->getPost('pass_lama');
+        $pass_baru = $this->request->getPost('pass_baru');
+        $pass_sesuai = $this->request->getPost('pass_sesuai');
+
+        if (session()->get('status') == 0) {
+            $validation = $this->validate(
+                [
+                    'pass_lama' => [
+                        'rules'  => 'required|is_not_unique[admin.password]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'is_not_unique' => 'Password tidak sesuai dengan database'
+                        ]
+                    ],
+                    'pass_baru' =>  [
+                        'rules'  => 'required|min_length[8]|max_length[16]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'min_length' => 'password minimal 8 karakter',
+                            'max_length' => 'password maksimal 16 karakter'
+                        ]
+                    ],
+                    'pass_sesuai' =>  [
+                        'rules'  => 'required|min_length[8]|max_length[16]|matches[pass_baru]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'min_length' => 'password minimal 8 karakter',
+                            'max_length' => 'password maksimal 16 karakter',
+                            'matches' => 'password harus sesuai dengan password lama'
+                        ]
+                    ]
+                ]
+            );
+
+            if (!$validation) {
+                session()->setFlashdata('error', $this->validator->listErrors());
+                return redirect()->back()->withInput();
+            }
+
+            $data = [
+                'password' => $pass_baru
+            ];
+            $this->admin->updateadmin($data, $id);
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Password Berhasil Diganti</div>');
+            return redirect()->to(base_url('KelolaAdmin'));
+        } else if (session()->get('status') == 1) {
+            $validation = $this->validate(
+                [
+                    'pass_lama' => [
+                        'rules'  => 'required|is_not_unique[guru.password]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'is_not_unique' => 'Password tidak sesuai dengan database'
+                        ]
+                    ],
+                    'pass_baru' =>  [
+                        'rules'  => 'required|min_length[8]|max_length[16]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'min_length' => 'password minimal 8 karakter',
+                            'max_length' => 'password maksimal 16 karakter'
+                        ]
+                    ],
+                    'pass_sesuai' =>  [
+                        'rules'  => 'required|min_length[8]|max_length[16]|matches[pass_baru]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'min_length' => 'password minimal 8 karakter',
+                            'max_length' => 'password maksimal 16 karakter',
+                            'matches' => 'password harus sesuai dengan password lama'
+                        ]
+                    ]
+                ]
+            );
+
+            if (!$validation) {
+                session()->setFlashdata('error', $this->validator->listErrors());
+                return redirect()->back()->withInput();
+            }
+
+            $data = [
+                'password' => $pass_baru
+            ];
+            $this->guru->updateguru($data, $id);
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Password Berhasil Diganti</div>');
+            return redirect()->to(base_url('PageGuru'));
+        } else {
+            $validation = $this->validate(
+                [
+                    'pass_lama' => [
+                        'rules'  => 'required|is_not_unique[siswa.password]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'is_not_unique' => 'Password tidak sesuai dengan database'
+                        ]
+                    ],
+                    'pass_baru' =>  [
+                        'rules'  => 'required|min_length[8]|max_length[16]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'min_length' => 'password minimal 8 karakter',
+                            'max_length' => 'password maksimal 16 karakter'
+                        ]
+                    ],
+                    'pass_sesuai' =>  [
+                        'rules'  => 'required|min_length[8]|max_length[16]|matches[pass_baru]',
+                        'errors' => [
+                            'required' => 'field ini tidak boleh kosong',
+                            'min_length' => 'password minimal 8 karakter',
+                            'max_length' => 'password maksimal 16 karakter',
+                            'matches' => 'password harus sesuai dengan password lama'
+                        ]
+                    ]
+                ]
+            );
+
+            if (!$validation) {
+                session()->setFlashdata('error', $this->validator->listErrors());
+                return redirect()->back()->withInput();
+            }
+
+            $data = [
+                'password' => $pass_baru
+            ];
+            $this->siswa->updatesiswa($data, $id);
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Password Berhasil Diganti</div>');
+            return redirect()->to(base_url('PageSiswa'));
+        }
     }
 }

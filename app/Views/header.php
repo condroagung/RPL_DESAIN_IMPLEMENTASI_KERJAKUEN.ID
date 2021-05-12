@@ -77,7 +77,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Change Password</a></li>
+                                <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#edit_pass<?= session()->get('id_user') ?>">Change Password</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -86,6 +86,59 @@
                         </li>
                     </ul>
                 </form>
+            </div>
+        </div>
+        <div class="modal fade" id="edit_pass<?= session()->get('id_user') ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <p class="modal-title" id="exampleModalLabel23" style="font-family: 'Poppins', sans-serif; font-weight:700; font-size:18px">GANTI PASSWORD</p>
+                            </div>
+                            <div class="col-md">
+                                <p class="modal-title" id="exampleModalLabel23" style="color:rgba(235, 87, 87, 1); font-family: 'Poppins', sans-serif; font-weight:400; font-size:12px">*Jika lupa password lama, langsung hubungi admin</p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3" action="<?php echo base_url('KelolaAdmin/change_pass'); ?>" method="post">
+                            <div class="mb-3">
+                                <input type="hidden" name="id_user" id="id_user" value="<?= session()->get('id_user') ?>">
+                                <label for="pass_lama" class="form-label">Password Lama</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_lama">
+                                <?php if ($validation->getError('pass_lama')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('pass_lama'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pass_baru" class="form-label">Password Baru</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_baru">
+                                <?php if ($validation->getError('pass_baru')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('pass_baru'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pass_sesuai" class="form-label">Ketik Ulang Password Baru</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_sesuai">
+                                <?php if ($validation->getError('pass_sesuai')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('pass_sesuai'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>

@@ -1,12 +1,12 @@
 <div class="container-fluid" style="font-family: 'Nunito', sans-serif; color:rgba(79, 79, 79, 1)">
-    <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:3.5vh">BUAT MODUL BARU</p>
+    <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:3.5vh">EDIT MODUL</p>
     <div class="row">
         <div class="col col-md-9" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh; margin-left:4vh; border-radius:8px;">
-            <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">MODUL <?= $count_modul + 1 ?></p>
+            <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">MODUL <?= $count_modul ?></p>
             <form class="row g-3" style="margin-left:5px" action="<?php echo base_url('KelolaModul/edit_data_modul'); ?>" method="post">
                 <div class="mb-3 row">
                     <input type="hidden" class="form-control" id="id_modul" name="id_modul" value="<?= $edit_modul['id_modul'] ?>">
-                    <label for="judul_modul" class="col-sm-2 col-form-label">Judul Modul</label>
+                    <label for="judul_modul" class="col-sm-2 col-form-label" style="margin-left:-1vh;">Judul Modul</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="judul_modul" name="judul_modul" value="<?= $edit_modul['judul_modul'] ?>">
                     </div>
@@ -17,7 +17,7 @@
                     <?php } ?>
                 </div>
                 <div class="mb-3 row">
-                    <label for="rata_waktu" class="col-sm-2 col-form-label">Waktu Pengerjaan</label>
+                    <label for="rata_waktu" class="col-sm-2 col-form-label" style="margin-left:-1vh;">Waktu Pengerjaan</label>
                     <div class="col-sm-1">
                         <input type="text" class="form-control" id="rata_waktu" name="rata_waktu" value="<?= $edit_modul['rata_waktu'] ?>">
                     </div>
@@ -43,7 +43,23 @@
     foreach ($soal as $s) { ?>
         <div class="row">
             <div class="col col-md-9" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh; margin-left:4vh; border-radius:8px;">
-                <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">SOAL <?= $no++ ?></p>
+                <div class="mb-3 row">
+                    <div class="col-md-11">
+                        <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">SOAL <?= $no++ ?></p>
+                    </div>
+                    <div class="col-md">
+                        <div class="dropdown">
+                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v" style="margin-left:8vh; margin-top:2vh;color:black; font-size:18px; border-radius:4px; font-weight:normal"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_soal<?php echo $s['id_soal'] ?>">Update Soal</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="<?php echo base_url('KelolaModul/delete_soal/' . $s['id_soal']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus modul ini?')">Delete Soal</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class=" mb-3 row">
                     <label for="bunyi_soal" class="col-sm-2 col-form-label">Soal</label>
                     <div class="col-sm-10">
@@ -106,4 +122,98 @@
             </div>
         </div>
     </div>
+    <?php foreach ($soal as $s) { ?>
+        <div class="modal fade" id="edit_soal<?php echo $s['id_soal']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="exampleModalLabel23" style="font-family: 'Poppins', sans-serif; font-weight:700; font-size:18px">Edit Soal</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3" action="<?php echo base_url('KelolaModul/edit_soal'); ?>" method="post">
+                            <div class="mb-3">
+                                <input type="hidden" name="id_soal" id="id_user" value="<?= $s['id_soal']; ?>">
+                                <label for="bunyi_soal" class="form-label">Soal</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $s['bunyi_soal']; ?>" name="bunyi_soal">
+                                <?php if ($validation->getError('bunyi_soal')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('bunyi_soal'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="opsi_a" class="form-label">Pilihan A</label>
+                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['opsi_a']; ?>" name="opsi_a">
+                                <?php if ($validation->getError('opsi_a')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('opsi_a'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="opsi_b" class="form-label">Pilihan B</label>
+                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['opsi_b']; ?>" name="opsi_b">
+                                <?php if ($validation->getError('opsi_b')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('opsi_b'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="opsi_c" class="form-label">Pilihan C</label>
+                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['opsi_c']; ?>" name="opsi_c">
+                                <?php if ($validation->getError('opsi_c')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('opsi_c'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="opsi_d" class="form-label">Pilihan D</label>
+                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['opsi_d']; ?>" name="opsi_d">
+                                <?php if ($validation->getError('opsi_d')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('opsi_d'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="skor_soal" class="form-label">Skor Maksimal</label>
+                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['skor_soal']; ?>" name="skor_soal">
+                                <?php if ($validation->getError('skor_soal')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('skor_soal'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="kunci_jawaban" class="form-label">Jawaban</label>
+                                <select class="form-select form-select" aria-label=".form-select-sm example" style="width:60%" name="kunci_jawaban">
+                                    <?php
+                                    foreach ($opsi as $o) {
+                                        if ($s['kunci_jawaban'] == $o) {
+                                            echo "<option value=$o selected>Pilihan " . strtoupper($o) . "</option>";
+                                        } else {
+                                            echo "<option value=$o >Pilihan " . strtoupper($o) . "</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <?php if ($validation->getError('kunci_jawaban')) { ?>
+                                    <div class='alert alert-danger mt-2'>
+                                        <?= $error = $validation->getError('kunci_jawaban'); ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 </div>

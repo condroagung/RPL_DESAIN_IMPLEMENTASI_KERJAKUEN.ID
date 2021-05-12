@@ -34,6 +34,7 @@ class PageGuru extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+        $set['validation'] = \Config\Services::validation();
         $data['paket'] = $this->paket->showpaketbyguru(session()->get('id_user'));
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Dashboard Guru';
@@ -47,6 +48,7 @@ class PageGuru extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+        $set['validation'] = \Config\Services::validation();
         $session = session();
         $session->set('id_paket', $id);
         $data['paket'] = $this->paket->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')

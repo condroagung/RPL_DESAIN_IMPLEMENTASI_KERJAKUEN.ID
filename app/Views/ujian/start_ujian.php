@@ -13,24 +13,25 @@
 
     <div class="row" style="margin-top:2vh">
         <div class="col col-md-9" style="background-color:rgba(255, 255, 255, 1); box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);border-radius: 8px; padding-bottom:20px; padding-right:15px; margin-left:5vh">
-            <form id="regForm" action="">
-                <?php $soal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+            <form id="regForm" action="<?= base_url('MulaiUjian/koreksi') ?>" method="post">
+                <input type="hidden" id="time_start" name="time_start" value="<?= $time_start ?>">
+                <?php
                 $no = 1;
                 foreach ($soal as $s) { ?>
                     <div class="tab1" style="display:none">
                         <div class="form-check" id="checkbox-container">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                <p style="font-family: 'Poppins', sans-serif; color:rgba(79, 79, 79, 1); font-weight:700; font-size:18px; margin-top:1vh ">Soal.<?= $s ?>
+                                <p style="font-family: 'Poppins', sans-serif; color:rgba(79, 79, 79, 1); font-weight:700; font-size:18px; margin-top:1vh ">Soal.<?= $no ?>
                                     <span style="color:rgba(189, 189, 189, 1); margin-left:2vh"> - / 5</span>
                                 </p>
                             </label>
-                            <p style="color:rgba(79, 79, 79, 1); font-weight:400; font-size:18px; margin-top:1vh ">Apa yang dimaksud dengan alpha</p>
+                            <p style="color:rgba(79, 79, 79, 1); font-weight:400; font-size:18px; margin-top:1vh "><?= $s['bunyi_soal'] ?> ?</p>
                             </br>
                             <section style="margin-left:2vh; margin-top:-2vh">
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a">a</br>
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="b">b</br>
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="c">c</br>
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="d">d</br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a"><?= $s['opsi_a'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="b"><?= $s['opsi_b'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="c"><?= $s['opsi_c'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="d"><?= $s['opsi_d'] ?></br>
                             </section>
                             <?php $no++ ?>
                         </div>
@@ -47,15 +48,20 @@
 
         <div class="col col-md-2" style="background-color:rgba(255, 255, 255, 1); box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);border-radius: 8px; margin-left:2vh">
             <div class="activenav" style="margin-top:2vh; margin-left:1.5vh">
-                <?php foreach ($soal as $s) { ?>
-                    <button type="button" class="btn btn-warning btn-default step" style="width:15%; color:white; margin:1vh; padding-right:15px; border-radius:4px" onclick="direct(this)"><?= $s ?></button>
-                <?php } ?>
+                <?php
+                $step = 1;
+                foreach ($soal as $s) { ?>
+                    <button type="button" class="btn btn-warning btn-default step" style="width:15%; color:white; margin:1vh; padding-right:15px; border-radius:4px" onclick="direct(this)"><?= $step ?></button>
+                <?php
+                    $step++;
+                } ?>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    var countDownDate = 7200;
+    var countDownDate = document.getElementById('time_start').value;
+    console.log(countDownDate);
 
     var x = setInterval(function() {
 
@@ -80,6 +86,7 @@
             document.getElementById("waktu_now").innerHTML = "SELESAI";
             alert('Terimakasih sudah mengikuti ujian');
             setInterval(function() {
+                document.getElementById("regForm").submit();
                 window.location.href = "<?php echo base_url('PageSiswa'); ?>";
             }, 3000)
 

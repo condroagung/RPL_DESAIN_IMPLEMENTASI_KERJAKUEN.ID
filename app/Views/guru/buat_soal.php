@@ -2,7 +2,7 @@
     <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:3.5vh">BUAT SOAL BARU</p>
     <div class="row">
         <div class="col col-md-9" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh; margin-left:4vh; border-radius:8px;">
-            <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">SOAL 1</p>
+            <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">SOAL <?= $count_soal + 1 ?></p>
             <form style="margin-left:5px" action="<?= base_url('KelolaModul/create_soal') ?>" method="post">
                 <div class=" mb-3 row">
                     <label for="bunyi_soal" class="col-sm-2 col-form-label">Soal</label>

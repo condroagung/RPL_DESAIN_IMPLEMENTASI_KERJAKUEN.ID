@@ -13,5 +13,10 @@ class Jawaban extends Model
 
     protected $returnType     = 'array';
 
-    protected $allowedFields = ['id_paket', 'id_kerjakan', 'id_nilai', 'jawaban_soal', 'status_jawaban', 'skor_jawaban'];
+    protected $allowedFields = ['id_jawaban', 'id_ujian', 'jawaban_soal', 'status_jawaban', 'skor_jawaban'];
+
+    public function createjawaban($data)
+    {
+        return $this->db->table($this->table)->insert($data);
+    }
 }

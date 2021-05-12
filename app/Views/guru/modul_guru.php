@@ -2,7 +2,7 @@
     <?php if (!empty(session()->getFlashdata('success'))) { ?>
         <?php echo session()->getFlashdata('success'); ?>
     <?php } ?>
-    <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:5px">BAHASA INDONESIA</p>
+    <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:5px"><?= $paket['nama_mapel'] ?></p>
     <div class="m-2 mb-4 rounded-3 shadow p-3 bg-white d-flex flex-row">
         <div>
             <img src="<?= base_url() . '/uploads/' . $paket['cover']; ?>" href="#" class="p-2" style="height:300px; width:300px" alt="">
@@ -76,7 +76,11 @@
                     <p style="font-size:16px; font-weight:700"> WAKTU PENGERJAAN : <span style="font-weight:400"><?= $m['rata_waktu'] ?> MENIT</span> </p>
                 </div>
                 <div class="col-2">
-                    <a href=""><i class="fas fa-recycle" style="background-color:#BDBDBD; color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px"></i></a>
+                    <?php if ($m['status_modul'] == 0) { ?>
+                        <a href=""><i class="fas fa-lock" style="background-color:rgba(242, 153, 74, 1); color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px" onclick="alert('modul belum dibuka')"></i></a>
+                    <?php } else { ?>
+                        <a href=""><i class="fas fa-unlock" style="background-color:rgba(39, 174, 96, 1); color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px" onclick="alert('modul sudah dibuka')"></i></a>
+                    <?php } ?>
                     <a href="<?= base_url('KelolaModul/edit_modul/' . $m['id_modul']);  ?>"><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
                     <a href="<?= base_url('KelolaModul/buat_soal/' . $m['id_modul']);  ?>"><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
                     <a href=""><i class="fas fa-ellipsis-v" style="color:black; margin-left:2vh; font-size:24px; border-radius:4px"></i></a>

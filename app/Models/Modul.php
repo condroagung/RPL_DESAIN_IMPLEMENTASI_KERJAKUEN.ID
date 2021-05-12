@@ -37,6 +37,16 @@ class Modul extends Model
             ->countAllResults();
     }
 
+    public function countModulbyPaket($kelas)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('id_modul')
+            ->groupBy('modul.id_paket')
+            ->orderBy('id_modul', 'ASC')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('paket.kelas', $kelas)
+            ->get()->getResultArray();
+    }
     public function deletemodul($primaryKey)
     {
         return $this->db->table($this->table)->delete(['id_modul' => $primaryKey]);
