@@ -36,4 +36,14 @@ class Modul extends Model
             ->where('modul.id_paket', $id_paket)
             ->countAllResults();
     }
+
+    public function deletemodul($primaryKey)
+    {
+        return $this->db->table($this->table)->delete(['id_modul' => $primaryKey]);
+    }
+
+    public function updatemodul($data, $primaryKey)
+    {
+        return $this->db->table($this->table)->update($data, ['id_modul' => $primaryKey]);
+    }
 }

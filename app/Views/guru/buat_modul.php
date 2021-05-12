@@ -32,8 +32,8 @@
                 </div>
         </div>
         <div class="col col-md-2" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); margin-top:2vh; margin-left:3vh; border-radius:8px;">
-            <button type="submit" class="btn btn-success" style="align-items: center; width:85%; margin-top:2vh;font-family: 'Poppins', sans-serif; font-weight:700; margin-left:2vh">SIMPAN</button>
-            <button type="reset" class="btn btn-primary" style="align-items: center; width:85%; margin-top:2vh;font-family: 'Poppins', sans-serif; font-weight:700; margin-left:2vh">SIMPAN DAN PUBLIKASIKAN</button>
+            <button type="submit" name="modulsubmit1" value="sub1" class="btn btn-success" style="align-items: center; width:85%; margin-top:2vh;font-family: 'Poppins', sans-serif; font-weight:700; margin-left:2vh">SIMPAN</button>
+            <button type="submit" name="modulsubmit2" value="sub2" class="btn btn-primary" style="align-items: center; width:85%; margin-top:2vh;font-family: 'Poppins', sans-serif; font-weight:700; margin-left:2vh">SIMPAN DAN PUBLIKASIKAN</button>
         </div>
         </form>
     </div>

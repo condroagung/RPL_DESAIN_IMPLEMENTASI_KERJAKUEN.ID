@@ -64,7 +64,7 @@
         foreach ($modul as $m) { ?>
 
             <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh">
-                <div class="col-1" style=" margin-top:2vh; margin-left:2vh"><?= $no++ ?></div>
+                <div class="col-1" style=" margin-top:2vh; margin-left:2vh"><?= $no ?></div>
                 <div class="col-2" style=" margin-left: -2vh; margin-top:2vh">
                     <p style="font-weight:700">KODE MODUL : <span style="font-weight:400">BIM<?= $no ?></span></p>
                 </div>
@@ -77,13 +77,14 @@
                 </div>
                 <div class="col-2">
                     <a href=""><i class="fas fa-recycle" style="background-color:#BDBDBD; color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px"></i></a>
-                    <a href=""><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
-                    <a href=""><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
+                    <a href="<?= base_url('KelolaModul/edit_modul/' . $m['id_modul']);  ?>"><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
+                    <a href="<?= base_url('KelolaModul/buat_soal/' . $m['id_modul']);  ?>"><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
                     <a href=""><i class="fas fa-ellipsis-v" style="color:black; margin-left:2vh; font-size:24px; border-radius:4px"></i></a>
                 </div>
             </div>
 
-        <?php } ?>
+        <?php $no++;
+        } ?>
         <div class="row">
             <div class="col col-md-12">
                 <div class="d-grid gap-2" style="margin-top:2vh; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1)">
