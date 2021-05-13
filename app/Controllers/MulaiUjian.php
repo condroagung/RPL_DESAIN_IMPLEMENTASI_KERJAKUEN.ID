@@ -124,10 +124,12 @@ class MulaiUjian extends BaseController
             $this->jawaban->createjawaban($insert);
             $j++;
         }
+        $indeks = 5 * $jumlah_soal;
+        $kali = 100 / $indeks;
 
         $update = [
             'waktu_berakhir' => date("d/m/Y h:i:s"),
-            'skor_akhir' => $skor
+            'skor_akhir' => $skor * $kali
         ];
 
         $this->ujian->updateujian($update, session()->get('id_ujian'));

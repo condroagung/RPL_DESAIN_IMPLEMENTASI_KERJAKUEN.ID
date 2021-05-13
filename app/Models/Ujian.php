@@ -48,7 +48,39 @@ class Ujian extends Model
             ->get()->getResultArray();
     }
 
+    public function countmoduldone($id)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('ujian.id_ujian')
+            ->groupBy('modul.id_modul')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id)
+            ->countAllResults();
+    }
+
+    public function countmoduldoneujian($id)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('ujian.id_ujian')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id)
+            ->countAllResults();
+    }
+
     public function hasilmax($id)
+    {
+        return $this->db->table($this->table)
+            ->selectMax('skor_akhir')
+            ->groupBy('ujian.id_modul')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('paket.id_paket', $id)
+            ->get()->getResultArray();
+    }
+
+    public function avgpaket($id)
     {
         return $this->db->table($this->table)
             ->selectMax('skor_akhir')

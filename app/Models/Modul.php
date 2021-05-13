@@ -37,6 +37,26 @@ class Modul extends Model
             ->countAllResults();
     }
 
+    public function avgtime($id_paket)
+    {
+        return $this->db->table($this->table)
+            ->selectAvg('rata_waktu')
+            ->groupBy('modul.id_paket')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id_paket)
+            ->get()->getResultArray();
+    }
+
+    public function check_avgtime($id_paket)
+    {
+        return $this->db->table($this->table)
+            ->selectAvg('rata_waktu')
+            ->groupBy('modul.id_paket')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id_paket)
+            ->countAllResults();
+    }
+
     public function countModulbyPaket($kelas)
     {
         return $this->db->table($this->table)

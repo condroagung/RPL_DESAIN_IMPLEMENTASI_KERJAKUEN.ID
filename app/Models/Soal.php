@@ -55,4 +55,25 @@ class Soal extends Model
             ->join('Modul', 'soal.id_modul = modul.id_modul')
             ->countAllResults();
     }
+
+    public function countsoalbymodul($id)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('id_soal')
+            ->groupBy('soal.id_modul')
+            ->join('Modul', 'soal.id_modul = modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id)
+            ->get()->getResultArray();
+    }
+
+    public function totalsoalbymodul($id)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('id_soal')
+            ->join('Modul', 'soal.id_modul = modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id)
+            ->countAllResults();
+    }
 }

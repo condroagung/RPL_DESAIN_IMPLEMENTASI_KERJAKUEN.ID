@@ -9,6 +9,7 @@ use App\Models\Paket;
 use App\Models\Mapel;
 use App\Models\Modul;
 use App\Models\Ujian;
+use App\Models\Soal;
 
 class PageSiswa extends BaseController
 {
@@ -20,6 +21,7 @@ class PageSiswa extends BaseController
     protected $mapel;
     protected $modul;
     protected $ujian;
+    protected $soal;
 
     function __construct()
     {
@@ -30,6 +32,7 @@ class PageSiswa extends BaseController
         $this->mapel = new Mapel();
         $this->modul = new Modul();
         $this->ujian = new Ujian();
+        $this->soal = new Soal();
     }
     public function index()
     {
@@ -60,6 +63,14 @@ class PageSiswa extends BaseController
             ->join('guru', 'guru.id_user = paket.id_user')->where('id_paket', $id)->first();
         $data['hasil'] = $this->ujian->hasilmax($id);
         $data['modul'] = $this->modul->showmodul($id);
+        $data['count_modul'] = $this->modul->countModul($id);
+        $data['count_modul_ujian'] = $this->ujian->countmoduldoneujian($id);
+        $data['check_avg_time'] = $this->modul->check_avgtime($id);
+        $data['avg_time'] = $this->modul->avgtime($id);
+        $data['avg_hasil'] = $this->ujian->avgpaket($id);
+        $data['count_modul_done'] = $this->ujian->countmoduldone($id);
+        $data['count_soal_modul'] = $this->soal->countsoalbymodul($id);
+        $data['total_soal'] = $this->soal->totalsoalbymodul($id);
         $set['validation'] = \Config\Services::validation();
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Detail Paket Siswa';
