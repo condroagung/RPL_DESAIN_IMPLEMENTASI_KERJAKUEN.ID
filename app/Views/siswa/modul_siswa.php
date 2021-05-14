@@ -1,6 +1,5 @@
 <div class="container-fluid" style="font-family: 'Nunito', sans-serif; color:rgba(79, 79, 79, 1)">
     <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:5px"><?= $paket['nama_mapel'] ?></p>
-    <?= var_dump($count_modul_done) ?>
     <div class="m-2 mb-4 rounded-3 shadow p-3 bg-white d-flex flex-row">
         <div>
             <img src="<?= base_url() . '/uploads/' . $paket['cover']; ?>" href="#" class="p-2" style="height:300px; width:300px" alt="">
@@ -59,7 +58,7 @@
                                 if ($check_avg_time == 0) {
                                     echo 0;
                                 } else {
-                                    echo number_format($avg_time[0]['rata_waktu']);
+                                    echo number_format($avg_time[0]['rata_waktu'], 2, ',', '.');
                                 }
                                 ?> Menit</span>
                         </td>

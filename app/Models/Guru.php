@@ -24,6 +24,14 @@ class Guru extends Model
         return $this->db->table($this->table)->get()->getResultArray();
     }
 
+    public function countguru($nip)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('nip')
+            ->where('nip', $nip)
+            ->countAllResults();
+    }
+
     public function createguru($data)
     {
         return $this->db->table($this->table)->insert($data);

@@ -20,6 +20,21 @@ class Siswa extends Model
         return $this->db->table($this->table)->where('username', $username);
     }
 
+    public function countsiswa($nis)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('nis')
+            ->where('nis', $nis)
+            ->countAllResults();
+    }
+
+    public function getdatabynama($nama)
+    {
+        return $this->db->table($this->table)
+            ->where('nama_siswa', $nama)
+            ->get()->getResultArray();
+    }
+
     public function showsiswa()
     {
         return $this->db->table($this->table)->get()->getResultArray();

@@ -518,4 +518,196 @@ class KelolaAdmin extends BaseController
             return redirect()->to(base_url('PageSiswa'));
         }
     }
+
+    public function excel_guru()
+    {
+        echo view('admin/template_upload_guru');
+    }
+
+    public function add_excel_guru()
+    {
+        $validation = $this->validate(
+            [
+                'uploadguru' => [
+                    'rules' => 'uploaded[uploadguru]|ext_in[uploadguru,xls,xlsx]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'ext_in' => 'File Extention Harus Berupa xls atau xlsx'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $file_excel = $this->request->getFile('uploadguru');
+
+        $isi = $file_excel->getClientExtension();
+
+        if ($isi == 'xls') {
+            $render = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        } else {
+            $render = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+
+        $spread_php = $render->load($file_excel);
+
+        $data = $spread_php->getActiveSheet()->toArray();
+        $jmldata = 0;
+        $jmlerror = 0;
+        $idx = 1;
+        $arr = array();
+
+        foreach ($data as $d => $row) {
+            if ($d == 0) {
+                continue;
+            }
+
+            $nama = $row[1];
+            $nip = $row[2];
+            $username = $row[3];
+            $password = $row[4];
+            $status = $row[5];
+
+            $cek = $this->guru->countguru($nip);
+
+            if ($cek != 0) {
+                $jmlerror++;
+                $arr[] = $idx;
+            } else {
+                $insert = [
+                    'nama_guru' => $nama,
+                    'nip' => $nip,
+                    'username' => $username,
+                    'password' => $password,
+                    'status' => $status
+                ];
+                $this->guru->createguru($insert);
+                $jmldata++;
+            }
+            $idx++;
+        }
+
+        if ($jmlerror == 0) {
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan Data Guru sebanyak ' . $jmldata . ' data</div>');
+            return redirect()->to(base_url('KelolaAdmin'));
+        } else {
+            $list = implode(",", $arr);
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan Data Guru sebanyak ' . $jmldata . ' data namun terdapat duplikasi atau error data sebanyak ' . $jmlerror . ' data</div>');
+            return redirect()->to(base_url('KelolaAdmin'));
+        }
+    }
+
+    public function excel_siswa()
+    {
+        echo view('admin/template_upload_siswa');
+    }
+
+    public function add_excel_siswa()
+    {
+        $validation = $this->validate(
+            [
+                'uploadsiswa' => [
+                    'rules' => 'uploaded[uploadsiswa]|ext_in[uploadsiswa,xls,xlsx]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'ext_in' => 'File Extention Harus Berupa xls atau xlsx'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $file_excel = $this->request->getFile('uploadsiswa');
+
+        $isi = $file_excel->getClientExtension();
+
+        if ($isi == 'xls') {
+            $render = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        } else {
+            $render = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+
+        $spread_php = $render->load($file_excel);
+
+        $data = $spread_php->getActiveSheet()->toArray();
+        $jmldata = 0;
+        $jmlerror = 0;
+        $idx = 1;
+        $arr = array();
+
+        foreach ($data as $d => $row) {
+            if ($d == 0) {
+                continue;
+            }
+
+            $nama = $row[1];
+            $nis = $row[2];
+            $kelas = $row[3];
+            if ($row[4] == 'L') {
+                $jeniskelamin = "Laki-Laki";
+            } else {
+                $jeniskelamin = "Perempuan";
+            }
+            $username = $row[5];
+            $password = $row[6];
+            $status = $row[7];
+
+            $cek = $this->siswa->countsiswa($nis);
+            $cek1 = $this->siswa->getdatabynama($nama);
+
+            if ($cek != 0) {
+                $jmlerror++;
+                $arr[] = $idx;
+            } else {
+                if ($cek1 == NULL) {
+                    $insert = [
+                        'nama_siswa' => $nama,
+                        'nis' => $nis,
+                        'kelas' => $kelas,
+                        'jenis_kelamin' => $jeniskelamin,
+                        'username' => $username,
+                        'password' => $password,
+                        'status' => $status
+                    ];
+                    $this->siswa->createsiswa($insert);
+                    $jmldata++;
+                } else {
+                    if (($cek1[0]['nama_siswa'] == $nama && $cek1[0]['kelas'] == $kelas) || ($cek1[0]['nama_siswa'] == $nama && $cek1[0]['kelas'] != $kelas)) {
+                        $jmlerror++;
+                        $arr[] = $idx;
+                    } else {
+                        $insert = [
+                            'nama_siswa' => $nama,
+                            'nis' => $nis,
+                            'kelas' => $kelas,
+                            'jenis_kelamin' => $jeniskelamin,
+                            'username' => $username,
+                            'password' => $password,
+                            'status' => $status
+                        ];
+                        $this->siswa->createsiswa($insert);
+                        $jmldata++;
+                    }
+                }
+            }
+            $idx++;
+        }
+
+        if ($jmlerror == 0) {
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan Data Siswa sebanyak ' . $jmldata . ' data</div>');
+            return redirect()->to(base_url('KelolaAdmin'));
+        } else {
+            $list = implode(",", $arr);
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan Data Siswa sebanyak ' . $jmldata . ' data namun terdapat duplikasi atau error data sebanyak ' . $jmlerror . ' data</div>');
+            return redirect()->to(base_url('KelolaAdmin'));
+        }
+    }
 }

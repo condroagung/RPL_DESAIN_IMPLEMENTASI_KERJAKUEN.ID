@@ -52,9 +52,27 @@
                                 <th scope="row"><?= $no++ ?></th>
                                 <td><?= $h['nama_paket'] ?></td>
                                 <td><?= $h['nama_mapel'] ?></td>
-                                <td><?= $count_modul[$no_modul]['id_modul'] ?></td>
-                                <td><?= number_format($sum_hasil[$no_modul]['skor_akhir']) ?></td>
-                                <td><?= number_format($avg_hasil[$no_modul]['skor_akhir'], 1) ?></td>
+                                <td><?php
+                                    if ($no_modul < count($count_modul)) {
+                                        echo $count_modul[$no_modul]['id_modul'];
+                                    } else {
+                                        echo 0;
+                                    }
+                                    ?></td>
+                                <td><?php
+                                    if ($no_modul < count($sum_hasil)) {
+                                        echo number_format($sum_hasil[$no_modul]['skor_akhir']);
+                                    } else {
+                                        echo 0;
+                                    }
+                                    ?></td>
+                                <td><?php
+                                    if ($no_modul < count($avg_hasil)) {
+                                        echo number_format($avg_hasil[$no_modul]['skor_akhir'], 2, '.', ',');
+                                    } else {
+                                        echo 0;
+                                    }
+                                    ?></td>
                             </tr>
                         <?php
                             $no_modul++;

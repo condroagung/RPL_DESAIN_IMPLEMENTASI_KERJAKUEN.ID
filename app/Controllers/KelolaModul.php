@@ -58,6 +58,8 @@ class KelolaModul extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+        $session = session();
+        $session->set('id_modul', $id);
         $set['validation'] = \Config\Services::validation();
         $data['soal'] = $this->soal->showsoal($id);
         $set['validation'] = \Config\Services::validation();
@@ -377,6 +379,74 @@ class KelolaModul extends BaseController
         $this->soal->updatesoal($data, $id);
         session()->setFlashdata('success', '<div class="alert alert-primary" style="margin-top:2vh" role="alert">Soal Berhasil Di update</div>');
         session()->remove('id_modul');
+        return redirect()->to(base_url('PageGuru'));
+    }
+
+    public function excel_soal()
+    {
+        echo view('guru/template_upload_soal');
+    }
+
+    public function add_soal_excel()
+    {
+        $validation = $this->validate(
+            [
+                'uploadsoal' => [
+                    'rules' => 'uploaded[uploadsoal]|ext_in[uploadsoal,xls,xlsx]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'ext_in' => 'File Extention Harus Berupa xls atau xlsx'
+                    ]
+                ]
+            ]
+        );
+
+        if (!$validation) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $file_excel = $this->request->getFile('uploadsoal');
+
+        $isi = $file_excel->getClientExtension();
+
+        if ($isi == 'xls') {
+            $render = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        } else {
+            $render = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        }
+
+        $spread_php = $render->load($file_excel);
+
+        $data = $spread_php->getActiveSheet()->toArray();
+
+        foreach ($data as $d => $row) {
+            if ($d == 0) {
+                continue;
+            }
+
+            $bunyi_soal = $row[1];
+            $opsi_a = $row[2];
+            $opsi_b = $row[3];
+            $opsi_c = $row[4];
+            $opsi_d = $row[5];
+            $skor_soal = $row[6];
+            $kunci_jawaban = $row[7];
+
+            $insert = [
+                'id_modul' => session()->get('id_modul'),
+                'bunyi_soal' => $bunyi_soal,
+                'opsi_a' => $opsi_a,
+                'opsi_b' => $opsi_b,
+                'opsi_c' => $opsi_c,
+                'opsi_d' => $opsi_d,
+                'skor_soal' => $skor_soal,
+                'kunci_jawaban' => $kunci_jawaban
+            ];
+
+            $this->soal->createsoal($insert);
+        }
+        session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan soal</div>');
         return redirect()->to(base_url('PageGuru'));
     }
 }

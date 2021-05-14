@@ -28,6 +28,15 @@ class Paket extends Model
         return $this->db->table($this->table)->insert($data);
     }
 
+    public function showmodulbyguru($id)
+    {
+        return $this->db->table($this->table)
+            ->join('Mata_pelajaran', 'paket.id_mapel = Mata_pelajaran.id_mapel')
+            ->join('guru', 'paket.id_user = guru.id_user')
+            ->where('paket.id_user', $id)
+            ->get()->getResultArray();
+    }
+
     public function showpaketbyguru($id_user)
     {
         return $this->db->table($this->table)

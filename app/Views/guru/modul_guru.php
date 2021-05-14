@@ -15,21 +15,28 @@
                         <td class="col-3 px-0 py-2">Kode Mapel</td>
                         <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['nama_paket'] ?></span></td>
                         <td class="col-3 px-0 py-2">Rata-rata nilai</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: 90</span>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">:
+                                <?php if (count($avg_all) == 0) {
+                                    echo 0;
+                                } else {
+                                    echo number_format($avg_all[0]['skor_akhir'], 2, ',', ',');
+                                }
+                                ?>
+                            </span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Nama Mapel</td>
                         <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['nama_mapel'] ?></td>
                         <td class="col-3 px-0 py-2">Jumlah modul selesai</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: 3</span>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $count_modul_done ?></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Guru Pengampu</td>
                         <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $paket['nama_guru'] ?>.</td>
                         <td class="col-3 px-0 py-2">Jumlah soal selesai</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: 60</span>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $count_soal_done ?></span>
                         </td>
                     </tr>
                     <tr>
@@ -39,12 +46,19 @@
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Jumlah Modul</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: 7</span>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: <?= $count_modul ?></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-3 px-0 py-2">Rata-rata waktu pengerjaan</td>
-                        <td class="col-3 px-0 py-2"><span style="font-weight:400">: 45 Menit</span>
+                        <td class="col-3 px-0 py-2"><span style="font-weight:400">:
+                                <?php
+                                if ($check_avg_time == 0) {
+                                    echo 0;
+                                } else {
+                                    echo number_format($avg_time[0]['rata_waktu'], 2, ',', '.');
+                                }
+                                ?> Menit</span>
                         </td>
                     </tr>
                 </tbody>
@@ -61,6 +75,7 @@
 
         <?php
         $no = 1;
+        $no_modul = 0;
         foreach ($modul as $m) { ?>
 
             <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh">
@@ -70,7 +85,14 @@
                 </div>
                 <div class="col-3" style=" margin-top:2vh"><?= $m['judul_modul'] ?></div>
                 <div class="col-2" style=" margin-top:2vh">
-                    <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400">20</span></p>
+                    <p style="font-size:16px; font-weight:700"> JUMLAH SOAL : <span style="font-weight:400">
+                            <?php
+                            if ($no_modul < count($count_soal_modul)) {
+                                echo number_format($count_soal_modul[$no_modul]['id_soal']);
+                            } else {
+                                echo 0;
+                            } ?>
+                        </span></p>
                 </div>
                 <div class="col-2" style=" margin-top:2vh;">
                     <p style="font-size:16px; font-weight:700"> WAKTU PENGERJAAN : <span style="font-weight:400"><?= $m['rata_waktu'] ?> MENIT</span> </p>
@@ -88,6 +110,7 @@
             </div>
 
         <?php $no++;
+            $no_modul++;
         } ?>
         <div class="row">
             <div class="col col-md-12">

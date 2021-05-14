@@ -19,4 +19,27 @@ class Jawaban extends Model
     {
         return $this->db->table($this->table)->insert($data);
     }
+
+    public function countjawabanbymodul($id, $id_user)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('id_jawaban')
+            ->join('Ujian', 'jawaban.id_ujian = ujian.id_ujian')
+            ->join('Modul', 'ujian.id_modul = modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id)
+            ->where('ujian.id_user', $id_user)
+            ->countAllResults();
+    }
+
+    public function countjawabanbymodulguru($id)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('id_jawaban')
+            ->join('Ujian', 'jawaban.id_ujian = ujian.id_ujian')
+            ->join('Modul', 'ujian.id_modul = modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('modul.id_paket', $id)
+            ->countAllResults();
+    }
 }

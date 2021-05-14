@@ -64,6 +64,7 @@ class Home extends BaseController
 					'id_user' => $log_admin['id_user'],
 					'username' => $log_admin['username'],
 					'status' => 0,
+					'sesi_ujian' => 0,
 					'logged_in' => TRUE
 				];
 				// men set session yang dibuat diatas
@@ -88,6 +89,7 @@ class Home extends BaseController
 					'id_user' => $log_siswa['id_user'],
 					'username' => $log_siswa['username'],
 					'status' => 2,
+					'sesi_ujian' => 0,
 					'kelas' => $log_siswa['kelas'],
 					'jenis_kelamin' => $log_siswa['jenis_kelamin'],
 					'logged_in' => TRUE
@@ -114,6 +116,7 @@ class Home extends BaseController
 					'id_user' => $log_guru['id_user'],
 					'username' => $log_guru['username'],
 					'status' => 1,
+					'sesi_ujian' => 0,
 					'logged_in' => TRUE
 				];
 				// men set session yang dibuat diatas

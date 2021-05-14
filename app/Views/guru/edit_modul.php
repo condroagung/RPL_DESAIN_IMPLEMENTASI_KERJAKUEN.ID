@@ -38,6 +38,49 @@
         </div>
         </form>
     </div>
+
+    <div class="row" style="margin-top:2vh;margin-left:4vh">
+        <div class="col-md-3">
+            <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#upload_soal"><i class="fas fa-upload"> Upload Soal (Excel)</i></a>
+        </div>
+    </div>
+    <div class="modal fade" id="upload_soal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel23" style="font-family: 'Poppins', sans-serif; font-weight:700; font-size:18px">Edit Soal</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="">Template upload soal dapat didownload dibawah ini</label>
+                        <a href="<?= base_url('KelolaModul/excel_soal') ?>" class="btn btn-primary"><i class="fas fa-file-excel"> Template_Upload_Soal.xls</i></a>
+                        <label for="">Dengan Ketentuan Sebagai berikut : </label>
+                        <ol style="color:red;">
+                            <li>Skor = 5</li>
+                            <li>Waktu Pengerjaan dalam menit</li>
+                            <li>Jumlah maksimum soal adalah 20</li>
+                        </ol>
+                    </div>
+                    <form class="row g-3" action="<?= base_url('kelolamodul/add_soal_excel') ?>" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="uploadsoal" class="form-label">Upload Soal</label>
+                            <input type="file" class="form-control" name="uploadsoal" id="uploadsoal" style="margin-top:1vh">
+                            <?php if ($validation->getError('uploadsoal')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('uploadsoal'); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     $no = 1;
     foreach ($soal as $s) { ?>

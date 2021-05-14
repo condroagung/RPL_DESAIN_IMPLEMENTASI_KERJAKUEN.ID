@@ -8,6 +8,9 @@ use App\Models\Kelas;
 use App\Models\Paket;
 use App\Models\Mapel;
 use App\Models\Modul;
+use App\Models\Ujian;
+use App\Models\Soal;
+use App\Models\Jawaban;
 
 class PageGuru extends BaseController
 {
@@ -18,6 +21,9 @@ class PageGuru extends BaseController
     protected $paket;
     protected $mapel;
     protected $modul;
+    protected $ujian;
+    protected $soal;
+    protected $jawaban;
 
     function __construct()
     {
@@ -27,6 +33,9 @@ class PageGuru extends BaseController
         $this->paket = new Paket();
         $this->mapel = new Mapel();
         $this->modul = new Modul();
+        $this->ujian = new Ujian();
+        $this->soal = new Soal();
+        $this->jawaban = new Jawaban();
     }
 
     public function index()
@@ -37,6 +46,10 @@ class PageGuru extends BaseController
         $set['validation'] = \Config\Services::validation();
         $data['paket'] = $this->paket->showpaketbyguru(session()->get('id_user'));
         $data['validation'] = \Config\Services::validation();
+        $data['rekap'] = $this->paket->showmodulbyguru(session()->get('id_user'));
+        $data['modul_guru'] = $this->modul->countmodulbyGuru(session()->get('id_user'));
+        $data['total_nilai'] = $this->ujian->counttotalnilai(session()->get('id_user'));
+        $data['max_nilai'] = $this->ujian->maxnilai(session()->get('id_user'));
         $set['title'] = 'Dashboard Guru';
         echo view('header', $set);
         echo view('guru/dashboard_guru', $data);
@@ -53,6 +66,13 @@ class PageGuru extends BaseController
         $session->set('id_paket', $id);
         $data['paket'] = $this->paket->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')->where('id_paket', $id)->first();
+        $data['count_modul'] = $this->modul->countModul($id);
+        $data['check_avg_time'] = $this->modul->check_avgtime($id);
+        $data['count_modul_done'] = $this->ujian->countmoduldoneguru($id);
+        $data['count_soal_modul'] = $this->soal->countsoalbymodul($id);
+        $data['count_soal_done'] = $this->jawaban->countjawabanbymodulguru($id);
+        $data['avg_all'] = $this->ujian->avgallujian($id);
+        $data['avg_time'] = $this->modul->avgtime($id);
         $data['modul'] = $this->modul->showmodul($id);
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Detail Paket';

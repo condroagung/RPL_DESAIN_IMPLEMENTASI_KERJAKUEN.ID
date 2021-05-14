@@ -43,22 +43,32 @@
                     </tr>
                 </thead>
                 <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>BI769</td>
-                        <td>Bahasa Indonesia</td>
-                        <td>7</td>
-                        <td>490</td>
-                        <td>70</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>MTK0234</td>
-                        <td>Matematika</td>
-                        <td>10</td>
-                        <td>950</td>
-                        <td>95</td>
-                    </tr>
+                    <?php $no = 1;
+                    $no_modul = 0;
+                    foreach ($rekap as $r) { ?>
+                        <tr>
+                            <th scope="row"><?= $no++ ?></th>
+                            <td><?= $r['nama_paket'] ?></td>
+                            <td><?= $r['nama_mapel'] ?></td>
+                            <td><?php
+                                if ($no_modul < count($modul_guru)) {
+                                    echo $modul_guru[$no_modul]['id_modul'];
+                                } else {
+                                    echo 0;
+                                }
+                                ?></td>
+                            <td><?php
+                                if ($no_modul < count($max_nilai)) {
+                                    echo $total_nilai[$no_modul]['skor_akhir'];
+                                } else {
+                                    echo 0;
+                                }
+                                ?></td>
+                            <td>70</td>
+                        </tr>
+                    <?php
+                        $no_modul++;
+                    } ?>
                 </tbody>
             </table>
         </div>

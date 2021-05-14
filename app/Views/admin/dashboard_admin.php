@@ -108,14 +108,58 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12" style="margin-left:-2vh">
+        <div class="col-md-12">
             <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700; color:rgba(79, 79, 79, 1)">DAFTAR GURU</p>
         </div>
     </div>
 
     <div class="row">
+        <div class="col-md-3">
+            <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#upload_guru"><i class="fas fa-upload"> Upload Guru (Excel)</i></a>
+        </div>
+    </div>
+
+    <div class="modal fade" id="upload_guru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel23" style="font-family: 'Poppins', sans-serif; font-weight:700; font-size:18px">Upload Data Guru</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="">Template upload data guru dapat didownload dibawah ini</label>
+                        <a href="<?= base_url('KelolaAdmin/excel_guru') ?>" class="btn btn-primary"><i class="fas fa-file-excel"> Template_Upload_Guru.xls</i></a>
+                        <label for="">Dengan Ketentuan Sebagai berikut : </label>
+                        <ol style="color:red;">
+                            <li>Status = 1</li>
+                            <li>NIP harus angka dan Unik (tidak duplikat dengan guru lain)</li>
+                            <li>Password minimal 8 karakter dan maksimal 16 karakter</li>
+                        </ol>
+                    </div>
+                    <form class="row g-3" action="<?= base_url('KelolaAdmin/add_excel_guru') ?>" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="uploadguru" class="form-label">Upload Soal</label>
+                            <input type="file" class="form-control" name="uploadguru" id="uploadguru" style="margin-top:1vh">
+                            <?php if ($validation->getError('uploadguru')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('uploadguru'); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:2vh">
         <div class="col-md-12" style="margin-left:-2vh">
-            <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+            <table class="display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
                 <thead class="text-center">
                     <tr>
                         <th scope="col">No</th>
@@ -272,14 +316,59 @@
     <?php } ?>
 
     <div class="row">
-        <div class="col-md-12" style="margin-left:-2vh">
+        <div class="col-md-12">
             <p style="margin-top:4vh;font-family: 'Poppins', sans-serif; font-size:18px; font-weight:700">DAFTAR SISWA</p>
         </div>
     </div>
 
     <div class="row">
+        <div class="col-md-3">
+            <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#upload_siswa"><i class="fas fa-upload"> Upload Siswa (Excel)</i></a>
+        </div>
+    </div>
+
+    <div class="modal fade" id="upload_siswa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title" id="exampleModalLabel23" style="font-family: 'Poppins', sans-serif; font-weight:700; font-size:18px">Upload Data Siswa</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="">Template upload data siswa dapat didownload dibawah ini</label>
+                        <a href="<?= base_url('KelolaAdmin/excel_siswa') ?>" class="btn btn-primary"><i class="fas fa-file-excel"> Template_Upload_Siswa.xls</i></a>
+                        <label for="">Dengan Ketentuan Sebagai berikut : </label>
+                        <ol style="color:red;">
+                            <li>Status = 2</li>
+                            <li>NIS harus angka dan Unik (tidak duplikat dengan siswa lain)</li>
+                            <li>Jenis Kelamin cukup disingkat L dan P</li>
+                            <li>Setiap siswa hanya menempati 1 kelas</li>
+                        </ol>
+                    </div>
+                    <form class="row g-3" action="<?= base_url('KelolaAdmin/add_excel_siswa') ?>" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="uploadsiswa" class="form-label">Upload Soal</label>
+                            <input type="file" class="form-control" name="uploadsiswa" id="uploadsiswa" style="margin-top:1vh">
+                            <?php if ($validation->getError('uploadsiswa')) { ?>
+                                <div class='alert alert-danger mt-2'>
+                                    <?= $error = $validation->getError('uploadsiswa'); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:2vh">
         <div class="col-md-12" style="margin-left:-2vh">
-            <table class="display" id="" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+            <table class="display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
                 <thead class="text-center">
                     <tr>
                         <th scope="col">No</th>
