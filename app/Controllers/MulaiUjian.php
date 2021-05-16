@@ -55,11 +55,12 @@ class MulaiUjian extends BaseController
         $data['title'] = 'Halaman Ujian';
         $session = session();
         $session->set('id_modul', $id);
+        $session->set('sesi_ujian', 1);
         $data_modul = $this->modul->where('id_modul', $id)->first();
         $data['time_start'] = $data_modul['rata_waktu'] * 60;
         $data['soal'] = $this->soal->showsoal($id);
 
-        /*$insert = [
+        $insert = [
             'id_modul' => $id,
             'id_user' => session()->get('id_user'),
             'waktu_mulai' => date("d/m/Y h:i:s"),
@@ -71,6 +72,8 @@ class MulaiUjian extends BaseController
 
         $insert_id = $this->ujian->insertID();
         $session->set('id_ujian', $insert_id);
+
+
         //$date = date_create("2013-03-15");
         //$date_true = date_format($date, "Y/m/d H:i:s");
 
@@ -78,7 +81,7 @@ class MulaiUjian extends BaseController
         //'waktu_berakhir' => $date_true
         //];
 
-        //$this->ujian->updateujian($update, $insert_id);*/
+        //$this->ujian->updateujian($update, $insert_id);
 
         echo view('header', $data);
         echo view('ujian/start_ujian', $data);
@@ -134,7 +137,9 @@ class MulaiUjian extends BaseController
 
         $this->ujian->updateujian($update, session()->get('id_ujian'));
 
-        session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Ujian Sudah Diterima, Silakan periksa hasilnya</div>');
+        session()->set('sesi_ujian', 0);
+
+        session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Ujian Sudah Diterima, Silakan Periksa Hasilnya</div>');
         return redirect()->to(base_url('PageSiswa'));
     }
 }

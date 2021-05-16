@@ -344,6 +344,7 @@
                             <li>NIS harus angka dan Unik (tidak duplikat dengan siswa lain)</li>
                             <li>Jenis Kelamin cukup disingkat L dan P</li>
                             <li>Setiap siswa hanya menempati 1 kelas</li>
+                            <li>Kelas yang tersedia = 1A, 2A, 3A, 4A, 5A, 6A</li>
                         </ol>
                     </div>
                     <form class="row g-3" action="<?= base_url('KelolaAdmin/add_excel_siswa') ?>" method="post" enctype="multipart/form-data">

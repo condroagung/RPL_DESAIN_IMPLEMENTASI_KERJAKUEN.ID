@@ -6,6 +6,8 @@ use App\Models\Paket;
 use App\Models\Mapel;
 use App\Models\Modul;
 use App\Models\Soal;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class KelolaModul extends BaseController
 {
@@ -385,7 +387,34 @@ class KelolaModul extends BaseController
 
     public function excel_soal()
     {
-        echo view('guru/template_upload_soal');
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No')
+            ->setCellValue('B1', 'Soal')
+            ->setCellValue('C1', 'Pilihan A')
+            ->setCellValue('D1', 'Pilihan B')
+            ->setCellValue('E1', 'Pilihan C')
+            ->setCellValue('F1', 'Pilihan D')
+            ->setCellValue('G1', 'Skor Maksimal')
+            ->setCellValue('H1', 'Kunci Jawaban');
+
+        $column = 2;
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A' . $column, 1)
+            ->setCellValue('B' . $column, 'Berapakah Hasil dari (2*2) + (2/2)')
+            ->setCellValue('C' . $column, 2)
+            ->setCellValue('D' . $column, 4)
+            ->setCellValue('E' . $column, 1)
+            ->setCellValue('F' . $column, 3)
+            ->setCellValue('G' . $column, 5)
+            ->setCellValue('H' . $column, 'd');
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'Template Upload Soal';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $fileName . '.xlsx');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 
     public function add_soal_excel()

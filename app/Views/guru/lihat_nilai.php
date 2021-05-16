@@ -5,7 +5,11 @@
         } ?></p>
     <div class="row" style="margin-top:2vh">
         <div class="col-md-12">
-            <table class="display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+            <table class="caption-top display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+                <caption>MODUL <?= session()->get('no_modul') ?> <?php foreach ($nama_modul as $n) {
+                                                                        echo $n['judul_modul'];
+                                                                    } ?>
+                </caption>
                 <thead class="text-center">
                     <tr>
                         <th scope="col">No</th>
@@ -13,6 +17,8 @@
                         <th scope="col">Nama Siswa</th>
                         <th scope="col">Kelas</th>
                         <th scope="col">Nilai</th>
+                        <th scope="col">Waktu Mulai</th>
+                        <th scope="col">Waktu Berakhir</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -32,6 +38,8 @@
                                     echo 0;
                                 }
                                 ?></td>
+                            <td style="font-weight:bold"><?= $d['waktu_mulai'] ?></td>
+                            <td style="font-weight:bold"><?= $d['waktu_berakhir'] ?></td>
                             <td class="text-center">
                                 <a class="btn btn-info" style="background-color:rgba(47, 128, 237, 1)" data-bs-toggle="modal" data-bs-target="#edit_ujian<?= $d['id_ujian'] ?>"><i class="fas fa-pen"></i></a>
                                 <a class="btn btn-light" href="<?php echo base_url('PageGuru/delete_ujian/' . $d['id_ujian']); ?>" style="background-color:#eb5757" onclick="return confirm('Apakah Anda yakin ingin menghapus hasil ujian ini?')"><i class="fas fa-trash"></i></a>
@@ -51,7 +59,9 @@
             fixedHeader: {
                 header: true,
                 footer: true
-            }
+            },
+            dom: 'lBfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });
     });
 </script>

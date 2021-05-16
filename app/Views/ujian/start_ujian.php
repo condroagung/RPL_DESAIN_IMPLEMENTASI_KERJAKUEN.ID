@@ -66,7 +66,13 @@
     //localStorage.setItem('jawaban', jawaban_string);
     //console.log(localStorage.getItem('jawaban'));
 
-    var countDownDate = document.getElementById('time_start').value;
+    if (localStorage.getItem('waktu') == null) {
+        var countDownDate = document.getElementById('time_start').value;
+    } else {
+        var countDownDate = localStorage.getItem('waktu');
+    }
+
+
     console.log(countDownDate);
     var x = setInterval(function() {
 
@@ -215,14 +221,11 @@
             document.getElementById("nextBtn").innerHTML = "Next";
         }
 
-        console.log(x.length);
-
         for (var a = 0; a < x.length; a++) {
             var set = document.getElementsByName('soal' + a);
             for (var b = 0; b < set.length; b++) {
                 if (set[b].checked) {
                     y[a - 1].style.backgroundColor = "rgba(0, 91, 0, 1)";
-                    console.log(a);
                 }
             }
         }

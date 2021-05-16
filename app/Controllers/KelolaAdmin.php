@@ -8,6 +8,8 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Paket;
 use App\Models\Mapel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class KelolaAdmin extends BaseController
 {
@@ -521,7 +523,30 @@ class KelolaAdmin extends BaseController
 
     public function excel_guru()
     {
-        echo view('admin/template_upload_guru');
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No')
+            ->setCellValue('B1', 'Nama Guru')
+            ->setCellValue('C1', 'NIP')
+            ->setCellValue('D1', 'Username')
+            ->setCellValue('E1', 'Password')
+            ->setCellValue('F1', 'Status');
+
+        $column = 2;
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A' . $column, 1)
+            ->setCellValue('B' . $column, 'Rian Fahriza Sitepu')
+            ->setCellValue('C' . $column, '1301158234')
+            ->setCellValue('D' . $column, 'Rasdwadad')
+            ->setCellValue('E' . $column, '10230131030')
+            ->setCellValue('F' . $column, 1);
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'Template Upload Guru';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $fileName . '.xlsx');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 
     public function add_excel_guru()
@@ -603,7 +628,34 @@ class KelolaAdmin extends BaseController
 
     public function excel_siswa()
     {
-        echo view('admin/template_upload_siswa');
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No')
+            ->setCellValue('B1', 'Nama Siswa')
+            ->setCellValue('C1', 'NIS')
+            ->setCellValue('D1', 'Kelas')
+            ->setCellValue('E1', 'Jenis Kelamin')
+            ->setCellValue('F1', 'Username')
+            ->setCellValue('G1', 'Password')
+            ->setCellValue('H1', 'Status');
+
+        $column = 2;
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A' . $column, 1)
+            ->setCellValue('B' . $column, 'Reihan Muhammad Aziz')
+            ->setCellValue('C' . $column, '1301184043')
+            ->setCellValue('D' . $column, '6A')
+            ->setCellValue('E' . $column, 'L')
+            ->setCellValue('F' . $column, 'reihan_xray')
+            ->setCellValue('G' . $column, 'reihankun')
+            ->setCellValue('H' . $column, '2');
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'Template Upload Siswa';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $fileName . '.xlsx');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 
     public function add_excel_siswa()

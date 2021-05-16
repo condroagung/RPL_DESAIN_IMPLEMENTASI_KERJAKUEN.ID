@@ -53,7 +53,6 @@ class Ujian extends Model
     public function hasil($id)
     {
         return $this->db->table($this->table)
-            ->groupBy('ujian.id_user')
             ->join('Siswa', 'ujian.id_user = siswa.id_user')
             ->join('Modul', 'ujian.id_modul = Modul.id_modul')
             ->join('Paket', 'modul.id_paket = Paket.id_paket')

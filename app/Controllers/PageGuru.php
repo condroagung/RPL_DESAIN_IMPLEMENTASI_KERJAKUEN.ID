@@ -88,7 +88,7 @@ class PageGuru extends BaseController
         $data['nilai'] = $this->ujian->hasilujian($id);
         $data['data'] = $this->ujian->hasil($id);
         $data['nama_modul'] = $this->modul->namamodul($id);
-        $set['title'] = 'Lihat Nilai';
+        $set['title'] = 'Rekap Nilai';
         $session = session();
         $session->set('no_modul', $no);
         echo view('header', $set);
