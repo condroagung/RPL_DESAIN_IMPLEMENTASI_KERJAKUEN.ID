@@ -22,6 +22,7 @@ class Modul extends Model
             ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('modul.id_paket', $id)
+            ->orderBy('modul.id_modul', 'ASC')
             ->get()->getResultArray();
     }
 
@@ -33,12 +34,20 @@ class Modul extends Model
             ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('paket.kelas', $kelas)
+            ->orderBy('paket.id_paket', 'ASC')
             ->get()->getResultArray();
     }
 
     public function createmodul($data)
     {
         return $this->db->table($this->table)->insert($data);
+    }
+
+    public function namamodul($id)
+    {
+        return $this->db->table($this->table)
+            ->where('id_modul', $id)
+            ->get()->getResultArray();
     }
 
     public function countModul($id_paket)
@@ -75,6 +84,7 @@ class Modul extends Model
             ->groupBy('modul.id_paket')
             ->join('Paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
+            ->orderBy('paket.id_paket', 'ASC')
             ->get()->getResultArray();
     }
 

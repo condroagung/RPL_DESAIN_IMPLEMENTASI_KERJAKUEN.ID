@@ -27,8 +27,8 @@
                             </label>
                             <p style="color:rgba(79, 79, 79, 1); font-weight:400; font-size:18px; margin-top:1vh "><?= $s['bunyi_soal'] ?> ?</p>
                             </br>
-                            <section style="margin-left:2vh; margin-top:-2vh">
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a"><?= $s['opsi_a'] ?></br>
+                            <section class="tab2" style="margin-left:2vh; margin-top:-2vh">
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a" onclick=""><?= $s['opsi_a'] ?></br>
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="b"><?= $s['opsi_b'] ?></br>
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="c"><?= $s['opsi_c'] ?></br>
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="d"><?= $s['opsi_d'] ?></br>
@@ -46,12 +46,12 @@
             </form>
         </div>
 
-        <div class="col col-md-2" style="background-color:rgba(255, 255, 255, 1); box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);border-radius: 8px; margin-left:2vh">
+        <div class="col col-md-2" style="background-color:rgba(255, 255, 255, 0); box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);border-radius: 8px; margin-left:2vh">
             <div class="activenav" style="margin-top:2vh; margin-left:1.5vh">
                 <?php
                 $step = 1;
                 foreach ($soal as $s) { ?>
-                    <button type="button" class="btn btn-warning btn-default step" style="width:15%; color:white; margin:1vh; padding-right:15px; border-radius:4px" onclick="direct(this)"><?= $step ?></button>
+                    <button type="button" class="btn btn-warning btn-default step" style="width:15%; color:white; margin:1vh; padding-right:15px; border-radius:4px;" onclick="direct(this)"><?= $step ?></button>
                 <?php
                     $step++;
                 } ?>
@@ -60,9 +60,14 @@
     </div>
 </div>
 <script type="text/javascript">
+    //var jawaban = ['a', 'b', 'c', 'd', 'd'];
+    //var jawaban_string = jawaban.toString();
+    //var jawaban_array = jawaban_string.split(",");
+    //localStorage.setItem('jawaban', jawaban_string);
+    //console.log(localStorage.getItem('jawaban'));
+
     var countDownDate = document.getElementById('time_start').value;
     console.log(countDownDate);
-
     var x = setInterval(function() {
 
         var now = new Date().getTime();
@@ -86,15 +91,108 @@
             document.getElementById("waktu_now").innerHTML = "SELESAI";
             alert('Terimakasih sudah mengikuti ujian');
             setInterval(function() {
+                var button = document.getElementById('nextBtn');
                 document.getElementById("regForm").submit();
-                window.location.href = "<?php echo base_url('PageSiswa'); ?>";
-            }, 3000)
+                localStorage.clear();
+            }, 1000)
 
         }
+        localStorage.setItem('waktu', countDownDate);
         countDownDate--;
     }, 1000);
 
     var currentTab = 0;
+
+    var cek = document.getElementsByClassName('tab1');
+    for (var j = 0; j < cek.length; j++) {
+        var radios = document.getElementsByName('soal' + j);
+        var val = localStorage.getItem('soal' + j);
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].value == val) {
+                radios[i].checked = true;
+            }
+        }
+    }
+
+    $('input[name="soal1"]').on('change', function() {
+        localStorage.setItem('soal1', $(this).val());
+    });
+
+    $('input[name="soal2"]').on('change', function() {
+        localStorage.setItem('soal2', $(this).val());
+    });
+
+    $('input[name="soal3"]').on('change', function() {
+        localStorage.setItem('soal3', $(this).val());
+    });
+
+    $('input[name="soal4"]').on('change', function() {
+        localStorage.setItem('soal4', $(this).val());
+    });
+
+    $('input[name="soal5"]').on('change', function() {
+        localStorage.setItem('soal5', $(this).val());
+    });
+
+    $('input[name="soal6"]').on('change', function() {
+        localStorage.setItem('soal6', $(this).val());
+    });
+
+    $('input[name="soal7"]').on('change', function() {
+        localStorage.setItem('soal7', $(this).val());
+    });
+
+    $('input[name="soal8"]').on('change', function() {
+        localStorage.setItem('soal8', $(this).val());
+    });
+
+    $('input[name="soal9"]').on('change', function() {
+        localStorage.setItem('soal9', $(this).val());
+    });
+
+    $('input[name="soal10"]').on('change', function() {
+        localStorage.setItem('soal10', $(this).val());
+    });
+
+    $('input[name="soal11"]').on('change', function() {
+        localStorage.setItem('soal11', $(this).val());
+    });
+
+    $('input[name="soal12"]').on('change', function() {
+        localStorage.setItem('soal12', $(this).val());
+    });
+
+    $('input[name="soal13"]').on('change', function() {
+        localStorage.setItem('soal13', $(this).val());
+    });
+
+    $('input[name="soal14"]').on('change', function() {
+        localStorage.setItem('soal14', $(this).val());
+    });
+
+    $('input[name="soal15"]').on('change', function() {
+        localStorage.setItem('soal15', $(this).val());
+    });
+
+    $('input[name="soal16"]').on('change', function() {
+        localStorage.setItem('soal16', $(this).val());
+    });
+
+    $('input[name="soal17"]').on('change', function() {
+        localStorage.setItem('soal17', $(this).val());
+    });
+
+    $('input[name="soal18"]').on('change', function() {
+        localStorage.setItem('soal18', $(this).val());
+    });
+
+    $('input[name="soal19"]').on('change', function() {
+        localStorage.setItem('soal19', $(this).val());
+    });
+
+    $('input[name="soal20"]').on('change', function() {
+        localStorage.setItem('soal20', $(this).val());
+    });
 
     showTab(currentTab);
 
@@ -105,7 +203,7 @@
         for (i = 0; i < y.length; i++) {
             y[i].style.backgroundColor = "";
         }
-        y[n].style.backgroundColor = "rgba(45, 156, 219, 1)";
+
         if (n == 0) {
             document.getElementById("prevBtn").style.display = "none";
         } else {
@@ -116,7 +214,20 @@
         } else {
             document.getElementById("nextBtn").innerHTML = "Next";
         }
-        console.log(n);
+
+        console.log(x.length);
+
+        for (var a = 0; a < x.length; a++) {
+            var set = document.getElementsByName('soal' + a);
+            for (var b = 0; b < set.length; b++) {
+                if (set[b].checked) {
+                    y[a - 1].style.backgroundColor = "rgba(0, 91, 0, 1)";
+                    console.log(a);
+                }
+            }
+        }
+
+        y[n].style.backgroundColor = "rgba(45, 156, 219, 1)";
         fixStepIndicator(n)
     }
 
@@ -126,6 +237,7 @@
         currentTab = currentTab + n;
         if (currentTab >= x.length) {
             document.getElementById("regForm").submit();
+            localStorage.clear();
             return false;
         }
         showTab(currentTab);

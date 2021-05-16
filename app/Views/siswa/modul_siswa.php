@@ -76,7 +76,9 @@
         </div>
 
         <?php $no = 0;
-        foreach ($modul as $m) { ?>
+        $no_temp = 0;
+        foreach ($modul as $m) {
+        ?>
 
             <div class="row" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); border-radius:8px; margin-top:2vh">
                 <div class="col-1" style=" margin-top:2vh; margin-left:2vh"><?= $no + 1 ?></div>
@@ -98,10 +100,13 @@
                     <p style="font-size:16px; font-weight:700;  margin-top:2vh"> WAKTU PENGERJAAN : <span style="font-weight:400"><?= $m['rata_waktu'] ?> MENIT</span> </p>
                 </div>
                 <?php
-                if ($no < count($hasil)) { ?>
+                if ($no_temp < (count($hasil))) { ?>
                     <div class="col-1" style="background-color:rgba(39, 174, 96, 1); border-radius: 0px 8px 8px 0px;">
                         <a href="<?= base_url('MulaiUjian/ujian/' . $m['id_modul']) ?>" onclick="return confirm('apakah anda akan memulai ujian lagi ?')" style=" text-decoration:none">
-                            <p style="color:white; font-size:24px; margin-bottom:10px; padding:15px;  text-align: center;"><?= number_format($hasil[$no]['skor_akhir']) ?></p>
+                            <p style="color:white; font-size:24px; margin-bottom:10px; padding:15px;  text-align: center;">
+                                <?php
+                                echo number_format($hasil[$no_temp]['skor_akhir']);
+                                ?></p>
                         </a>
                     </div>
                     <?php } else {
@@ -117,6 +122,7 @@
                 } ?>
             </div>
         <?php $no++;
+            $no_temp++;
         } ?>
     </div>
 </div>

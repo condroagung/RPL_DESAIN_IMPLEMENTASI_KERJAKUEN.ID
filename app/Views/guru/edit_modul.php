@@ -2,7 +2,7 @@
     <p style="margin-top:2vh; font-weight:700; font-size:24px; margin-left:3.5vh">EDIT MODUL</p>
     <div class="row">
         <div class="col col-md-9" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh; margin-left:4vh; border-radius:8px;">
-            <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">MODUL <?= $count_modul ?></p>
+            <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">MODUL <?= session()->get('no_modul') ?></p>
             <form class="row g-3" style="margin-left:5px" action="<?php echo base_url('KelolaModul/edit_data_modul'); ?>" method="post">
                 <div class="mb-3 row">
                     <input type="hidden" class="form-control" id="id_modul" name="id_modul" value="<?= $edit_modul['id_modul'] ?>">

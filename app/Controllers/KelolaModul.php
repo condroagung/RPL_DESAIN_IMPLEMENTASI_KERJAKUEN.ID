@@ -53,13 +53,14 @@ class KelolaModul extends BaseController
         echo view('footer');
     }
 
-    public function edit_modul($id)
+    public function edit_modul($id, $no)
     {
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
         $session = session();
         $session->set('id_modul', $id);
+        $session->set('no_modul', $no);
         $set['validation'] = \Config\Services::validation();
         $data['soal'] = $this->soal->showsoal($id);
         $set['validation'] = \Config\Services::validation();

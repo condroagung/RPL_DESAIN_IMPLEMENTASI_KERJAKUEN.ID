@@ -58,16 +58,17 @@
                                 }
                                 ?></td>
                             <td><?php
-                                if ($no_modul < count($max_nilai)) {
+                                if ($no_modul < count($max_nilai) - 1) {
                                     echo $total_nilai[$no_modul]['skor_akhir'];
                                 } else {
                                     echo 0;
+                                    $no_modul++;
                                 }
                                 ?></td>
                             <td>70</td>
                         </tr>
                     <?php
-                        $no_modul++;
+
                     } ?>
                 </tbody>
             </table>

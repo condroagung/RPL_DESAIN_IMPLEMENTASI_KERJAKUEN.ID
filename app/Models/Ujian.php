@@ -37,6 +37,31 @@ class Ujian extends Model
             ->get()->getResultArray();
     }
 
+    public function hasilujian($id)
+    {
+        return $this->db->table($this->table)
+            ->selectMax('skor_akhir')
+            ->groupBy('ujian.id_user')
+            ->join('Siswa', 'ujian.id_user = siswa.id_user')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = Paket.id_paket')
+            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->where('ujian.id_modul', $id)
+            ->get()->getResultArray();
+    }
+
+    public function hasil($id)
+    {
+        return $this->db->table($this->table)
+            ->groupBy('ujian.id_user')
+            ->join('Siswa', 'ujian.id_user = siswa.id_user')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = Paket.id_paket')
+            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->where('ujian.id_modul', $id)
+            ->get()->getResultArray();
+    }
+
     public function sumhasilujian($id, $kelas)
     {
         return $this->db->table($this->table)
@@ -114,6 +139,7 @@ class Ujian extends Model
             ->join('Modul', 'ujian.id_modul = Modul.id_modul')
             ->join('Paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
+            ->orderBy('modul.id_modul', 'ASC')
             ->get()->getResultArray();
     }
 
@@ -146,6 +172,8 @@ class Ujian extends Model
             ->join('Paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_paket', $id)
             ->where('ujian.id_user', $id_user)
+            ->orderBy('ujian.id_modul', 'ASC')
+            ->orderBy('ujian.skor_akhir', 'DESC')
             ->get()->getResultArray();
     }
 
@@ -169,5 +197,10 @@ class Ujian extends Model
     public function updateujian($data, $primaryKey)
     {
         return $this->db->table($this->table)->update($data, ['id_ujian' => $primaryKey]);
+    }
+
+    public function deleteujian($primaryKey)
+    {
+        return $this->db->table($this->table)->delete(['id_ujian' => $primaryKey]);
     }
 }

@@ -59,7 +59,7 @@ class MulaiUjian extends BaseController
         $data['time_start'] = $data_modul['rata_waktu'] * 60;
         $data['soal'] = $this->soal->showsoal($id);
 
-        $insert = [
+        /*$insert = [
             'id_modul' => $id,
             'id_user' => session()->get('id_user'),
             'waktu_mulai' => date("d/m/Y h:i:s"),
@@ -78,7 +78,7 @@ class MulaiUjian extends BaseController
         //'waktu_berakhir' => $date_true
         //];
 
-        //$this->ujian->updateujian($update, $insert_id);
+        //$this->ujian->updateujian($update, $insert_id);*/
 
         echo view('header', $data);
         echo view('ujian/start_ujian', $data);

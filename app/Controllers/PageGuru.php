@@ -80,4 +80,26 @@ class PageGuru extends BaseController
         echo view('guru/modul_guru', $data);
         echo view('footer');
     }
+
+    public function lihat_nilai($id, $no)
+    {
+        $set['validation'] = \Config\Services::validation();
+        $data['validation'] = \Config\Services::validation();
+        $data['nilai'] = $this->ujian->hasilujian($id);
+        $data['data'] = $this->ujian->hasil($id);
+        $data['nama_modul'] = $this->modul->namamodul($id);
+        $set['title'] = 'Lihat Nilai';
+        $session = session();
+        $session->set('no_modul', $no);
+        echo view('header', $set);
+        echo view('guru/lihat_nilai', $data);
+        echo view('footer');
+    }
+
+    public function delete_ujian($id)
+    {
+        $this->ujian->deleteujian($id); // memanggil function delete guru dari model guru
+        session()->setFlashdata('success', '<div class="alert alert-warning" style="margin-top:2vh" role="alert">Data Ujian berhasil dihapus</div>');
+        return redirect()->to(base_url('PageGuru')); // jika proses berhasil, maka kembali ke page admin
+    }
 }

@@ -103,8 +103,8 @@
                     <?php } else { ?>
                         <a href=""><i class="fas fa-unlock" style="background-color:rgba(39, 174, 96, 1); color:white; margin-left:3vh; font-size:24px; margin-top:1.5vh; padding:5px; border-radius:4px" onclick="alert('modul sudah dibuka')"></i></a>
                     <?php } ?>
-                    <a href="<?= base_url('KelolaModul/edit_modul/' . $m['id_modul']);  ?>"><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
-                    <a href="<?= base_url('KelolaModul/buat_soal/' . $m['id_modul']);  ?>"><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
+                    <a href="<?= base_url('KelolaModul/edit_modul/' . $m['id_modul'] . '/' . $no);  ?>"><i class="fas fa-pen" style="background-color:#2F80ED; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
+                    <a href="<?= base_url('PageGuru/lihat_nilai/' . $m['id_modul']) . '/' . $no;  ?>"><i class="fas fa-tasks" style="background-color:#9B51E0; color:white; margin-left:3vh; font-size:24px; padding:5px; border-radius:4px"></i></a>
                     <a href=""><i class="fas fa-ellipsis-v" style="color:black; margin-left:2vh; font-size:24px; border-radius:4px"></i></a>
                 </div>
             </div>
