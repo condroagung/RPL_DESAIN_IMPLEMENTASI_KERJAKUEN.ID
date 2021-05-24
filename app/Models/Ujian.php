@@ -15,6 +15,13 @@ class Ujian extends Model
 
     protected $allowedFields = ['id_ujian', 'id_modul', 'id_user', 'waktu_mulai', 'waktu_berakhir', 'skor_akhir'];
 
+    public function ujian($primaryKey)
+    {
+        return $this->db->table($this->table)
+            ->where('id_ujian', $primaryKey)
+            ->get()->getResultArray();
+    }
+
     public function showhasilujianmurid($id)
     {
         return $this->db->table($this->table)
@@ -64,12 +71,28 @@ class Ujian extends Model
     public function sumhasilujian($id, $kelas)
     {
         return $this->db->table($this->table)
-            ->selectSum('skor_akhir')
-            ->groupBy('modul.id_paket')
+            ->select('*')
+            ->selectMax('skor_akhir', 'skor_tertinggi')
+            ->groupBy('modul.id_modul')
             ->join('Modul', 'ujian.id_modul = Modul.id_modul')
             ->join('Paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.kelas', $kelas)
             ->where('ujian.id_user', $id)
+            ->orderBy('paket.id_paket', 'ASC')
+            ->get()->getResultArray();
+    }
+
+    public function hasilmax($id, $id_user)
+    {
+        return $this->db->table($this->table)
+            ->select('*')
+            ->selectMax('skor_akhir', 'skor_tertinggi')
+            ->groupBy('modul.id_modul')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('paket.id_paket', $id)
+            ->where('ujian.id_user', $id_user)
+            ->orderBy('modul.id_modul', 'ASC')
             ->get()->getResultArray();
     }
 
@@ -95,6 +118,17 @@ class Ujian extends Model
             ->where('modul.id_paket', $id)
             ->where('ujian.id_user', $id_user)
             ->countAllResults();
+    }
+
+    public function countmodullist($id)
+    {
+        return $this->db->table($this->table)
+            ->selectCount('ujian.id_modul')
+            ->groupBy('modul.id_paket')
+            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->where('ujian.id_user', $id)
+            ->get()->getResultArray();
     }
 
     public function countmoduldoneguru($id)
@@ -162,17 +196,13 @@ class Ujian extends Model
             ->countAllResults();
     }
 
-    public function hasilmax($id, $id_user)
+    public function jawabanujian($id, $id_user)
     {
         return $this->db->table($this->table)
-            ->selectMax('skor_akhir')
-            ->groupBy('ujian.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
+            ->join('Modul', 'ujian.id_modul = modul.id_modul')
             ->join('Paket', 'modul.id_paket = paket.id_paket')
-            ->where('paket.id_paket', $id)
+            ->where('ujian.id_modul', $id)
             ->where('ujian.id_user', $id_user)
-            ->orderBy('ujian.id_modul', 'ASC')
-            ->orderBy('ujian.skor_akhir', 'DESC')
             ->get()->getResultArray();
     }
 

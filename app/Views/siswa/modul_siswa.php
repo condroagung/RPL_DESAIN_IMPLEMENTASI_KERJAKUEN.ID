@@ -100,16 +100,40 @@
                     <p style="font-size:16px; font-weight:700;  margin-top:2vh"> WAKTU PENGERJAAN : <span style="font-weight:400"><?= $m['rata_waktu'] ?> MENIT</span> </p>
                 </div>
                 <?php
-                if ($no_temp < (count($hasil))) { ?>
-                    <div class="col-1" style="background-color:rgba(39, 174, 96, 1); border-radius: 0px 8px 8px 0px;">
-                        <a href="<?= base_url('MulaiUjian/ujian/' . $m['id_modul']) ?>" onclick="return confirm('apakah anda akan memulai ujian lagi ?')" style=" text-decoration:none">
-                            <p style="color:white; font-size:24px; margin-bottom:10px; padding:15px;  text-align: center;">
-                                <?php
-                                echo number_format($hasil[$no_temp]['skor_akhir']);
-                                ?></p>
-                        </a>
-                    </div>
-                    <?php } else {
+                if (count($hasil) != 0) { ?>
+                    <?php
+                    $status = 0;
+                    foreach ($hasil as $h) {
+                        if ($h['id_modul'] == $m['id_modul']) {
+                            $status = 1;
+                        }
+                    }
+                    ?>
+                    <?php if ($status == 1) { ?>
+                        <div class="col-1" style="background-color:rgba(39, 174, 96, 1); border-radius: 0px 8px 8px 0px;">
+                            <a href="<?= base_url('MulaiUjian/ujian/' . $m['id_modul']) ?>" onclick="return confirm('apakah anda akan memulai ujian lagi ?')" style=" text-decoration:none">
+                                <p style="color:white; font-size:24px; margin-bottom:10px; padding:15px;  text-align: center;">
+                                    <?php
+                                    foreach ($hasil as $h) {
+                                        if ($h['id_modul'] == $m['id_modul']) {
+                                            echo number_format($h['skor_tertinggi']);
+                                        }
+                                    }
+                                    ?></p>
+                            </a>
+                        </div>
+                    <?php } else { ?>
+                        <?php if ($m['status_modul'] == 0) { ?>
+                            <div class="col-1">
+                                <a href="" onclick="alert('Soal belum bisa dikerjakan');"><i class="fas fa-lock" style="color:rgba(242, 153, 74, 1); margin-left:3vh; font-size:30px; padding:25px;"></i></a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-1">
+                                <a href="<?= base_url('MulaiUjian/ujian/' . $m['id_modul']) ?>" onclick="return confirm('apakah anda akan memulai ujian ?')"><i class="fas fa-play" style="color:rgba(39, 174, 96, 1); margin-left:3vh; font-size:30px; padding:25px;"></i></a>
+                            </div>
+                        <?php }
+                    }
+                } else {
                     if ($m['status_modul'] == 0) { ?>
                         <div class="col-1">
                             <a href="" onclick="alert('Soal belum bisa dikerjakan');"><i class="fas fa-lock" style="color:rgba(242, 153, 74, 1); margin-left:3vh; font-size:30px; padding:25px;"></i></a>

@@ -20,6 +20,13 @@ class Siswa extends Model
         return $this->db->table($this->table)->where('username', $username);
     }
 
+    public function siswatertentu($primaryKey)
+    {
+        return $this->db->table($this->table)
+            ->where('id_user', $primaryKey)
+            ->get()->getResultArray();;
+    }
+
     public function countsiswa($nis)
     {
         return $this->db->table($this->table)

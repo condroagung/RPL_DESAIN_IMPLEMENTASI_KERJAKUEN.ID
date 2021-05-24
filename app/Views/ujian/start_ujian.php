@@ -28,7 +28,7 @@
                             <p style="color:rgba(79, 79, 79, 1); font-weight:400; font-size:18px; margin-top:1vh "><?= $s['bunyi_soal'] ?> ?</p>
                             </br>
                             <section class="tab2" style="margin-left:2vh; margin-top:-2vh">
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a" onclick=""><?= $s['opsi_a'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a"><?= $s['opsi_a'] ?></br>
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="b"><?= $s['opsi_b'] ?></br>
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="c"><?= $s['opsi_c'] ?></br>
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="d"><?= $s['opsi_d'] ?></br>

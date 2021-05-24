@@ -42,6 +42,15 @@ class PageSiswa extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
+        }
+
         $set['validation'] = \Config\Services::validation();
         $data['paket'] = $this->paket->showpaketbykelas(session()->get('kelas'));
         $data['hasil'] = $this->modul->showmodulbykelas(session()->get('kelas'));
@@ -55,10 +64,110 @@ class PageSiswa extends BaseController
         echo view('footer');
     }
 
+    public function profile()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
+        }
+        $set['validation'] = \Config\Services::validation();
+        $data['validation'] = \Config\Services::validation();
+        $data['siswa'] = $this->siswa->siswatertentu(session()->get('id_user'));
+        $data['paket'] = $this->paket->showpaketbykelas(session()->get('kelas'));
+        $data['count_modul'] = $this->modul->countModulbyPaket(session()->get('kelas'));
+        $data['sum_hasil'] = $this->ujian->sumhasilujian(session()->get('id_user'), session()->get('kelas'));
+        $set['title'] = 'Profil Siswa';
+        echo view('header', $set);
+        echo view('siswa/lihat_profil', $data);
+        echo view('footer');
+    }
+
+    public function nilai()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
+        }
+        $set['validation'] = \Config\Services::validation();
+        $data['validation'] = \Config\Services::validation();
+        $data['modul'] = $this->modul->showmodulbykelas(session()->get('kelas'));
+        $set['title'] = 'Nilai Siswa';
+        echo view('header', $set);
+        echo view('siswa/nilai_siswa', $data);
+        echo view('footer');
+    }
+
+    public function hasil($id)
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
+        }
+        $set['validation'] = \Config\Services::validation();
+        $data['validation'] = \Config\Services::validation();
+        $data['jawaban'] = $this->ujian->jawabanujian($id, session()->get('id_user'));
+        $set['title'] = 'Nilai Siswa';
+        echo view('header', $set);
+        echo view('siswa/hasil_ujian', $data);
+        echo view('footer');
+    }
+
+    public function detail_hasil($id, $id_modul)
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
+        }
+        $set['validation'] = \Config\Services::validation();
+        $data['validation'] = \Config\Services::validation();
+        $data['ujian'] = $this->ujian->ujian($id);
+        $data['soal'] = $this->soal->showsoal($id_modul);
+        $data['jawaban'] = $this->jawaban->jawabanmodul($id);
+        $set['title'] = 'Nilai Siswa';
+        echo view('header', $set);
+        echo view('siswa/detail_nilai', $data);
+        echo view('footer');
+    }
+
     public function lihat_modul_siswa($id)
     {
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
+        }
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
         }
         $session = session();
         $session->set('id_paket', $id);

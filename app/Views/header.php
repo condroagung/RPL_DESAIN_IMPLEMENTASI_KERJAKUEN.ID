@@ -16,11 +16,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="<?php echo base_url('css/progress-circle.css') ?>">
     <link rel="shortcut icon" href="<?php echo base_url('images/logo.png') ?>" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-    <title><?= $title ?></title>
+    <title>Kerjakeun - <?= $title ?></title>
 </head>
 
 <style>
@@ -60,29 +60,33 @@
                 </ul>
                 <form class="d-flex">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <img src="<?php
-                                    if (session()->get('status') == 0) {
-                                        echo base_url('images/admin.png');
-                                    } else if (session()->get('status') == 1) {
-                                        echo base_url('images/teacher.png');
-                                    } else {
-                                        if (session()->get('jenis_kelamin') == "Laki-Laki") {
-                                            echo base_url('images/student_boy.png');
-                                        } else {
-                                            echo base_url('images/student_girl.png');
-                                        }
-                                    } ?>" style="height:5vh; widht:5vw;" alt=" ...">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#4F4F4F; font-family: 'Nunito', sans-serif; font-size:24px; font-weight:400">
-                                <?php echo session()->get('username') ?>
+                        <img class="rounded-circle" src="<?php
+                                                            if (session()->get('status') == 0) {
+                                                                echo base_url('images/admin.png');
+                                                            } else if (session()->get('status') == 1) {
+                                                                echo base_url('images/teacher.png');
+                                                            } else {
+                                                                if (session()->get('jenis_kelamin') == "Laki-Laki") {
+                                                                    echo base_url('images/student_boy.png');
+                                                                } else {
+                                                                    echo base_url('images/student_girl.png');
+                                                                }
+                                                            } ?>" style="height:4vh; widht:4vw;" alt=" ...">
+                        <li class="nav-item" style="appearance: none; ">
+                            <a class="nav-link" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#4F4F4F; font-family: 'Nunito', sans-serif; font-size:16px; font-weight:400">
+                                <?php echo strtoupper(session()->get('nama')) ?> <i class="fas fa-chevron-down" style="font-size:12px;margin-left:1vh"></i>
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#edit_pass<?= session()->get('id_user') ?>">Change Password</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdown" style="border-radius:8px; font-family: 'Nunito', sans-serif; color:rgba(79, 79, 79, 1)">
+                                <li><a class="dropdown-item" href="<?= base_url('PageSiswa/profile') ?>"><i class="fas fa-user-alt" style="font-size:12px"></i> Profile</a></li>
+                                <?php
+                                if (session()->get('status') == 2) { ?>
+                                    <li><a class="dropdown-item" href="<?= base_url('PageSiswa/nilai'); ?>"><i class="far fa-calendar-alt" style="font-size:12px"></i> Grades</a></li>
+                                <?php                          } ?>
+                                <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#edit_pass<?= session()->get('id_user') ?>"><i class="fas fa-key" style="font-size:12px"></i> Change Password</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="<?= base_url('Home/logout') ?>">Logout</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('Home/logout') ?>"><i class="fas fa-sign-out-alt" style="font-size:12px"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>

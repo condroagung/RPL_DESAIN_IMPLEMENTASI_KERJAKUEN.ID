@@ -29,7 +29,6 @@ class Modul extends Model
     public function showmodulbykelas($kelas)
     {
         return $this->db->table($this->table)
-            ->groupBy('modul.id_paket')
             ->join('Paket', 'modul.id_paket = paket.id_paket')
             ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
@@ -95,6 +94,7 @@ class Modul extends Model
             ->groupBy('modul.id_paket')
             ->join('Paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.kelas', $kelas)
+            ->orderBy('paket.id_paket', 'ASC')
             ->get()->getResultArray();
     }
     public function deletemodul($primaryKey)

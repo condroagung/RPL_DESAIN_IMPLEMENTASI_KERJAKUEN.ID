@@ -63,6 +63,7 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_admin['id_user'],
 					'username' => $log_admin['username'],
+					'nama' => $log_admin['nama_admin'],
 					'status' => 0,
 					'sesi_ujian' => 0,
 					'logged_in' => TRUE
@@ -88,6 +89,7 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_siswa['id_user'],
 					'username' => $log_siswa['username'],
+					'nama' => $log_siswa['nama_siswa'],
 					'status' => 2,
 					'sesi_ujian' => 0,
 					'kelas' => $log_siswa['kelas'],
@@ -115,6 +117,7 @@ class Home extends BaseController
 				$session_data = [
 					'id_user' => $log_guru['id_user'],
 					'username' => $log_guru['username'],
+					'nama' => $log_guru['nama_guru'],
 					'status' => 1,
 					'sesi_ujian' => 0,
 					'logged_in' => TRUE

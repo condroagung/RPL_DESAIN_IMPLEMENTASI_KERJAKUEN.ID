@@ -42,4 +42,12 @@ class Jawaban extends Model
             ->where('modul.id_paket', $id)
             ->countAllResults();
     }
+
+    public function jawabanmodul($id)
+    {
+        return $this->db->table($this->table)
+            ->join('Ujian', 'jawaban.id_ujian = ujian.id_ujian')
+            ->where('jawaban.id_ujian', $id)
+            ->get()->getResultArray();
+    }
 }

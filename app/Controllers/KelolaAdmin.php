@@ -35,6 +35,14 @@ class KelolaAdmin extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+
+        if (session()->get('status') != 0) {
+            if (session()->get('status') == 1) {
+                return redirect()->to(base_url('PageGuru'));
+            } else {
+                return redirect()->to(base_url('PageSiswa'));
+            }
+        }
         $data['guru'] = $this->guru->showguru();
         $data['siswa'] = $this->siswa->showsiswa();
         $data['kelas'] = $this->kelas->showkelas();

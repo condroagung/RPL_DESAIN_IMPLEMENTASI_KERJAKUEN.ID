@@ -50,6 +50,14 @@ class MulaiUjian extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+
+        if (session()->get('status') != 2) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageGuru'));
+            }
+        }
         $set['validation'] = \Config\Services::validation();
         $data['validation'] = \Config\Services::validation();
         $data['title'] = 'Halaman Ujian';

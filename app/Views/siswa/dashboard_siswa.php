@@ -40,6 +40,7 @@
                             <th scope="col">Kode</th>
                             <th scope="col">Mata Pelajaran</th>
                             <th scope="col">Jumlah Modul</th>
+                            <th scope="col">Jumlah Modul Selesai</th>
                             <th scope="col">Nilai Total</th>
                             <th scope="col">Rata-Rata</th>
                         </tr>
@@ -47,30 +48,68 @@
                     <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif;">
                         <?php $no = 1;
                         $no_modul = 0;
-                        foreach ($hasil as $h) { ?>
+                        $sum_avg = 0;
+                        foreach ($paket as $p) { ?>
                             <tr>
                                 <th scope="row"><?= $no++ ?></th>
-                                <td><?= $h['nama_paket'] ?></td>
-                                <td><?= $h['nama_mapel'] ?></td>
-                                <td><?php
-                                    if ($no_modul < count($count_modul)) {
+                                <td><?= $p['nama_paket'] ?></td>
+                                <td><?= $p['nama_mapel'] ?></td>
+                                <td>
+                                    <?php
+                                    if (count($count_modul) == 0) {
+                                        echo 0;
+                                    } else {
                                         echo $count_modul[$no_modul]['id_modul'];
-                                    } else {
-                                        echo 0;
                                     }
                                     ?></td>
-                                <td><?php
-                                    if ($no_modul < count($sum_hasil)) {
-                                        echo number_format($sum_hasil[$no_modul]['skor_akhir']);
-                                    } else {
+                                <td>
+                                    <?php
+                                    if (count($count_modul) == 0) {
                                         echo 0;
+                                    } else {
+                                        $modul_done = 0;
+                                        foreach ($sum_hasil as $s) {
+                                            if ($s['id_paket'] == $p['id_paket']) {
+                                                $modul_done++;
+                                            }
+                                        }
+                                        echo $modul_done;
                                     }
                                     ?></td>
-                                <td><?php
-                                    if ($no_modul < count($avg_hasil)) {
-                                        echo number_format($avg_hasil[$no_modul]['skor_akhir'], 2, '.', ',');
-                                    } else {
+                                <td>
+                                    <?php
+                                    if (count($count_modul) == 0) {
                                         echo 0;
+                                    } else {
+                                        $sum = 0;
+                                        foreach ($sum_hasil as $s) {
+                                            if ($s['id_paket'] == $p['id_paket']) {
+                                                $sum += $s['skor_tertinggi'];
+                                            }
+                                        }
+                                        echo $sum;
+                                    }
+                                    ?></td>
+                                <td>
+                                    <?php
+                                    if (count($sum_hasil) == 0) {
+                                        echo 0;
+                                    } else {
+                                        $sum = 0;
+                                        $count = 0;
+                                        foreach ($sum_hasil as $s) {
+                                            if ($s['id_paket'] == $p['id_paket']) {
+                                                $sum += $s['skor_tertinggi'];
+                                                $count++;
+                                            }
+                                        }
+                                        if ($count == 0) {
+                                            echo 0;
+                                            $sum_avg += 0;
+                                        } else {
+                                            echo number_format($sum / $count, 2);
+                                            $sum_avg += ($sum / $count);
+                                        }
                                     }
                                     ?></td>
                             </tr>
@@ -78,6 +117,32 @@
                             $no_modul++;
                         } ?>
                     </tbody>
+                    <?php if (count($paket) != 0) { ?>
+                        <tfoot>
+                            <td colspan="6" style="text-align:right;font-weight:700">Rata-Rata Keseluruhan</td>
+                            <td style="text-align:center">
+                                <?php
+                                if (count($sum_hasil) == 0) {
+                                    echo 0;
+                                } else {
+                                    $count_all = 0;
+                                    foreach ($sum_hasil as $s) {
+                                        $count_all++;
+                                    }
+                                    if ($count_all == 0) {
+                                        echo 0;
+                                    } else {
+                                        if (count($paket) == 0) {
+                                            echo 0;
+                                        } else {
+                                            echo number_format($sum_avg / count($paket), 2);
+                                        }
+                                    }
+                                }
+                                ?>
+                            </td>
+                        </tfoot>
+                    <?php } ?>
                 </table>
             </div>
         </div>

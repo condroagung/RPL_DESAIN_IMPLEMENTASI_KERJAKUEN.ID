@@ -43,6 +43,15 @@ class PageGuru extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+
+        if (session()->get('status') != 1) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageSiswa'));
+            }
+        }
+
         $set['validation'] = \Config\Services::validation();
         $data['paket'] = $this->paket->showpaketbyguru(session()->get('id_user'));
         $data['validation'] = \Config\Services::validation();
@@ -61,6 +70,15 @@ class PageGuru extends BaseController
         if (!session()->get('logged_in')) {
             return redirect()->to(base_url('Home'));
         }
+
+        if (session()->get('status') != 1) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageSiswa'));
+            }
+        }
+
         $set['validation'] = \Config\Services::validation();
         $session = session();
         $session->set('id_paket', $id);
@@ -83,6 +101,18 @@ class PageGuru extends BaseController
 
     public function lihat_nilai($id, $no)
     {
+        if (!session()->get('logged_in')) {
+            return redirect()->to(base_url('Home'));
+        }
+
+        if (session()->get('status') != 1) {
+            if (session()->get('status') == 0) {
+                return redirect()->to(base_url('KelolaAdmin'));
+            } else {
+                return redirect()->to(base_url('PageSiswa'));
+            }
+        }
+
         $set['validation'] = \Config\Services::validation();
         $data['validation'] = \Config\Services::validation();
         $data['nilai'] = $this->ujian->hasilujian($id);
