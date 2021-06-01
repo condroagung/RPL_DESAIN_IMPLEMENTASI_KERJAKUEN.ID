@@ -26,9 +26,9 @@ class Ujian extends Model
     {
         return $this->db->table($this->table)
             ->groupBy('modul.id_paket')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = Paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->where('ujian.id_user', $id)
             ->get()->getResultArray();
     }
@@ -37,9 +37,9 @@ class Ujian extends Model
     {
         return $this->db->table($this->table)
             ->groupBy('modul.id_paket')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = Paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->where('paket.id_user', $id)
             ->get()->getResultArray();
     }
@@ -49,10 +49,10 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectMax('skor_akhir')
             ->groupBy('ujian.id_user')
-            ->join('Siswa', 'ujian.id_user = siswa.id_user')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = Paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('siswa', 'ujian.id_user = siswa.id_user')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->where('ujian.id_modul', $id)
             ->get()->getResultArray();
     }
@@ -60,10 +60,10 @@ class Ujian extends Model
     public function hasil($id)
     {
         return $this->db->table($this->table)
-            ->join('Siswa', 'ujian.id_user = siswa.id_user')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = Paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('siswa', 'ujian.id_user = siswa.id_user')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->where('ujian.id_modul', $id)
             ->get()->getResultArray();
     }
@@ -74,8 +74,8 @@ class Ujian extends Model
             ->select('*')
             ->selectMax('skor_akhir', 'skor_tertinggi')
             ->groupBy('modul.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.kelas', $kelas)
             ->where('ujian.id_user', $id)
             ->orderBy('paket.id_paket', 'ASC')
@@ -88,8 +88,8 @@ class Ujian extends Model
             ->select('*')
             ->selectMax('skor_akhir', 'skor_tertinggi')
             ->groupBy('modul.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_paket', $id)
             ->where('ujian.id_user', $id_user)
             ->orderBy('modul.id_modul', 'ASC')
@@ -101,8 +101,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectAvg('skor_akhir')
             ->groupBy('modul.id_paket')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.kelas', $kelas)
             ->where('ujian.id_user', $id)
             ->get()->getResultArray();
@@ -113,8 +113,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectCount('ujian.id_ujian')
             ->groupBy('modul.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id)
             ->where('ujian.id_user', $id_user)
             ->countAllResults();
@@ -125,8 +125,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectCount('ujian.id_modul')
             ->groupBy('modul.id_paket')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('ujian.id_user', $id)
             ->get()->getResultArray();
     }
@@ -136,8 +136,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectCount('ujian.id_ujian')
             ->groupBy('modul.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id)
             ->countAllResults();
     }
@@ -147,8 +147,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectCount('ujian.id_modul')
             ->groupBy('modul.id_paket')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
             ->get()->getResultArray();
     }
@@ -158,8 +158,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectSum('ujian.skor_akhir')
             ->groupBy('modul.id_paket')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
             ->get()->getResultArray();
     }
@@ -169,8 +169,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectMax('ujian.skor_akhir')
             ->groupBy('ujian.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
             ->orderBy('modul.id_modul', 'ASC')
             ->get()->getResultArray();
@@ -180,8 +180,8 @@ class Ujian extends Model
     {
         return $this->db->table($this->table)
             ->selectAvg('ujian.skor_akhir')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id)
             ->get()->getResultArray();
     }
@@ -190,8 +190,8 @@ class Ujian extends Model
     {
         return $this->db->table($this->table)
             ->selectCount('ujian.id_ujian')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id)
             ->countAllResults();
     }
@@ -199,8 +199,8 @@ class Ujian extends Model
     public function jawabanujian($id, $id_user)
     {
         return $this->db->table($this->table)
-            ->join('Modul', 'ujian.id_modul = modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('ujian.id_modul', $id)
             ->where('ujian.id_user', $id_user)
             ->get()->getResultArray();
@@ -211,8 +211,8 @@ class Ujian extends Model
         return $this->db->table($this->table)
             ->selectMax('skor_akhir')
             ->groupBy('ujian.id_modul')
-            ->join('Modul', 'ujian.id_modul = Modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_paket', $id)
             ->where('ujian.id_user', $id_user)
             ->get()->getResultArray();

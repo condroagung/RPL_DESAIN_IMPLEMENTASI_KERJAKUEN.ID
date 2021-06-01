@@ -89,12 +89,13 @@
                             <div class="progress-circle progress-<?= 0; ?>" style="margin-left:10vh"><span><?= 0; ?></span></div>
                         <?php } else {
                             $modul_done = 0;
+                            $mod = 0;
                             foreach ($sum_hasil as $s) {
                                 if ($s['id_paket'] == $p['id_paket']) {
                                     $modul_done++;
                                 }
                             }
-                            $avg = number_format($modul_done / $count_modul[$no]['id_modul'], 2);
+                            $avg = number_format($modul_done / $count_modul[$mod]['id_modul'], 2);
                         ?>
                             <div class="progress-circle progress-<?= $avg * 100; ?>" style="margin-left:10vh"><span><?= $avg * 100; ?></span></div>
                         <?php }

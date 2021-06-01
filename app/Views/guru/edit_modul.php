@@ -60,6 +60,7 @@
                             <li>Skor = 5</li>
                             <li>Waktu Pengerjaan dalam menit</li>
                             <li>Jumlah maksimum soal adalah 20</li>
+                            <li>Tidak dapat upload gambar</li>
                         </ol>
                     </div>
                     <form class="row g-3" action="<?= base_url('kelolamodul/add_soal_excel') ?>" method="post" enctype="multipart/form-data">
@@ -109,6 +110,14 @@
                         <textarea class="form-control" name="bunyi_soal" readonly><?= $s['bunyi_soal'] ?></textarea>
                     </div>
                 </div>
+                <?php if ($s['gambar_soal']) { ?>
+                    <div class="mb-3 row">
+                        <label for="bunyi_soal" class="col-sm-2 col-form-label">Gambar Soal</label>
+                        <div class="col-sm-10">
+                            <img src="<?= base_url() . '/uploads/' . $s['gambar_soal']; ?>" alt="image can't load">
+                        </div>
+                    </div>
+                <?php } ?>
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Pilihan A</label>
                     <div class="col-sm-10">
@@ -223,7 +232,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="skor_soal" class="form-label">Skor Maksimal</label>
-                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['skor_soal']; ?>" name="skor_soal">
+                                <input type="text" class="form-control" id=" exampleInputPassword1" value="<?= $s['skor_soal']; ?>" name="skor_soal" readonly>
                                 <?php if ($validation->getError('skor_soal')) { ?>
                                     <div class='alert alert-danger mt-2'>
                                         <?= $error = $validation->getError('skor_soal'); ?>

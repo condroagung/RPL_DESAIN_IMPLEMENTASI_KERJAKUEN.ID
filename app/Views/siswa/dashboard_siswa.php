@@ -59,7 +59,15 @@
                                     if (count($count_modul) == 0) {
                                         echo 0;
                                     } else {
-                                        echo $count_modul[$no_modul]['id_modul'];
+                                        $mod = 0;
+                                        foreach ($count_modul as $m) {
+                                            if ($p['id_paket'] == $m['id_paket']) {
+                                                echo $count_modul[$mod]['id_modul'];
+                                                $mod++;
+                                            } else {
+                                                echo 0;
+                                            }
+                                        }
                                     }
                                     ?></td>
                                 <td>
@@ -158,4 +166,5 @@
             }
         });
     });
+    localStorage.clear();
 </script>

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Paket extends Model
 {
-    protected $table = 'Paket';
+    protected $table = 'paket';
 
     protected $primaryKey = 'id_paket';
     protected $useAutoIncrement = true;
@@ -18,7 +18,7 @@ class Paket extends Model
     public function showpaket()
     {
         return $this->db->table($this->table)
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->get()->getResultArray();
     }
@@ -31,7 +31,7 @@ class Paket extends Model
     public function showmodulbyguru($id)
     {
         return $this->db->table($this->table)
-            ->join('Mata_pelajaran', 'paket.id_mapel = Mata_pelajaran.id_mapel')
+            ->join('mata_pelajaran', 'paket.id_mapel = mata_pelajaran.id_mapel')
             ->join('guru', 'paket.id_user = guru.id_user')
             ->where('paket.id_user', $id)
             ->get()->getResultArray();
@@ -40,7 +40,7 @@ class Paket extends Model
     public function showpaketbyguru($id_user)
     {
         return $this->db->table($this->table)
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('paket.id_user', $id_user)
             ->get()->getResultArray();
@@ -49,7 +49,7 @@ class Paket extends Model
     public function showpaketbykelas($kelas)
     {
         return $this->db->table($this->table)
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('paket.kelas', $kelas)
             ->get()->getResultArray();
@@ -58,7 +58,7 @@ class Paket extends Model
     public function showpaketbyid($primaryKey)
     {
         return $this->db->table($this->table)
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('id_paket', $primaryKey)
             ->get()->getResultArray();

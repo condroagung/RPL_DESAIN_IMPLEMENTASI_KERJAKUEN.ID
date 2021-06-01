@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col col-md-9" style="background-color:white; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1);margin-top:2vh; margin-left:4vh; border-radius:8px;">
             <p style="margin-top:2vh; font-weight:700; font-size:18px; margin-left:5px">SOAL <?= $count_soal + 1 ?></p>
-            <form style="margin-left:5px" action="<?= base_url('KelolaModul/create_soal') ?>" method="post">
+            <form style="margin-left:5px" action="<?= base_url('KelolaModul/create_soal') ?>" method="post" enctype="multipart/form-data">
                 <div class=" mb-3 row">
                     <label for="bunyi_soal" class="col-sm-2 col-form-label">Soal</label>
                     <div class="col-sm-10">
@@ -13,6 +13,12 @@
                                 <?= $error = $validation->getError('bunyi_soal'); ?>
                             </div>
                         <?php } ?>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="gambar_soal" class="col-sm-2 col-form-label">Upload Gambar Soal</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="inputPassword" name="gambar_soal">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -62,7 +68,7 @@
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Skor Maksimal</label>
                     <div class="col-sm-1">
-                        <input type="text" class="form-control" id="inputPassword" name="skor_soal">
+                        <input type="text" class="form-control" id="inputPassword" name="skor_soal" value="5" readonly>
                         <?php if ($validation->getError('skor_soal')) { ?>
                             <div class='alert alert-danger mt-2'>
                                 <?= $error = $validation->getError('skor_soal'); ?>

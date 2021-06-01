@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Guru extends Model
 {
-    protected $table = 'Guru';
+    protected $table = 'guru';
     protected $primaryKey = 'id_user';
     protected $useAutoIncrement = true;
 

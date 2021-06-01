@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Jawaban extends Model
 {
-    protected $table = 'Jawaban';
+    protected $table = 'jawaban';
 
     protected $primaryKey = 'id_jawaban';
     protected $useAutoIncrement = true;
@@ -24,9 +24,9 @@ class Jawaban extends Model
     {
         return $this->db->table($this->table)
             ->selectCount('id_jawaban')
-            ->join('Ujian', 'jawaban.id_ujian = ujian.id_ujian')
-            ->join('Modul', 'ujian.id_modul = modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('ujian', 'jawaban.id_ujian = ujian.id_ujian')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id)
             ->where('ujian.id_user', $id_user)
             ->countAllResults();
@@ -36,9 +36,9 @@ class Jawaban extends Model
     {
         return $this->db->table($this->table)
             ->selectCount('id_jawaban')
-            ->join('Ujian', 'jawaban.id_ujian = ujian.id_ujian')
-            ->join('Modul', 'ujian.id_modul = modul.id_modul')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('ujian', 'jawaban.id_ujian = ujian.id_ujian')
+            ->join('modul', 'ujian.id_modul = modul.id_modul')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id)
             ->countAllResults();
     }
@@ -46,7 +46,7 @@ class Jawaban extends Model
     public function jawabanmodul($id)
     {
         return $this->db->table($this->table)
-            ->join('Ujian', 'jawaban.id_ujian = ujian.id_ujian')
+            ->join('ujian', 'jawaban.id_ujian = ujian.id_ujian')
             ->where('jawaban.id_ujian', $id)
             ->get()->getResultArray();
     }

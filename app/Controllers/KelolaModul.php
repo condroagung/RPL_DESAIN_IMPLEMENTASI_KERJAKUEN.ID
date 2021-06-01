@@ -234,6 +234,7 @@ class KelolaModul extends BaseController
         $opsi_d = $this->request->getPost('opsi_d');
         $skor_soal = $this->request->getPost('skor_soal');
         $kunci_jawaban = $this->request->getPost('kunci_jawaban');
+        $cover = $this->request->getFile('gambar_soal');
 
         $validation = $this->validate(
             [
@@ -288,18 +289,37 @@ class KelolaModul extends BaseController
             return redirect()->back()->withInput();
         }
 
-        $data = [
-            'id_modul' => session()->get('id_modul'),
-            'bunyi_soal' => $bunyi_soal,
-            'opsi_a' => $opsi_a,
-            'opsi_b' => $opsi_b,
-            'opsi_c' => $opsi_c,
-            'opsi_d' => $opsi_d,
-            'skor_soal' => $skor_soal,
-            'kunci_jawaban' => $kunci_jawaban
-        ];
 
-        $this->soal->createsoal($data);
+        if ($cover) {
+            $fileName = $cover->getRandomName();
+
+            $data = [
+                'id_modul' => session()->get('id_modul'),
+                'bunyi_soal' => $bunyi_soal,
+                'gambar_soal' => $fileName,
+                'opsi_a' => $opsi_a,
+                'opsi_b' => $opsi_b,
+                'opsi_c' => $opsi_c,
+                'opsi_d' => $opsi_d,
+                'skor_soal' => $skor_soal,
+                'kunci_jawaban' => $kunci_jawaban
+            ];
+            $this->soal->createsoal($data);
+            $cover->move('uploads/', $fileName);
+        } else {
+            $data = [
+                'id_modul' => session()->get('id_modul'),
+                'bunyi_soal' => $bunyi_soal,
+                'gambar_soal' => null,
+                'opsi_a' => $opsi_a,
+                'opsi_b' => $opsi_b,
+                'opsi_c' => $opsi_c,
+                'opsi_d' => $opsi_d,
+                'skor_soal' => $skor_soal,
+                'kunci_jawaban' => $kunci_jawaban
+            ];
+            $this->soal->createsoal($data);
+        }
         session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Soal Berhasil Ditambahkan</div>');
         session()->remove('id_modul');
         return redirect()->to(base_url('PageGuru'));

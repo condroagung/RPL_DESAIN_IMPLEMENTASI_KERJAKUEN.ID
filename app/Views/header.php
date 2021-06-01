@@ -77,7 +77,9 @@
                                 <?php echo strtoupper(session()->get('nama')) ?> <i class="fas fa-chevron-down" style="font-size:12px;margin-left:1vh"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdown" style="border-radius:8px; font-family: 'Nunito', sans-serif; color:rgba(79, 79, 79, 1)">
-                                <li><a class="dropdown-item" href="<?= base_url('PageSiswa/profile') ?>"><i class="fas fa-user-alt" style="font-size:12px"></i> Profile</a></li>
+                                <?php if (session()->get('status') == 2) { ?>
+                                    <li><a class="dropdown-item" href="<?= base_url('PageSiswa/profile') ?>"><i class="fas fa-user-alt" style="font-size:12px"></i> Profile</a></li>
+                                <?php                          } ?>
                                 <?php
                                 if (session()->get('status') == 2) { ?>
                                     <li><a class="dropdown-item" href="<?= base_url('PageSiswa/nilai'); ?>"><i class="far fa-calendar-alt" style="font-size:12px"></i> Grades</a></li>

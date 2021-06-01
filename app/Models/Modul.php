@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Modul extends Model
 {
-    protected $table = 'Modul';
+    protected $table = 'modul';
 
     protected $primaryKey = 'id_modul';
     protected $useAutoIncrement = true;
@@ -18,8 +18,8 @@ class Modul extends Model
     public function showmodul($id)
     {
         return $this->db->table($this->table)
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('modul.id_paket', $id)
             ->orderBy('modul.id_modul', 'ASC')
@@ -29,8 +29,8 @@ class Modul extends Model
     public function showmodulbykelas($kelas)
     {
         return $this->db->table($this->table)
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')
             ->where('paket.kelas', $kelas)
             ->orderBy('paket.id_paket', 'ASC')
@@ -61,7 +61,7 @@ class Modul extends Model
         return $this->db->table($this->table)
             ->selectAvg('rata_waktu')
             ->groupBy('modul.id_paket')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id_paket)
             ->get()->getResultArray();
     }
@@ -71,7 +71,7 @@ class Modul extends Model
         return $this->db->table($this->table)
             ->selectAvg('rata_waktu')
             ->groupBy('modul.id_paket')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('modul.id_paket', $id_paket)
             ->countAllResults();
     }
@@ -81,7 +81,7 @@ class Modul extends Model
         return $this->db->table($this->table)
             ->selectCount('modul.id_modul')
             ->groupBy('modul.id_paket')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
             ->orderBy('paket.id_paket', 'ASC')
             ->get()->getResultArray();
@@ -90,9 +90,10 @@ class Modul extends Model
     public function countModulbyPaket($kelas)
     {
         return $this->db->table($this->table)
+            ->select('modul.id_paket')
             ->selectCount('id_modul')
             ->groupBy('modul.id_paket')
-            ->join('Paket', 'modul.id_paket = paket.id_paket')
+            ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.kelas', $kelas)
             ->orderBy('paket.id_paket', 'ASC')
             ->get()->getResultArray();

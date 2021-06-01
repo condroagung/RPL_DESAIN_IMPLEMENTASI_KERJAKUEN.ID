@@ -80,9 +80,10 @@ class KelolaAdmin extends BaseController
                     ]
                 ],
                 'username' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|is_unique[guru.username]',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong'
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain',
                     ]
                 ],
                 'password' => [
@@ -223,9 +224,10 @@ class KelolaAdmin extends BaseController
                     ]
                 ],
                 'username_siswa' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|is_unique[siswa.username]',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong'
+                        'required' => '{field} tidak boleh kosong',
+                        'is_unique' => '{field} ({value}) telah digunakan, gunakan yang lain',
                     ]
                 ],
                 'password_siswa' => [
@@ -537,8 +539,7 @@ class KelolaAdmin extends BaseController
             ->setCellValue('B1', 'Nama Guru')
             ->setCellValue('C1', 'NIP')
             ->setCellValue('D1', 'Username')
-            ->setCellValue('E1', 'Password')
-            ->setCellValue('F1', 'Status');
+            ->setCellValue('E1', 'Password');
 
         $column = 2;
         $spreadsheet->setActiveSheetIndex(0)
@@ -546,8 +547,7 @@ class KelolaAdmin extends BaseController
             ->setCellValue('B' . $column, 'Rian Fahriza Sitepu')
             ->setCellValue('C' . $column, '1301158234')
             ->setCellValue('D' . $column, 'Rasdwadad')
-            ->setCellValue('E' . $column, '10230131030')
-            ->setCellValue('F' . $column, 1);
+            ->setCellValue('E' . $column, '10230131030');
         $writer = new Xlsx($spreadsheet);
         $fileName = 'Template Upload Guru';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -603,7 +603,6 @@ class KelolaAdmin extends BaseController
             $nip = $row[2];
             $username = $row[3];
             $password = $row[4];
-            $status = $row[5];
 
             $cek = $this->guru->countguru($nip);
 
@@ -616,7 +615,7 @@ class KelolaAdmin extends BaseController
                     'nip' => $nip,
                     'username' => $username,
                     'password' => $password,
-                    'status' => $status
+                    'status' => 1
                 ];
                 $this->guru->createguru($insert);
                 $jmldata++;
@@ -644,8 +643,7 @@ class KelolaAdmin extends BaseController
             ->setCellValue('D1', 'Kelas')
             ->setCellValue('E1', 'Jenis Kelamin')
             ->setCellValue('F1', 'Username')
-            ->setCellValue('G1', 'Password')
-            ->setCellValue('H1', 'Status');
+            ->setCellValue('G1', 'Password');
 
         $column = 2;
         $spreadsheet->setActiveSheetIndex(0)
@@ -655,8 +653,7 @@ class KelolaAdmin extends BaseController
             ->setCellValue('D' . $column, '6A')
             ->setCellValue('E' . $column, 'L')
             ->setCellValue('F' . $column, 'reihan_xray')
-            ->setCellValue('G' . $column, 'reihankun')
-            ->setCellValue('H' . $column, '2');
+            ->setCellValue('G' . $column, 'reihankun');
         $writer = new Xlsx($spreadsheet);
         $fileName = 'Template Upload Siswa';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -718,7 +715,6 @@ class KelolaAdmin extends BaseController
             }
             $username = $row[5];
             $password = $row[6];
-            $status = $row[7];
 
             $cek = $this->siswa->countsiswa($nis);
             $cek1 = $this->siswa->getdatabynama($nama);
@@ -735,7 +731,7 @@ class KelolaAdmin extends BaseController
                         'jenis_kelamin' => $jeniskelamin,
                         'username' => $username,
                         'password' => $password,
-                        'status' => $status
+                        'status' => 2
                     ];
                     $this->siswa->createsiswa($insert);
                     $jmldata++;
@@ -751,7 +747,7 @@ class KelolaAdmin extends BaseController
                             'jenis_kelamin' => $jeniskelamin,
                             'username' => $username,
                             'password' => $password,
-                            'status' => $status
+                            'status' => 2
                         ];
                         $this->siswa->createsiswa($insert);
                         $jmldata++;

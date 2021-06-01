@@ -26,6 +26,13 @@
                                 </p>
                             </label>
                             <p style="color:rgba(79, 79, 79, 1); font-weight:400; font-size:18px; margin-top:1vh "><?= $s['bunyi_soal'] ?> ?</p>
+                            <?php if ($s['gambar_soal']) { ?>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <img src="<?= base_url() . '/uploads/' . $s['gambar_soal']; ?>" alt="image can't load">
+                                    </div>
+                                </div>
+                            <?php } ?>
                             </br>
                             <section class="tab2" style="margin-left:2vh; margin-top:-2vh">
                                 <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a"><?= $s['opsi_a'] ?></br>
@@ -37,10 +44,11 @@
                         </div>
                     </div>
                 <?php } ?>
-                <div class="d-flex justify-content-end">
-                    <div class="nextprev" style="margin-top:2vh; margin-left:-2vh">
-                        <button type="button" class="btn btn-default" style="background-color:rgba(47, 128, 237, 1); color:white; font-family: 'Poppins', sans-serif; font-weight:700" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                        <button type="button" class="btn btn-default" style="background-color:rgba(47, 128, 237, 1); color:white; font-family: 'Poppins', sans-serif; font-weight:700" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <div class="btn-nav">
+                    <div class="nextprev d-flex justify-content-end" style="margin-top:2vh">
+                        <button type="submit" class="btn btn-default" style="background-color:rgba(0, 145, 0, 0.7); color:white; font-family: 'Poppins', sans-serif; font-weight:700" id="confirmBtn" onclick="return confirm('Apakah Anda yakin ingin mengumpulkan tes ini?')">Submit</button>
+                        <button type="button" class="btn btn-default" style="background-color:rgba(47, 128, 237, 1); color:white; font-family: 'Poppins', sans-serif; font-weight:700; margin-left:1vh" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                        <button type="button" class="btn btn-default" style="background-color:rgba(47, 128, 237, 1); color:white; font-family: 'Poppins', sans-serif; font-weight:700; margin-left:1vh" id="nextBtn" onclick="nextPrev(1)">Next</button>
                     </div>
                 </div>
             </form>
@@ -216,9 +224,9 @@
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
+            document.getElementById("nextBtn").style.display = "none";
         } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
+            document.getElementById("nextBtn").style.display = "inline";
         }
 
         for (var a = 0; a < x.length; a++) {
@@ -238,11 +246,11 @@
         var x = document.getElementsByClassName("tab1");
         x[currentTab].style.display = "none";
         currentTab = currentTab + n;
-        if (currentTab >= x.length) {
-            document.getElementById("regForm").submit();
-            localStorage.clear();
-            return false;
-        }
+        //if (currentTab >= x.length) {
+        //document.getElementById("regForm").submit();
+        //localStorage.clear();
+        //return false;
+        //}
         showTab(currentTab);
     }
 
@@ -259,10 +267,10 @@
         var x = document.getElementsByClassName("tab1");
         x[currentTab].style.display = "none";
         currentTab = i - 1;
-        if (currentTab >= x.length) {
-            document.getElementById("regForm").submit();
-            return false;
-        }
+        //if (currentTab >= x.length) {
+        //document.getElementById("regForm").submit();
+        //return false;
+        //}
         showTab(currentTab);
     }
 </script>

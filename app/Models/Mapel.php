@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class Mapel extends Model
 {
-    protected $table = 'Mata_pelajaran';
+    protected $table = 'mata_pelajaran';
 
     protected $primaryKey = 'id_mapel';
     protected $useAutoIncrement = true;

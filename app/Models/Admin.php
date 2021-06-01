@@ -9,7 +9,7 @@ use CodeIgniter\Model;
  */
 class Admin extends Model
 {
-    protected $table = 'Admin';
+    protected $table = 'admin';
     protected $primaryKey = 'id_user';
     protected $useAutoIncrement = true;
 
