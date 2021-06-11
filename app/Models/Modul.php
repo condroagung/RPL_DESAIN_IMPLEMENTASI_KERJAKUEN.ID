@@ -79,6 +79,7 @@ class Modul extends Model
     public function countmodulbyGuru($id)
     {
         return $this->db->table($this->table)
+            ->select('modul.id_paket')
             ->selectCount('modul.id_modul')
             ->groupBy('modul.id_paket')
             ->join('paket', 'modul.id_paket = paket.id_paket')

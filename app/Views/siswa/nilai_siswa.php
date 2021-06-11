@@ -56,7 +56,7 @@
                         <div class="accordion-body">
                             <ol>
                                 <?php foreach ($modul as $m) {
-                                    if ($m['nama_mapel'] == 'Ipa') { ?>
+                                    if ($m['nama_mapel'] == 'IPA') { ?>
                                         <li><a href="<?= base_url('PageSiswa/hasil/' . $m['id_modul']); ?>"><?= $m['judul_modul'] ?></a></li>
                                 <?php }
                                 } ?>

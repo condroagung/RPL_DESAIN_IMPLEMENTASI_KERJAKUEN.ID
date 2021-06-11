@@ -114,7 +114,7 @@
                     <div class="mb-3 row">
                         <label for="bunyi_soal" class="col-sm-2 col-form-label">Gambar Soal</label>
                         <div class="col-sm-10">
-                            <img src="<?= base_url() . '/uploads/' . $s['gambar_soal']; ?>" alt="image can't load">
+                            <img src="<?= base_url() . '/uploads/' . $s['gambar_soal']; ?>" alt="image can't load" style="height:160px; widht:160px;">
                         </div>
                     </div>
                 <?php } ?>

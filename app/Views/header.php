@@ -114,7 +114,7 @@
                             <div class="mb-3">
                                 <input type="hidden" name="id_user" id="id_user" value="<?= session()->get('id_user') ?>">
                                 <label for="pass_lama" class="form-label">Password Lama</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_lama">
+                                <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_lama">
                                 <?php if ($validation->getError('pass_lama')) { ?>
                                     <div class='alert alert-danger mt-2'>
                                         <?= $error = $validation->getError('pass_lama'); ?>
@@ -123,7 +123,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="pass_baru" class="form-label">Password Baru</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_baru">
+                                <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_baru">
                                 <?php if ($validation->getError('pass_baru')) { ?>
                                     <div class='alert alert-danger mt-2'>
                                         <?= $error = $validation->getError('pass_baru'); ?>
@@ -132,7 +132,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="pass_sesuai" class="form-label">Ketik Ulang Password Baru</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_sesuai">
+                                <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="pass_sesuai">
                                 <?php if ($validation->getError('pass_sesuai')) { ?>
                                     <div class='alert alert-danger mt-2'>
                                         <?= $error = $validation->getError('pass_sesuai'); ?>

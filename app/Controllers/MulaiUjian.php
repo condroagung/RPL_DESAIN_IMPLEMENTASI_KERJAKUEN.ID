@@ -107,34 +107,51 @@ class MulaiUjian extends BaseController
         }
 
         $kunjaw = array();
+        $status_array = array();
+        $skor_array = array();
+
         $j = 0;
-        $status = 'benar';
         $skor = 0;
-        $jumlah_soal = $this->soal->countsoal(session()->get('id_modul'));
+        $jumlah_soal = count($kunjaw_soal);
         while ($j < $jumlah_soal) {
             $kunjaw[$j] = $this->request->getPost('soal' . ($j + 1));
             if ($kunjaw[$j] == $kunjaw_ujian[$j]) {
-                $status = 'benar';
                 $skor = $skor + 5;
-                $insert = [
+                /*$insert = [
                     'id_ujian' => session()->get('id_ujian'),
                     'jawaban_soal' => $kunjaw[$j],
                     'status_jawaban' => $status,
                     'skor_jawaban' => 5
-                ];
+                ];*/
+                array_push($status_array, 'b');
+                array_push($skor_array, 5);
             } else {
-                $status = 'salah';
                 $skor = $skor + 0;
-                $insert = [
+                /*$insert = [
                     'id_ujian' => session()->get('id_ujian'),
                     'jawaban_soal' => $kunjaw[$j],
                     'status_jawaban' => $status,
                     'skor_jawaban' => 0
-                ];
+                ];*/
+                array_push($status_array, 's');
+                array_push($skor_array, 0);
             }
-            $this->jawaban->createjawaban($insert);
+            #$this->jawaban->createjawaban($insert);
             $j++;
         }
+
+        $str_jawaban = implode(",", $kunjaw);
+        $str_status = implode(",", $status_array);
+        $str_skor = implode(",", $skor_array);
+        $insert = [
+            'id_ujian' => session()->get('id_ujian'),
+            'jawaban_soal' => $str_jawaban,
+            'status_jawaban' => $str_status,
+            'skor_jawaban' => $str_skor
+        ];
+        $this->jawaban->createjawaban($insert);
+
+
         $indeks = 5 * $jumlah_soal;
         $kali = 100 / $indeks;
 

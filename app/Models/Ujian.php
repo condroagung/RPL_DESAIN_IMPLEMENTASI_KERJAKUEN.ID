@@ -156,8 +156,9 @@ class Ujian extends Model
     public function counttotalnilai($id)
     {
         return $this->db->table($this->table)
-            ->selectSum('ujian.skor_akhir')
-            ->groupBy('modul.id_paket')
+            ->select('modul.id_paket')
+            ->selectMax('ujian.skor_akhir')
+            ->groupBy('ujian.id_modul')
             ->join('modul', 'ujian.id_modul = modul.id_modul')
             ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
@@ -172,7 +173,6 @@ class Ujian extends Model
             ->join('modul', 'ujian.id_modul = modul.id_modul')
             ->join('paket', 'modul.id_paket = paket.id_paket')
             ->where('paket.id_user', $id)
-            ->orderBy('modul.id_modul', 'ASC')
             ->get()->getResultArray();
     }
 

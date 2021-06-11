@@ -159,7 +159,8 @@
 
     <div class="row" style="margin-top:2vh">
         <div class="col-md-12" style="margin-left:-2vh">
-            <table class="display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+            <table class="display caption-top" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+                <caption> </caption>
                 <thead class="text-center">
                     <tr>
                         <th scope="col">No</th>
@@ -369,7 +370,8 @@
 
     <div class="row" style="margin-top:2vh">
         <div class="col-md-12" style="margin-left:-2vh">
-            <table class="display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+            <table class="display caption-top" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; font-weight:500" data-page-length='10'>
+                <caption> </caption>
                 <thead class="text-center">
                     <tr>
                         <th scope="col">No</th>

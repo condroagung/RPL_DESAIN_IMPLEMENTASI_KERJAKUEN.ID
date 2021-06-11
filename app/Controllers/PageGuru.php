@@ -82,7 +82,7 @@ class PageGuru extends BaseController
         $set['validation'] = \Config\Services::validation();
         $session = session();
         $session->set('id_paket', $id);
-        $data['paket'] = $this->paket->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+        $data['paket'] = $this->paket->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')->where('id_paket', $id)->first();
         $data['count_modul'] = $this->modul->countModul($id);
         $data['check_avg_time'] = $this->modul->check_avgtime($id);

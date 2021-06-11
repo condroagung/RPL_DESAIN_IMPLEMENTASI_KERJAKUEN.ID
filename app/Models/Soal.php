@@ -52,7 +52,7 @@ class Soal extends Model
     public function countsoalmodul()
     {
         return $this->db->table($this->table)
-            ->join('nodul', 'soal.id_modul = modul.id_modul')
+            ->join('modul', 'soal.id_modul = modul.id_modul')
             ->countAllResults();
     }
 

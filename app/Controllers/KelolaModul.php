@@ -67,8 +67,8 @@ class KelolaModul extends BaseController
         $data['soal'] = $this->soal->showsoal($id);
         $set['validation'] = \Config\Services::validation();
         $data['count_modul'] = $this->modul->countModul(session()->get('id_paket'));
-        $data['edit_modul'] = $this->modul->join('Paket', 'modul.id_paket = paket.id_paket')
-            ->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+        $data['edit_modul'] = $this->modul->join('paket', 'modul.id_paket = paket.id_paket')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')->where('id_modul', $id)->first();
         $data['validation'] = \Config\Services::validation();
         $set['title'] = 'Edit Modul';
@@ -289,8 +289,15 @@ class KelolaModul extends BaseController
             return redirect()->back()->withInput();
         }
 
+        $banyak_soal = $this->soal->countsoalmodul(session()->get('id_modul'));
 
-        if ($cover) {
+        if ($banyak_soal > 20) {
+            session()->setFlashdata('success', '<div class="alert alert-danger" style="margin-top:2vh" role="alert">Soal Melebihi Kapasitas Modul</div>');
+            session()->remove('id_modul');
+            return redirect()->to(base_url('PageGuru'));
+        }
+
+        if (is_uploaded_file($cover)) {
             $fileName = $cover->getRandomName();
 
             $data = [
@@ -304,8 +311,8 @@ class KelolaModul extends BaseController
                 'skor_soal' => $skor_soal,
                 'kunci_jawaban' => $kunci_jawaban
             ];
-            $this->soal->createsoal($data);
             $cover->move('uploads/', $fileName);
+            $this->soal->createsoal($data);
         } else {
             $data = [
                 'id_modul' => session()->get('id_modul'),
@@ -415,8 +422,7 @@ class KelolaModul extends BaseController
             ->setCellValue('D1', 'Pilihan B')
             ->setCellValue('E1', 'Pilihan C')
             ->setCellValue('F1', 'Pilihan D')
-            ->setCellValue('G1', 'Skor Maksimal')
-            ->setCellValue('H1', 'Kunci Jawaban');
+            ->setCellValue('G1', 'Kunci Jawaban');
 
         $column = 2;
         $spreadsheet->setActiveSheetIndex(0)
@@ -426,8 +432,7 @@ class KelolaModul extends BaseController
             ->setCellValue('D' . $column, 4)
             ->setCellValue('E' . $column, 1)
             ->setCellValue('F' . $column, 3)
-            ->setCellValue('G' . $column, 5)
-            ->setCellValue('H' . $column, 'd');
+            ->setCellValue('G' . $column, 'd');
         $writer = new Xlsx($spreadsheet);
         $fileName = 'Template Upload Soal';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -469,19 +474,22 @@ class KelolaModul extends BaseController
         $spread_php = $render->load($file_excel);
 
         $data = $spread_php->getActiveSheet()->toArray();
+        $sukses = 0;
+        $error = 0;
 
         foreach ($data as $d => $row) {
             if ($d == 0) {
                 continue;
             }
 
+            $banyak_soal = $this->soal->countsoalmodul(session()->get('id_modul'));
+
             $bunyi_soal = $row[1];
             $opsi_a = $row[2];
             $opsi_b = $row[3];
             $opsi_c = $row[4];
             $opsi_d = $row[5];
-            $skor_soal = $row[6];
-            $kunci_jawaban = $row[7];
+            $kunci_jawaban = $row[6];
 
             $insert = [
                 'id_modul' => session()->get('id_modul'),
@@ -490,13 +498,24 @@ class KelolaModul extends BaseController
                 'opsi_b' => $opsi_b,
                 'opsi_c' => $opsi_c,
                 'opsi_d' => $opsi_d,
-                'skor_soal' => $skor_soal,
+                'skor_soal' => 5,
                 'kunci_jawaban' => $kunci_jawaban
             ];
 
-            $this->soal->createsoal($insert);
+            if ($banyak_soal > 20) {
+                $error++;
+            } else {
+                $this->soal->createsoal($insert);
+                $sukses++;
+            }
         }
-        session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan soal</div>');
-        return redirect()->to(base_url('PageGuru'));
+
+        if ($error == 0) {
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan semua soal</div>');
+            return redirect()->to(base_url('PageGuru'));
+        } else {
+            session()->setFlashdata('success', '<div class="alert alert-success" style="margin-top:2vh" role="alert">Berhasil menambahkan soal sebanyak ' . $sukses . ' dan gagal sebanyak ' . $error . ' </div>');
+            return redirect()->to(base_url('PageGuru'));
+        }
     }
 }

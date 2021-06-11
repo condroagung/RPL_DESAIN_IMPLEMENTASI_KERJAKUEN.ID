@@ -29,16 +29,16 @@
                             <?php if ($s['gambar_soal']) { ?>
                                 <div class="row">
                                     <div class="col-sm-10">
-                                        <img src="<?= base_url() . '/uploads/' . $s['gambar_soal']; ?>" alt="image can't load">
+                                        <img src="<?= base_url() . '/uploads/' . $s['gambar_soal']; ?>" alt="image can't load" style="height:160px; widht:160px;">
                                     </div>
                                 </div>
                             <?php } ?>
                             </br>
                             <section class="tab2" style="margin-left:2vh; margin-top:-2vh">
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a"><?= $s['opsi_a'] ?></br>
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="b"><?= $s['opsi_b'] ?></br>
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="c"><?= $s['opsi_c'] ?></br>
-                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="d"><?= $s['opsi_d'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="a">a. <?= $s['opsi_a'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="b">b. <?= $s['opsi_b'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="c">c. <?= $s['opsi_c'] ?></br>
+                                <input class="form-check-input" type="radio" name="soal<?= $no ?>" id="soal<?= $no ?>" value="d">d. <?= $s['opsi_d'] ?></br>
                             </section>
                             <?php $no++ ?>
                         </div>

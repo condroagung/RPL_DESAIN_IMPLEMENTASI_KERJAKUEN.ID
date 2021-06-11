@@ -31,7 +31,8 @@
 
     <div class="row">
         <div class="col-md-12" style="margin-left:-2vh">
-            <table class="display" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white " data-page-length='10'>
+            <table class="display caption-top" style="margin-top:2vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white " data-page-length='10'>
+                <caption> </caption>
                 <thead class="text-center">
                     <tr>
                         <th scope="col">No</th>
@@ -51,21 +52,55 @@
                             <td><?= $r['nama_paket'] ?></td>
                             <td><?= $r['nama_mapel'] ?></td>
                             <td><?php
-                                if ($no_modul < count($modul_guru)) {
-                                    echo $modul_guru[$no_modul]['id_modul'];
-                                } else {
+                                if (empty($modul_guru)) {
                                     echo 0;
+                                } else {
+                                    foreach ($modul_guru as $m) {
+                                        if ($r['id_paket'] == $m['id_paket']) {
+                                            echo $m['id_modul'];
+                                        } else {
+                                            echo 0;
+                                        }
+                                    }
                                 }
                                 ?></td>
                             <td><?php
-                                if ($no_modul < count($max_nilai) - 1) {
-                                    echo $total_nilai[$no_modul]['skor_akhir'];
-                                } else {
+                                if (count($total_nilai) < 0) {
                                     echo 0;
-                                    $no_modul++;
+                                } else {
+                                    $skor = 0;
+                                    foreach ($total_nilai as $m) {
+                                        if ($r['id_paket'] == $m['id_paket']) {
+                                            $skor = $skor + $m['skor_akhir'];
+                                        } else {
+                                            $skor = $skor + 0;
+                                        }
+                                    }
+                                    echo $skor;
                                 }
                                 ?></td>
-                            <td>70</td>
+                            <td><?php
+                                if (count($total_nilai) < 0) {
+                                    echo 0;
+                                } else {
+                                    $skor = 0;
+                                    $pembagi = 0;
+                                    foreach ($total_nilai as $m) {
+                                        if ($r['id_paket'] == $m['id_paket']) {
+                                            $skor = $skor + $m['skor_akhir'];
+                                            $pembagi = $pembagi + 1;
+                                        } else {
+                                            $skor = $skor + 0;
+                                            $pembagi = $pembagi + 0;
+                                        }
+                                    }
+                                    if ($pembagi == 0) {
+                                        echo 0;
+                                    } else {
+                                        echo number_format($skor / $pembagi, 2);
+                                    }
+                                }
+                                ?></td>
                         </tr>
                     <?php
 

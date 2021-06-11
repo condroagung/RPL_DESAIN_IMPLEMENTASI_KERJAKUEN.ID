@@ -33,7 +33,8 @@
     <div class="row">
         <div class="col col-md-12" style="margin-left:-2vh">
             <div class="table-responsive">
-                <table class="display" style="margin-top:3vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; " data-page-length='10'>
+                <table class="display caption-top" style="margin-top:3vh; font-family: 'IBM Plex Sans', sans-serif; box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.1); background-color:white; " data-page-length='10'>
+                    <caption> </caption>
                     <thead class="text-center">
                         <tr>
                             <th scope="col">No</th>
@@ -62,10 +63,7 @@
                                         $mod = 0;
                                         foreach ($count_modul as $m) {
                                             if ($p['id_paket'] == $m['id_paket']) {
-                                                echo $count_modul[$mod]['id_modul'];
-                                                $mod++;
-                                            } else {
-                                                echo 0;
+                                                echo $m['id_modul'];
                                             }
                                         }
                                     }

@@ -23,6 +23,16 @@ class Paket extends Model
             ->get()->getResultArray();
     }
 
+    public function cekpaket($id_user, $kelas)
+    {
+        return $this->db->table($this->table)
+            ->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
+            ->join('guru', 'guru.id_user = paket.id_user')
+            ->where('guru.id_user', $id_user)
+            ->where('kelas', $kelas)
+            ->get()->getResultArray();
+    }
+
     public function createpaket($data)
     {
         return $this->db->table($this->table)->insert($data);

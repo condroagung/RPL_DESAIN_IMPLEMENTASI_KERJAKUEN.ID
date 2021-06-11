@@ -19,7 +19,6 @@
                         <th scope="col">Nilai</th>
                         <th scope="col">Waktu Mulai</th>
                         <th scope="col">Waktu Berakhir</th>
-                        <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="text-center" style="font-family: 'IBM Plex Sans', sans-serif; font-weight:400">
@@ -40,10 +39,6 @@
                                 ?></td>
                             <td style="font-weight:bold"><?= $d['waktu_mulai'] ?></td>
                             <td style="font-weight:bold"><?= $d['waktu_berakhir'] ?></td>
-                            <td class="text-center">
-                                <a class="btn btn-info" style="background-color:rgba(47, 128, 237, 1)" data-bs-toggle="modal" data-bs-target="#edit_ujian<?= $d['id_ujian'] ?>"><i class="fas fa-pen"></i></a>
-                                <a class="btn btn-light" href="<?php echo base_url('PageGuru/delete_ujian/' . $d['id_ujian']); ?>" style="background-color:#eb5757" onclick="return confirm('Apakah Anda yakin ingin menghapus hasil ujian ini?')"><i class="fas fa-trash"></i></a>
-                            </td>
                         </tr>
                     <?php $no_ujian++;
                     } ?>

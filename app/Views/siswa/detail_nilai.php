@@ -48,13 +48,17 @@
         <?php
         $no = 1;
         $idx = 0;
+        foreach ($jawaban as $j) {
+            $arr_jawaban = explode(",", $j['jawaban_soal']);
+            $arr_status = explode(",", $j['status_jawaban']);
+        }
         foreach ($soal as $s) { ?>
             <div class="row" style="margin-top:2vh;font-weight:700;">
                 <div class="col-md-2" style="margin-left:2vh; margin-top:2vh">
                     <p style="font-weight:500">Soal . <?= $no++; ?></p>
                     <p style="font-style:italic">
                         <?php
-                        if ($jawaban[$idx]['status_jawaban'] == 'benar') {
+                        if ($arr_status[$idx] == 'b') {
                             echo "benar";
                         } else {
                             echo "salah";
@@ -64,7 +68,7 @@
                 <div class="col-md-7" style="margin-left:2vh;margin-top:2vh">
                     <p style="font-weight:500"><?= $s['bunyi_soal'] ?> ...</p>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault1" value="a" <?php if ($jawaban[$idx]['jawaban_soal'] == 'a') {
+                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault1" value="a" <?php if ($arr_jawaban[$idx] == 'a') {
                                                                                                                                                 echo ' checked ';
                                                                                                                                             } ?>>
                         <label class="form-check-label" for="flexRadioDefault1">
@@ -72,7 +76,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault2" value="b" <?php if ($jawaban[$idx]['jawaban_soal'] == 'b') {
+                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault2" value="b" <?php if ($arr_jawaban[$idx] == 'b') {
                                                                                                                                                 echo ' checked ';
                                                                                                                                             } ?>>
                         <label class="form-check-label" for="flexRadioDefault2">
@@ -80,7 +84,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault1" value="c" <?php if ($jawaban[$idx]['jawaban_soal'] == 'c') {
+                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault1" value="c" <?php if ($arr_jawaban[$idx] == 'c') {
                                                                                                                                                 echo ' checked ';
                                                                                                                                             } ?>>
                         <label class="form-check-label" for="flexRadioDefault1">
@@ -88,7 +92,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault1" value="d" <?php if ($jawaban[$idx]['jawaban_soal'] == 'd') {
+                        <input class="form-check-input" type="radio" name="flexRadioDefault<?= $idx ?>" id="flexRadioDefault1" value="d" <?php if ($arr_jawaban[$idx] == 'd') {
                                                                                                                                                 echo ' checked ';
                                                                                                                                             } ?>>
                         <label class="form-check-label" for="flexRadioDefault1">
@@ -96,7 +100,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <?php if ($jawaban[$idx]['status_jawaban'] == 'benar') { ?>
+                        <?php if ($arr_status[$idx] == 'b') { ?>
                             <div class="alert alert-success d-flex align-items-center" role="alert" style="margin-left:-3vh; width:85%; margin-top:2vh">
                                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
                                     <use xlink:href="#check-circle-fill" />

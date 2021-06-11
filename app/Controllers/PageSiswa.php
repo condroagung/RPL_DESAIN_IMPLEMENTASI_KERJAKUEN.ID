@@ -171,7 +171,7 @@ class PageSiswa extends BaseController
         }
         $session = session();
         $session->set('id_paket', $id);
-        $data['paket'] = $this->paket->join('Mata_pelajaran', 'Mata_pelajaran.id_mapel = paket.id_mapel')
+        $data['paket'] = $this->paket->join('mata_pelajaran', 'mata_pelajaran.id_mapel = paket.id_mapel')
             ->join('guru', 'guru.id_user = paket.id_user')->where('id_paket', $id)->first();
         $data['hasil'] = $this->ujian->hasilmax($id, session()->get('id_user'));
         $data['modul'] = $this->modul->showmodul($id);
